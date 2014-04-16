@@ -67,5 +67,5 @@ int emptyboard(char board[SIZE][SIZE])
     }
      return 1;
 
- }
+ } 
 

@@ -62,6 +62,18 @@ typedef struct game
 	int board_rows;     	// number of rows of the board
 }game_t;
 
+
+/**
+ * Stores the move played by the user
+ */
+typedef struct
+{
+    	char Y;		//char that indicates the column for the user
+    	int X;		//int that indicates the row for the user and the index of the board later
+    	int Y_int;	//int to indicate the index of the column in the matrix
+}position_t;
+
+
 /**
  * FIXME: data structures to hold the game's statistics
  */

@@ -31,12 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="PL_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="board.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="board.h" />
 		<Unit filename="data_structs.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="data_structs.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

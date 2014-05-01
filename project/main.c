@@ -1,34 +1,38 @@
 #include <stdlib.h>
 /**
- * Triplets Game - VIOPE 2014
- * @file main.c
- *
- * @creation date	2014-03-27
- *
- **/
+* Triplets Game - VIOPE 2014
+* @file main.c
+*
+* @creation date 2014-03-27
+*
+**/
 
 /*=====================================
- * System includes
- *===================================*/
+* System includes
+*===================================*/
 #include <stdio.h>
 
 /*=====================================
- * Local includes
- *===================================*/
+* Local includes
+*===================================*/
 #include "data_structs.h"
 #include "board.h"
+#include "PL_ui.h"
 
 
 /*=====================================
- * main
- *===================================*/
+* main
+*===================================*/
 int main(void){
-	reset_data_structs();
+reset_data_structs();
+system("cls");
 
-	/* Simple testing code */
-	board_set_size(BOARD_MEDIUM);
 
-	board_print_raw();
+/* Simple testing code */
+//board_set_size(BOARD_MEDIUM);
+welcome_screen();
+show_menu();
+board_print_raw();
 
-	return 0;
+return 0;
 }

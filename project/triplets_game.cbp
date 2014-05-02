@@ -31,13 +31,32 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="PL_ui.h" />
+		<Unit filename="PL_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="board.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="board.h" />
 		<Unit filename="data_structs.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="data_structs.h" />
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="PT_save_read_moves.h" />
+		<Unit filename="PT_save_read_moves.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SP_check_if_end.c" >
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SP_random_mov.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SP_smart_mov.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

@@ -28,3 +28,4 @@ int vertical (char board [SIZE][SIZE],int columnNumber,int rowNumber)
  else
     return 0;
 }             
+

@@ -1,10 +1,11 @@
 int finish_game (char board [SIZE][SIZE],int columnName,int rowNumber)
-{int columnNumber,i,j;
- columnNumber=turn_name(columnName);//This function turn the columnName in to a number;
-  if(diagonally(board,columnNumber-1,rowNumber-1)||horizontal(board,columnNumber-1,rowNumber-1)||vertical(board,columnNumber-1,rowNumber-1))
-    return 1;
-  else
-    return 0;
+{
+	int columnNumber,i,j;
+	columnNumber = turn_name(columnName);//This function turn the columnName in to a number;
+	if(diagonally(board,columnNumber-1,rowNumber-1)||horizontal(board,columnNumber-1,rowNumber-1)||vertical(board,columnNumber-1,rowNumber-1))
+		return 1;
+	else
+		return 0;
 }
 
 int diagonally (char board [SIZE][SIZE],int columnNumber,int rowNumber)

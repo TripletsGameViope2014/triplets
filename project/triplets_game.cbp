@@ -34,6 +34,9 @@
 		<Unit filename="PL_ui.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="PT_save_read_moves.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="board.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -153,9 +153,8 @@ void board_print_raw(void){
 }
 
 
-#ifdef __COMMENTED_OUT_BY_PL
 /**
- * Converts the row obteined in the equivalent index
+ * Converts the row obtained in the equivalent index
  * Of the row in the matrix
  *
  * @v	board_size	Converts the row in the index
@@ -169,7 +168,7 @@ int board_row_to_matrix_idx(int row){
 }
 
 /**
- * Converts the column obteined in the equivalent index
+ * Converts the column obtained in the equivalent index
  * Of the column in the matrix (int)
  *
  * @v	board_size	Converts the column in the index
@@ -265,7 +264,6 @@ void board_set_content_row_col(int row, char col){
 	get_current_game_ptr()->board[pos.X][pos.Y_int] = PIECE;
 
 }
-#endif /* #ifdef __COMMENTED_OUT_BY_PL */
 
 /*=====================================
  * Private functions

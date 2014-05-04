@@ -19,13 +19,12 @@
  *===================================*/
 #include "board.h"
 #include "data_structs.h"
-#include "save_read_moves.h"
+#include "PT_save_read_moves.h"
 
 /*=====================================
  * Prototypes of **private** functions
  *===================================*/
-static void example_of_private_function(int num_states);
-
+//static void example_of_private_function(int num_states);
 
 /*=====================================
  * Public functions
@@ -39,14 +38,6 @@ static void example_of_private_function(int num_states);
  * @date	2014-03-27
  * @author	name of the author of the function
  **/
-
-
-int example_of_function(char *info_s){
-
-	int value_to_return = ...;
-
-	return value_to_return;
-}
 
 /**
  * This function initializes the log file
@@ -183,11 +174,11 @@ char moveY;
         fscanf(logFile, "Game #%d\n", &gameCounter);
         fscanf(logFile, "# Matrix Dimension: %d", &dimension);
         // call function to initiate an empty matrix with dimension dimension
-        fscanf(logFile, "Started on: %s\n", &dateExtended);
+        fscanf(logFile, "Started on: %s\n", (char*)dateExtended);
 
 
 for (i=0;i<playNumber;i++){
-        fscanf(logFile, "Player %s ; Play %d ; Move [%d][%c]", &playerName, &playNumber, &moveX, &moveY);
+        fscanf(logFile, "Player %s ; Play %d ; Move [%d][%c]", (char*)playerName, &playNumber, &moveX, &moveY);
         // call function to do a singular move
         Sleep(2000); // time between moves
 }
@@ -202,13 +193,13 @@ Sleep(3000);
 
 
 /**
- * This function read a string from the user and 
+ * This function read a string from the user and
  * separate the value of the column and the row
  *
  * @v info_s	Also validates the size of the string and limits
  * 			Of the row and column.
  * @return doesn't return anything, the struct position_t pass
- * 		by refference.
+ * 		by reference.
  * @date	2014-04-20
  * @author	Gabriel Rodrigues (PT Team)
  **/
@@ -253,6 +244,7 @@ void read_move(position_t *pos){
         pos->Y = input_is_char(move_in_board);
         pos->Y = toupper(pos->Y);
         pos->Y_int = board_col_to_matrix_idx(pos->Y);
+        //extern int board_col_to_matrix_idx(char col);
 
         if(pos->X < 1 || pos->X > dimension){
                 printf("Invalid number!\nThe number has to be between 1 - %d\n\n", dimension);
@@ -294,7 +286,7 @@ int function_validate_move(position_t pos){
 
 
 /**
- * This function cleans the buffer from useless  
+ * This function cleans the buffer from useless
  * things that could be there after a read from the STDIN
  *
  * @v info_s	It erases all until get and '\n' or EOF
@@ -315,7 +307,7 @@ void clean_buffer_keyboard(void){
 
 
 /**
- * This function terminates the string when it finds the '\n'  
+ * This function terminates the string when it finds the '\n'
  *
  * @v info_s	Necessary after the "fgets" function because
  * 			we don't want the '\0' at the end of the string
@@ -336,11 +328,88 @@ char* terminate_string_at_first_slash_n(char *str){
 
 
 /**
+ *
+ * @param
+ * @return
+ * 2014-04-18
+ * Gabriel (PT)
+ **/
+char input_is_char(char position[3]){
+
+    char array_letters[24] = "aAbBcCdDeEfFgGhHiIjJkKlL"; //array to compare with the input
+
+    char* ptr = NULL;
+    int i, counter = 0;
+    char first_character; // returns char ('\0' if no character found)
+
+    for(i = 0; i < sizeof(array_letters); i++){
+        ptr = strchr(position, array_letters[i]);   //checks if in the vector position exists a character of the vector arrayLetters
+        if(ptr != NULL){
+            first_character = *ptr;
+            counter++;
+            if(counter > 1){
+                printf("[WARNING] There is more that one Letter!\n");
+                return '\0';
+            }
+        }
+    }
+    return first_character;
+}
+
+int input_is_digit(char position[3]){
+
+    int i, j;
+    char * ptr = NULL;       // ptr: pointer LINE 82
+    int numbersInString[2] = {-1, -1};      //vector that helps the return of two-digits numbers
+    int aux = 0;        //auxiliar to position of the vector: numbersInString
+    char arrayNumbers[10] = "0123456789";       //array to compare with the obtained input
+    for(j=0; j < 3; j++){
+        for(i=0; i < 10; i++){
+            if(position[j] == arrayNumbers[i]){
+                    numbersInString[aux] = i;
+                    aux++;
+            }
+            if(aux > 2){
+                printf("[Warning] too much numbers in this move\n");
+                return -1;
+            }
+
+        }
+    }
+
+    ptr = strchr(position, '-'); // In order to make sure that the user didn't write the "minus" symbol
+    if(ptr != NULL){
+        numbersInString[0] = -1;  //To return -1 at the end
+    }
+
+    if(numbersInString[0] != -1 && numbersInString[1] != -1){  //Look if we gottwo numbers
+        numbersInString[0] = numbersInString[0]*10 + numbersInString[1];
+        //printf("first if numberInString[0] = %d\n", numbersInString[0]);
+    }
+    else{
+        if(numbersInString[0] != -1){  //Look if we got one number
+                //continue
+                //printf("second if numberInString[0] = %d\n", numbersInString[0]);
+        }
+    }
+                //if we didn't got any number it'll return -1 as we state at the beggining in numbersInString
+    if(numbersInString[0] < 13){
+        return numbersInString[0];
+    }
+    else{
+        return -1;
+    }
+}
+
+
+
+
+/**
  * This function helps the test of reading, converting and
  * validating moves
  *
  * @v info_s	This represents the matrix (The Board)
- * 			
+ *
  * @return	 void
  * @date	2014-04-15
  * @author	Gabriel Rodrigues(PT Team)
@@ -364,12 +433,12 @@ void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int d
 
 
 /**
- * This TEST function represents the enviroment which the "reading,
+ * This TEST function represents the environment which the "reading,
  * validating and converting moves functionality" needs to work
- * properly.  
+ * properly.
  *
  * @v info_s	This is a test function
- * 			
+ *
  * @return	 void
  * @date	2014-04-25
  * @author	Gabriel Rodrigues(PT Team)
@@ -400,17 +469,3 @@ void test_reading_converting_validating(){
 /*=====================================
  * Private functions
  *===================================*/
-
-/**
- * This is a private function which is not exported to the .h file.
- * It can only be called from this file.
- *
- * @v numstates		number of states to process
- * @return		none
- * @date		2014-03-27
- * @author		...
- **/
-static void example_of_private_function(int num_states){
-	/* fill in the code */
-}
-

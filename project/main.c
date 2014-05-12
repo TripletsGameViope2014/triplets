@@ -19,7 +19,16 @@
 #include "board.h"
 #include "PL_ui.h"
 #include "PT_save_read_moves.h"
-//#include "SP.h" //not compile!
+#include "SP.h"
+#include "debug.h"
+
+int finish_game_wrapper(position_t current_pos){
+    char S[1024];
+    sprintf(S,"Calling finish_game: X=%d,Y=%d",current_pos.X, current_pos.Y_int);
+    debug_append_to_file("debug.txt", S);
+    return finish_game(get_current_game_ptr()->board,current_pos.X, current_pos.Y_int);
+}
+
 
 /*=====================================
 * main
@@ -42,7 +51,8 @@ if(G_current_game.game_mode==pvp){ //pvp mode
        cmp.previous_player_move=G_players[0];
     }
 
-    while(1){   // in while add finish_game...
+//    while(1){   // in while add finish_game...
+    while( ! finish_game_wrapper(pos) ){
             system("cls");
             board_print_raw();
                 do{

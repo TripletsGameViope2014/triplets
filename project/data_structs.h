@@ -105,6 +105,4 @@ extern int is_valid_board_size(const int board_size);
 extern int set_board_size(const int board_size);
 extern void reset_data_structs(void);
 
-
-
 #endif

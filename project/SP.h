@@ -1,14 +1,16 @@
 #ifndef SP_H_INCLUDED
 #define SP_H_INCLUDED
 
-int validate (char board [N][N], int column, int row);
-void random (char board[SIZE][SIZE]);
-int finish_game (char board [SIZE][SIZE],int columnName,int rowNumber);
-int diagonally1 (char board [SIZE][SIZE],int columnNumber,int rowNumber);
-int diagonally2 (char board [SIZE][SIZE],int columnNumber,int rowNumber);
-int horizontal (char board [SIZE][SIZE],int columnNumber,int rowNumber);
-int vertical (char board [SIZE][SIZE],int columnNumber,int rowNumber);
-void smart (char board[SIZE][SIZE]);
-void write(char board[N][N]);
+#include "data_structs.h"
+
+int validate (char board [MAX_BOARDSIZE][MAX_BOARDSIZE], int column, int row);
+void random (char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
+int finish_game (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnName,int rowNumber);
+int diagonally1 (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
+int diagonally2 (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
+int horizontal (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
+int vertical (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
+void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
+void write(char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
 
 #endif // SP_H_INCLUDED

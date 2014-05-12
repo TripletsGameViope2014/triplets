@@ -277,6 +277,7 @@ void board_set_content_row_col(int row, char col){
 
 }
 
+
 /*=====================================
  * Private functions
 *===================================*/

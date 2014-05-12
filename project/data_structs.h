@@ -64,6 +64,18 @@ typedef struct game
 
 
 /**
+ * auxiliary structure to assign who is currently moves, and change current player
+ * @date	2014-05-05
+ * @author	PL team
+ **/
+typedef struct
+{
+  player_t current_player_move;
+  player_t previous_player_move;
+  player_t tmp; //temporary
+}current_move_t;
+
+/**
  * Stores the move played by the user
  */
 typedef struct
@@ -92,6 +104,7 @@ extern player_t* get_players_ptr(void);
 extern int is_valid_board_size(const int board_size);
 extern int set_board_size(const int board_size);
 extern void reset_data_structs(void);
+
 
 
 #endif

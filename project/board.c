@@ -179,39 +179,51 @@ int board_row_to_matrix_idx(int row){
 int board_col_to_matrix_idx(char col){
 	int col_int;
 	switch(col){
+	   case 'a':
 		case 'A':
 			col_int = 0;
 			break;
+		case 'b':
 		case 'B':
 			col_int = 1;
 			break;
+        case 'c':
 		case 'C':
 			col_int = 2;
 			break;
+        case 'd':
 		case 'D':
 			col_int = 3;
 			break;
+        case 'e':
 		case 'E':
 			col_int = 4;
 			break;
+        case 'f':
 		case 'F':
 			col_int = 5;
 			break;
+        case 'g':
 		case 'G':
 			col_int = 6;
 			break;
+        case 'h':
 		case 'H':
 			col_int = 7;
 			break;
+        case 'i':
 		case 'I':
 			col_int = 8;
 			break;
+        case 'j':
 		case 'J':
 			col_int = 9;
 			break;
+        case 'k':
 		case 'K':
 			col_int = 10;
 			break;
+        case 'l':
 		case 'L':
 			col_int = 11;
 			break;

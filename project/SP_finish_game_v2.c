@@ -2,61 +2,11 @@
 #include "SP.h"
 
 /* Number of aligned pieces that are needed to finish the game */
-#define NUM_ALIGNED_PIECES_FINISH (3)
+#define NUM_ALIGNED_PIECES_FINISH  (3)
 
 
-int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
-{
-    int i,j;
-    // Diagonally <-
-    for(i=0;i<MAX_BOARDSIZE-3;i++)
-    {
-        for(j=0;j<MAX_BOARDSIZE-3;j++)
-        {
-            if(board[i][j] == PIECE &&
-               board[i+1][j+1] == PIECE &&
-               board[i+2][j+2] == PIECE)
-                return 1;
-        }
-    }
-    // Diagonally ->
-    for(i=0;i<MAX_BOARDSIZE-3;i++)
-    {
-        for(j=0;j<MAX_BOARDSIZE-3;j++)
-        {
-            if(board[i+2][j] == PIECE &&
-               board[i+1][j+1] == PIECE &&
-               board[i][j+2] == PIECE)
-                return 1;
-        }
-    }
-    // Horizontally
-    for(i=0;i<MAX_BOARDSIZE-3;i++)
-    {
-        for(j=0;j<MAX_BOARDSIZE;j++)
-        {
-            if(board[i][j] == PIECE &&
-               board[i+1][j] == PIECE &&
-               board[i+2][j] == PIECE)
-                return 1;
-        }
-    }
-    // Vertically
-    for(i=0;i<MAX_BOARDSIZE;i++)
-    {
-        for(j=0;j<MAX_BOARDSIZE-3;j++)
-        {
-            if(board[i][j] == PIECE &&
-               board[i][j+1] == PIECE &&
-               board[i][j+2] == PIECE)
-                return 1;
-        }
-    }
-    return 0;
-}
 
 
-/*
 int finish_game (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber)
 {
     // FIXME: not needed
@@ -131,4 +81,4 @@ int vertical (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int row
  else
     return 0;
 }
-*/
+

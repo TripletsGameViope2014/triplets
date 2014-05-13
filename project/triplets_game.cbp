@@ -37,7 +37,7 @@
 		<Unit filename="PT_save_read_moves.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="SP_finish_game_v2.c">
+		<Unit filename="SP_finish_game_v3.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="board.c">

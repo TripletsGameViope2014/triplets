@@ -26,7 +26,8 @@ int finish_game_wrapper(position_t current_pos){
     char S[1024];
     sprintf(S,"Calling finish_game: X=%d,Y=%d",current_pos.X, current_pos.Y_int);
     debug_append_to_file("debug.txt", S);
-    return finish_game(get_current_game_ptr()->board,current_pos.X, current_pos.Y_int);
+    //return finish_game(get_current_game_ptr()->board,current_pos.X, current_pos.Y_int);
+    return finish_gamePL(get_current_game_ptr()->board);
 }
 
 
@@ -52,8 +53,9 @@ if(G_current_game.game_mode==pvp){ //pvp mode
     }
 
 //    while(1){   // in while add finish_game...
-    while( ! finish_game_wrapper(pos) ){
-            system("cls");
+    while( !finish_game_wrapper(pos) ){
+            //system("cls");
+            clearscr();
             board_print_raw();
                 do{
                         //
@@ -67,6 +69,11 @@ if(G_current_game.game_mode==pvp){ //pvp mode
             cmp.current_player_move=cmp.previous_player_move;  //
             cmp.previous_player_move=cmp.tmp;                  //
     }//end while(1)
+    cmp.tmp=cmp.current_player_move;                   //swap current player
+    cmp.current_player_move=cmp.previous_player_move;  //
+    cmp.previous_player_move=cmp.tmp;
+    board_print_raw();
+    printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
 }// end pvp mode
 
 if(G_current_game.game_mode==pvc){ //pvc mode
@@ -80,7 +87,8 @@ if(G_current_game.game_mode==pvc){ //pvc mode
        cmp.previous_player_move=G_players[0];
     }
     while(1){
-            system("cls");
+            //system("cls");
+            clearscr();
             board_print_raw();
             do{
                 printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);

@@ -1,0 +1,1 @@
+[INFO] Calling finish_game: X=0,Y=0[INFO] Calling finish_game: X=0,Y=0[INFO] Calling finish_game: X=0,Y=0

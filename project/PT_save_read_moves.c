@@ -299,7 +299,7 @@ void clean_buffer_keyboard(void){
     do
     {
         chr = getchar();
-        printf("char = %c", chr);
+       // printf("char = %c", chr);
     }
     while (chr != '\n' && chr != EOF);
 }

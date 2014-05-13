@@ -25,7 +25,7 @@
 int finish_game_wrapper(position_t current_pos){
     char S[1024];
     sprintf(S,"Calling finish_game: X=%d,Y=%d",current_pos.X, current_pos.Y_int);
-    debug_append_to_file("debug.txt", S);
+    // debug_append_to_file("debug.txt", S);
     //return finish_game(get_current_game_ptr()->board,current_pos.X, current_pos.Y_int);
     return finish_gamePL(get_current_game_ptr()->board);
 }

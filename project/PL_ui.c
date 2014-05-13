@@ -1,29 +1,54 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "board.h"
-#include "conio.h"
+#ifdef WIN32
+    #include "conio.h"
+#else
+    #include <unistd.h>
+#endif // WIN32
 #include <string.h> //strcpy();
 #include "data_structs.h"
 #include "PL_ui.h"
+#include "unistd.h"
+
+void clearscr(void) {
+    #ifdef WIN32
+    system("cls");
+    #else
+    write(1,"\E[H\E[2J",7);
+    #endif
+}
+
+int readchar(void) {
+    #ifdef WIN32
+    return getch();
+    #else
+    int ch = getchar();
+	 if (ch != '\n') {
+	 	scanf("%*[^\n]%*c");
+	 }
+    return ch;
+    #endif
+}
 
 void show_game_rules(){
-    system("cls");
+    clearscr();
     printf("This game is called Triplets Game. \n");
     printf("Rules are:\n");
     printf("1. Who will put THIRD piece vertically, horizontally or across - WINS\n");
     printf("2. You can select small, medium or large board.\n");
     printf("3. Matches can be played as Player vs Player or Player vs Computer.\n");
     printf("Press any key to go back to main menu...");
-    getch();
+    readchar();
 }
 void show_credits(){
-    system("cls");
+    clearscr();
     printf("Triplet game authors:\n\n from Poland:\n -Paliga Krzysztof\n -Gradzi%cski Tomasz\n -Daniel W%cgrzyn\n\n",228,169);
     printf(" from Portugal:\n -Jo%co Ramos\n -Eduardo Andrade\n -Gabriel Rodrigues\n\n",199);
     printf(" from Spain:\n -Nuria MANCHADO BUSTELOS\n -Andres MARTIN DE LA IGLESIA\n\n");
     printf(" promoter:\n -Patricio Domingues (from Portugal)\n\n");
     printf("Press any key to go back to main menu...");
-    getch();
+    readchar();
 }
 void welcome_screen(){
     printf("              ####################################################\n");
@@ -38,11 +63,11 @@ void welcome_screen(){
     printf("              #                                                  #\n");
     printf("              ####################################################\n\n");
     printf("Press any key to continue...");
-    getch();
+    readchar();
 }
 
 void choose_board(){
-            system("cls");
+            clearscr();
             printf("Choose board size\n");
             printf("1. Small board (3x3)\n");
             printf("2. Medium board (6x6)\n");
@@ -67,13 +92,13 @@ void choose_board(){
                     G_current_game.board_rows=BOARD_LARGE;
                     break;
                 default:
-                    system("cls");
+                    clearscr();
                     choose_board();
                     break;
             }
 }
 void show_menu(){
-    system("cls");
+    clearscr();
     printf("Triplets Game\n\n");
     printf("1. Game Player vs Computer\n");
     printf("2. Game Player vs Player\n");
@@ -90,13 +115,13 @@ void show_menu(){
 
     case 1:
        G_current_game.game_mode=pvc;
-            system("cls");
+            clearscr();
             printf("enter your name: ");
             scanf("%s",G_players[0].name);
             strcpy(G_players[1].name, "cpu");// G_players[1] is cpu player
             choose_board();
 who_first_start_game_pvc:
-            system("cls");
+            clearscr();
             printf("who first start game?\n1. you\n2.computer\n (Choose an option and press enter): ");
             scanf("%d",&who_first_start_game);
             switch(who_first_start_game){
@@ -107,22 +132,22 @@ who_first_start_game_pvc:
                     G_current_game.player_first= 0;
                     break;
                 default:
-                    system("cls");
+                    clearscr();
                     goto who_first_start_game_pvc;
                     break;
             }
-            system("cls");
+            clearscr();
             break;
     case 2:
         G_current_game.game_mode=pvp;
-            system("cls");
+            clearscr();
             printf("enter name player 1: ");
             scanf("%s",G_players[0].name);
             printf("\nenter name player 2: ");
             scanf("%s",G_players[1].name);
             choose_board();
 who_first_start_game_pvp:
-            system("cls");
+            clearscr();
             printf("who first start game?\n1. %s\n2. %s\n (Choose an option and press enter): ",G_players[0].name,G_players[1].name);
             scanf("%d",&who_first_start_game);
             switch(who_first_start_game){
@@ -133,11 +158,11 @@ who_first_start_game_pvp:
                     G_current_game.player_first= 0;
                     break;
                 default:
-                    system("cls");
+                    clearscr();
                     goto who_first_start_game_pvp;
                     break;
             }
-            system("cls");
+            clearscr();
             break;
 
     case 3:
@@ -155,7 +180,7 @@ who_first_start_game_pvp:
             exit(0);
             break;
     default:
-            system("cls");
+            clearscr();
             show_menu();
             break;
    }

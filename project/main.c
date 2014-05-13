@@ -35,7 +35,7 @@ int finish_game_wrapper(position_t current_pos){
 *===================================*/
 int main(void){
 reset_data_structs();
-system("cls");
+clearscr();
 welcome_screen();
 show_menu();
 

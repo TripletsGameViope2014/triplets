@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <Windows.h>
 #include <ctype.h>
 
 /*=====================================
@@ -180,10 +179,10 @@ char moveY;
 for (i=0;i<playNumber;i++){
         fscanf(logFile, "Player %s ; Play %d ; Move [%d][%c]", (char*)playerName, &playNumber, &moveX, &moveY);
         // call function to do a singular move
-        Sleep(2000); // time between moves
+        //Sleep(2000); // time between moves
 }
 
-Sleep(3000);
+//Sleep(3000);
 
         // call MENU function
     }

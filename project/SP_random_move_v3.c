@@ -13,7 +13,7 @@ void random (char board[SIZE][SIZE])
       position.X=1+rand%SIZE;
       position.Y_int=1+rand%SIZE;
 
-    }while(validate(position));
+    }while(function_validate_move_cpu(position));
 
     board[position.X][position.Y]=PIECE//Piece is a constant define char '#'
 

@@ -23,7 +23,11 @@
 #include "debug.h"
 #include "highscores.h"
 #include "util.h"
+<<<<<<< HEAD
 #include "pl_htmlui.h"
+=======
+
+>>>>>>> 95636bf8c4d83d3803f3e4c5efe57dc65431b19f
 int finish_game_wrapper(position_t current_pos){
     char S[1024];
     sprintf(S,"Calling finish_game: X=%d,Y=%d",current_pos.X, current_pos.Y_int);
@@ -78,7 +82,11 @@ if(G_current_game.game_mode==pvp){ //pvp mode
     cmp.current_player_move=cmp.previous_player_move;  //
     cmp.previous_player_move=cmp.tmp;
     board_print_raw();
+<<<<<<< HEAD
     WriteHTML(get_current_game_ptr()->board,"test.html");
+=======
+
+>>>>>>> 95636bf8c4d83d3803f3e4c5efe57dc65431b19f
     verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, highscores);
 
     printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);

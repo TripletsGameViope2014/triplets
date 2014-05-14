@@ -41,5 +41,8 @@ extern highscores_t init_highscores(highscores_t highscores[]);
 extern void verify_new_highscore(int new_player_moves, char new_player_name[], highscores_t highscores[]);
 extern void show_highscores();
 extern void createHighscores(highscores_t highscores[]);
+<<<<<<< HEAD
 extern void clearscr(void);
 extern int readchar(void);
+=======
+>>>>>>> 95636bf8c4d83d3803f3e4c5efe57dc65431b19f

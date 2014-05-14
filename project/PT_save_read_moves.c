@@ -47,7 +47,8 @@
  * @author	Eduardo Andrade (PT)
  **/
 
-void createLogs(int wYear, int wMonth, int wDay, int wHour, int wMinute, int gameCounter, char logName[], int dimension){
+void createLogs(int wYear, int wMonth, int wDay, int wHour, int wMinute, int gameCounter, char logName[], int dimension)
+{
     FILE *newLog;
     char year[5];
     char month[3];
@@ -73,10 +74,12 @@ void createLogs(int wYear, int wMonth, int wDay, int wHour, int wMinute, int gam
     strcat(dateExtended, minute);
 
     newLog = fopen(logName, "w");
-    if(newLog == NULL){
+    if(newLog == NULL)
+    {
         printf("\n\tERR: Unable to create Log!");
     }
-    else{
+    else
+    {
         fprintf(newLog, "--Triplets Log--\n");
         fprintf(newLog, "Game #%d\n", gameCounter);
         fprintf(newLog, "Matrix Dimension: %d\n", dimension);
@@ -95,14 +98,17 @@ void createLogs(int wYear, int wMonth, int wDay, int wHour, int wMinute, int gam
  * @author	Eduardo Andrade (PT)
  **/
 
-void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter, char logName[]){
+void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter, char logName[])
+{
     FILE *playLog;
 
     playLog = fopen(logName, "a");
-    if(playLog == NULL){
+    if(playLog == NULL)
+    {
         printf("\n\tERR: Couldn't write to %s", logName);
     }
-    else{
+    else
+    {
         fprintf(playLog, "Player %s ; Play %d ; Move [%d][%c]", playerName, playNumber, moveX, moveY);
     }
     fclose(playLog);
@@ -119,13 +125,15 @@ void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int g
 
 void closePlayLog(int playNumber, char logName[])
 {
-FILE *playLog;
+    FILE *playLog;
 
     playLog = fopen(logName, "a");
-    if(playLog == NULL){
+    if(playLog == NULL)
+    {
         printf("\n\tERR: Couldn't close %s", logName);
     }
-    else{
+    else
+    {
         fprintf(playLog, "# Game closed successfully!\n");
         fprintf(playLog, "# Number of moves: %d", playNumber);
     }
@@ -141,34 +149,64 @@ FILE *playLog;
  * @author João Ramos (PT)
  **/
 
-void loadLogs(int gameNum){
+void loadLogs(int gameNum)
+{
 
     FILE *logFile;
 
-char logName[30] = "TripletsLog-";
-char gameCounterChar[4];
-int playNumber;
-int gameCounter;
-char dateExtended[15];
-char playerName[30];
-int dimension;
-int i;
-int moveX;
-char moveY;
+    position_t posMove;
+    char logName[30] = "TripletsLog-";
+    char gameCounterChar[4];
+    int playNumber;
+    int gameCounter;
+    char dateExtended[15];
+    char playerName[30];
+    int dimension;
+    int i;
+    int moveX;
+    char moveY;
+    int check;
+    int lineCounter=0;
+    char lines[1];
+    int headLinesNumber=4;
 
     sprintf(gameCounterChar, "%d", gameNum);
     strcat(logName, gameCounterChar);
     strcat(logName, ".txt");
 
     logFile = fopen(logName, "r");
-    if(logFile == NULL){
+    if(logFile == NULL)
+    {
         printf("\n\tERR: Unable to read Log!");
     }
-    else{
+    else
+    {
+        do
+        {
 
-        fscanf(logFile, "# Game closed successfully!");
-        fscanf(logFile, "# Number of moves: %d", &playNumber);
+            check = fscanf(logFile, "%s", lines);
 
+            if(check != EOF)
+            {
+                lineCounter++; // this counts how many lines the file has
+            }
+
+
+        }
+        while(check != EOF);
+
+        fclose(logFile);
+
+        lineCounter-=headLinesNumber;
+
+    }
+    logFile = fopen(logName, "r");
+    if(logFile == NULL)
+    {
+        printf("\n\tERR: Unable to read Log!");
+    }
+    else
+    {
         fscanf(logFile, "--Triplets Log--\n");
         fscanf(logFile, "Game #%d\n", &gameCounter);
         fscanf(logFile, "# Matrix Dimension: %d", &dimension);
@@ -176,15 +214,18 @@ char moveY;
         fscanf(logFile, "Started on: %s\n", (char*)dateExtended);
 
 
-for (i=0;i<playNumber;i++){
-        fscanf(logFile, "Player %s ; Play %d ; Move [%d][%c]", (char*)playerName, &playNumber, &moveX, &moveY);
-        // call function to do a singular move
-        //Sleep(2000); // time between moves
-}
+        for (i=0; i<lineCounter; i++)
+        {
+            fscanf(logFile, "Player %s ; Play %d ; Move [%d][%c]", (char*)playerName, &playNumber, &moveX, &moveY);
+            posMove.X=moveX;
+            posMove.Y=moveY;
+            read_move(&posMove);
+            board_print_raw();
+//          Sleep(2000); // time between moves
+        }
 
-//Sleep(3000);
-
-        // call MENU function
+//        Sleep(3000);
+//        Show menu
     }
 
     fclose(logFile);
@@ -203,9 +244,10 @@ for (i=0;i<playNumber;i++){
  * @author	Gabriel Rodrigues (PT Team)
  **/
 
-void read_move(position_t *pos){
+void read_move(position_t *pos)
+{
 
-/* Maximum size for the buffer to read a move: 3 characters + 1 \n + 1 \0 => 5 */
+    /* Maximum size for the buffer to read a move: 3 characters + 1 \n + 1 \0 => 5 */
 #define READ_MOVE_MAX_BUFF_LEN      (5)
 
     int dimension = board_get_size();
@@ -220,8 +262,10 @@ void read_move(position_t *pos){
     // Keep the number of char in the move_in_board string
     size_t move_in_board_strlen;
 
-    do{
-        do{
+    do
+    {
+        do
+        {
             printf("Write your move [3 characters max]: ");
             fgets(move_in_board, maxLength, stdin);    //gets in the string move_in_board a maximum of maxLength characters coming from the STDIN
 
@@ -232,12 +276,14 @@ void read_move(position_t *pos){
             /* Compute # of chars in move_in_board */
             move_in_board_strlen = strlen(move_in_board);
 
-            if( move_in_board_strlen > 3){
+            if( move_in_board_strlen > 3)
+            {
                 clean_buffer_keyboard();
                 printf("The move has a maximum of three characters!\n");
             }
 
-        }while(move_in_board_strlen > 3);
+        }
+        while(move_in_board_strlen > 3);
 
         pos->X = input_is_digit(move_in_board);
         pos->Y = input_is_char(move_in_board);
@@ -245,14 +291,17 @@ void read_move(position_t *pos){
         pos->Y_int = board_col_to_matrix_idx(pos->Y);
         //extern int board_col_to_matrix_idx(char col);
 
-        if(pos->X < 1 || pos->X > dimension){
-                printf("Invalid number!\nThe number has to be between 1 - %d\n\n", dimension);
+        if(pos->X < 1 || pos->X > dimension)
+        {
+            printf("Invalid number!\nThe number has to be between 1 - %d\n\n", dimension);
         }
-        if(pos->Y_int == -1 || pos->Y_int >= dimension){
-                printf("Invalid letter!\nIt has to be between A - %c\n\n", 64+dimension);
+        if(pos->Y_int == -1 || pos->Y_int >= dimension)
+        {
+            printf("Invalid letter!\nIt has to be between A - %c\n\n", 64+dimension);
         }
 
-    }while(pos->Y_int == -1 || pos->Y_int >= dimension || pos->X < 1 || pos->X > dimension);
+    }
+    while(pos->Y_int == -1 || pos->Y_int >= dimension || pos->X < 1 || pos->X > dimension);
 
     printf("Part of the board! \n");
 
@@ -269,17 +318,20 @@ void read_move(position_t *pos){
  * @author	Gabriel Rodrigues (PT Team)
  **/
 
-int function_validate_move(position_t pos){
+int function_validate_move(position_t pos)
+{
 
-    if(board_get_content_row_col(pos.X, pos.Y) == EMPTY){
+    if(board_get_content_row_col(pos.X, pos.Y) == EMPTY)
+    {
 
         printf("Valid move!\n");
         board_set_content_row_col(pos.X, pos.Y);
     }
-    else{
+    else
+    {
         printf("That spot is occupied!!!\n");
         return 1;
-        }
+    }
     return 0;
 }
 
@@ -294,12 +346,13 @@ int function_validate_move(position_t pos){
  * @author	(PT Team)
  **/
 
-void clean_buffer_keyboard(void){
+void clean_buffer_keyboard(void)
+{
     char chr;
     do
     {
         chr = getchar();
-       // printf("char = %c", chr);
+        // printf("char = %c", chr);
     }
     while (chr != '\n' && chr != EOF);
 }
@@ -315,14 +368,15 @@ void clean_buffer_keyboard(void){
  * @author	(PT Team)
  **/
 
-char* terminate_string_at_first_slash_n(char *str){
-	char* ptr;
-	ptr = strchr(str, '\n');
-	if (ptr != NULL)
-	{
-		*ptr = '\0';
-	}
-	return str;
+char* terminate_string_at_first_slash_n(char *str)
+{
+    char* ptr;
+    ptr = strchr(str, '\n');
+    if (ptr != NULL)
+    {
+        *ptr = '\0';
+    }
+    return str;
 }
 
 
@@ -333,7 +387,8 @@ char* terminate_string_at_first_slash_n(char *str){
  * 2014-04-18
  * Gabriel (PT)
  **/
-char input_is_char(char position[3]){
+char input_is_char(char position[3])
+{
 
     char array_letters[24] = "aAbBcCdDeEfFgGhHiIjJkKlL"; //array to compare with the input
 
@@ -341,12 +396,15 @@ char input_is_char(char position[3]){
     int i, counter = 0;
     char first_character; // returns char ('\0' if no character found)
 
-    for(i = 0; i < sizeof(array_letters); i++){
+    for(i = 0; i < sizeof(array_letters); i++)
+    {
         ptr = strchr(position, array_letters[i]);   //checks if in the vector position exists a character of the vector arrayLetters
-        if(ptr != NULL){
+        if(ptr != NULL)
+        {
             first_character = *ptr;
             counter++;
-            if(counter > 1){
+            if(counter > 1)
+            {
                 printf("[WARNING] There is more that one Letter!\n");
                 return '\0';
             }
@@ -355,20 +413,25 @@ char input_is_char(char position[3]){
     return first_character;
 }
 
-int input_is_digit(char position[3]){
+int input_is_digit(char position[3])
+{
 
     int i, j;
     char * ptr = NULL;       // ptr: pointer LINE 82
     int numbersInString[2] = {-1, -1};      //vector that helps the return of two-digits numbers
     int aux = 0;        //auxiliar to position of the vector: numbersInString
     char arrayNumbers[10] = "0123456789";       //array to compare with the obtained input
-    for(j=0; j < 3; j++){
-        for(i=0; i < 10; i++){
-            if(position[j] == arrayNumbers[i]){
-                    numbersInString[aux] = i;
-                    aux++;
+    for(j=0; j < 3; j++)
+    {
+        for(i=0; i < 10; i++)
+        {
+            if(position[j] == arrayNumbers[i])
+            {
+                numbersInString[aux] = i;
+                aux++;
             }
-            if(aux > 2){
+            if(aux > 2)
+            {
                 printf("[Warning] too much numbers in this move\n");
                 return -1;
             }
@@ -377,25 +440,31 @@ int input_is_digit(char position[3]){
     }
 
     ptr = strchr(position, '-'); // In order to make sure that the user didn't write the "minus" symbol
-    if(ptr != NULL){
+    if(ptr != NULL)
+    {
         numbersInString[0] = -1;  //To return -1 at the end
     }
 
-    if(numbersInString[0] != -1 && numbersInString[1] != -1){  //Look if we gottwo numbers
+    if(numbersInString[0] != -1 && numbersInString[1] != -1)   //Look if we gottwo numbers
+    {
         numbersInString[0] = numbersInString[0]*10 + numbersInString[1];
         //printf("first if numberInString[0] = %d\n", numbersInString[0]);
     }
-    else{
-        if(numbersInString[0] != -1){  //Look if we got one number
-                //continue
-                //printf("second if numberInString[0] = %d\n", numbersInString[0]);
+    else
+    {
+        if(numbersInString[0] != -1)   //Look if we got one number
+        {
+            //continue
+            //printf("second if numberInString[0] = %d\n", numbersInString[0]);
         }
     }
-                //if we didn't got any number it'll return -1 as we state at the beggining in numbersInString
-    if(numbersInString[0] < 13){
+    //if we didn't got any number it'll return -1 as we state at the beggining in numbersInString
+    if(numbersInString[0] < 13)
+    {
         return numbersInString[0];
     }
-    else{
+    else
+    {
         return -1;
     }
 }
@@ -411,18 +480,22 @@ int input_is_digit(char position[3]){
  * @author	Gabriel Rodrigues(PT Team)
  **/
 
-void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension){
+void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension)
+{
     int i, j;
     printf("GAME BOARD! %d x %d\n\n", dimension, dimension);
     printf("   \t A     B     C     D     E     F     G     H     I     J     K     L\n\n");
-    for(i = 0 ; i < dimension; i++){
+    for(i = 0 ; i < dimension; i++)
+    {
 
-            printf("  %d\t", i+1);
+        printf("  %d\t", i+1);
 
-            for(j = 0; j < dimension; j++){+
-                printf("|%c|   ", matrix[i][j]);
-            }
-            printf("\n\n");
+        for(j = 0; j < dimension; j++)
+        {
+            +
+            printf("|%c|   ", matrix[i][j]);
+        }
+        printf("\n\n");
 
     }
 }
@@ -440,21 +513,25 @@ void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int d
  * @author	Gabriel Rodrigues(PT Team)
  **/
 
-void test_reading_converting_validating(){
+void test_reading_converting_validating()
+{
     int counter = 1, check = 0;
     reset_data_structs();
     board_set_size(BOARD_MEDIUM);
     int dimension = board_get_size();
     position_t pos;
 
-    while(counter == 1){
-    test_representation_matrix(get_current_game_ptr()->board, dimension);
+    while(counter == 1)
+    {
+        test_representation_matrix(get_current_game_ptr()->board, dimension);
 
-        do{
-        read_move(&pos);
+        do
+        {
+            read_move(&pos);
 
-        check = function_validate_move(pos);
-        }while(check != 0);
+            check = function_validate_move(pos);
+        }
+        while(check != 0);
         //arise the variable "int playNumber".
         //save in log
     }

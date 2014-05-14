@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdlib.h>
 #include <time.h>
 #include "board.h"
@@ -30,6 +31,7 @@ void random (char board[SIZE][SIZE])
 //We must use #include<time.h> and #include<stdlib.h>.
 {int randRow,randColumn;
  position_t position;
+>>>>>>> c949a8ff44a88296c8a70658eac34645ef2ee615
  srand(time (NULL));
  int SIZE=board_get_size();
  int check=1;

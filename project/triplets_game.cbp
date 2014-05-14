@@ -34,6 +34,7 @@
 		<Unit filename="PL_ui.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="PL_ui.h" />
 		<Unit filename="PT_save_read_moves.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -51,6 +52,10 @@
 		<Unit filename="debug.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="highscores.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="highscores.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

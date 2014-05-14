@@ -3,23 +3,21 @@
 #include "board.h"
 #include "PL_ui.h"
 #include "PT_save_read_moves.h"
+
 void random_cpu (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
-//We must use #include<time.h> and #include<stdlib.h>.
-{//int randRow,randColumn;
- position_t position;
- srand(time (NULL));
- int SIZE=board_get_size();
-    do
-    {
-      position.X=rand()%SIZE;
-      position.Y_int=rand()%SIZE;
-    }while(function_validate_move(position)!=0);
-    board[position.X][position.Y_int]=PIECE;//Piece is a constant define char '#'
+{
+	//int randRow,randColumn;
+	position_t position;
+	srand(time (NULL));
+	int SIZE=board_get_size();
+	do
+	{
+		position.X=rand()%SIZE;
+		position.Y_int=rand()%SIZE;
+	}while(function_validate_move(position)!=0);
+	//Piece is a constant define char '#'
+	board[position.X][position.Y_int]=PIECE;
 }
-
-
-
-
 
 
 /*

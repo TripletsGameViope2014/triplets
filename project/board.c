@@ -276,6 +276,25 @@ void board_set_content_row_col(int row, char col){
 	get_current_game_ptr()->board[pos.X][pos.Y_int] = PIECE;
 
 }
+/**
+ * This function validates if the given position is already
+ * occupied or if it's free
+ *
+ * @v info_s	This function is called after the cpu move
+ * @return	An int "0" if the spot is occupied or "1" if it's not
+ * @date	2014-04-15
+ * @author	Gabriel Rodrigues (PT Team)
+ **/
+int function_validate_move_cpu(position_t pos){
+
+    if(get_current_game_ptr()->board[pos.X][pos.Y_int] == EMPTY){
+	
+	return 1;
+    }
+    else{
+        return 0;
+        }
+}
 
 
 /*=====================================

@@ -77,7 +77,7 @@ if(G_current_game.game_mode==pvp){ //pvp mode
     cmp.previous_player_move=cmp.tmp;
     board_print_raw();
 
-    verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, &highscores);
+    verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, highscores);
 
     printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
 }// end pvp mode

@@ -154,7 +154,6 @@ void show_menu()
         strcpy(G_players[1].name, "cpu");// G_players[1] is cpu player
         choose_board();
 
-//who_first_start_game_pvc:
 
         do
         {
@@ -174,11 +173,8 @@ void show_menu()
         case 2:
             G_current_game.player_first= 0;
             break;
-//        default:
-//           clearscr();
-//            goto who_first_start_game_pvc;
-//           break;
         }
+
         clearscr();
         break;
     case 2:
@@ -189,7 +185,7 @@ void show_menu()
         printf("\nenter name player 2: ");
         scanf("%s",G_players[1].name);
         choose_board();
-//who_first_start_game_pvp:
+
         do
         {
             clearscr();
@@ -206,10 +202,6 @@ void show_menu()
         case 2:
             G_current_game.player_first= 0;
             break;
-//        default:
-//            clearscr();
-//            goto who_first_start_game_pvp;
-//            break;
         }
         clearscr();
         break;
@@ -225,6 +217,7 @@ void show_menu()
     case 5:
         show_credits();
         show_menu();
+        break;
     case 6:
         exit(0);
         break;

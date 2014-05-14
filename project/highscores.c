@@ -19,10 +19,6 @@
 #include "data_structs.h"
 #include "highscores.h"
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 95636bf8c4d83d3803f3e4c5efe57dc65431b19f
 /*=====================================
  * Prototypes of **private** functions
  *===================================*/

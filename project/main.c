@@ -63,7 +63,7 @@ if(G_current_game.game_mode==pvp){ //pvp mode
             board_print_raw();
                 do{
                         //
-                    printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+                    printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
                     read_move(&pos);
                     check = function_validate_move(pos);
                     }while(check != 0);
@@ -98,7 +98,7 @@ if(G_current_game.game_mode==pvc){ //pvc mode
             clearscr();
             board_print_raw();
             do{
-                printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+                printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
                 read_move(&pos);
                 check = function_validate_move(pos);
                 }while(check != 0);

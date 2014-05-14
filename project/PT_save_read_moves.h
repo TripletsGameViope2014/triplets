@@ -43,6 +43,7 @@ extern void closePlayLog(int playNumber, char logName[]);
 extern void loadLogs(int gameNum);
 int input_is_digit(char position[3]);
 char input_is_char(char position[3]);
+
 /* Testing functions */
 extern void test_reading_converting_validating();
 extern void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension);

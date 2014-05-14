@@ -400,9 +400,6 @@ int input_is_digit(char position[3]){
     }
 }
 
-
-
-
 /**
  * This function helps the test of reading, converting and
  * validating moves
@@ -462,8 +459,6 @@ void test_reading_converting_validating(){
         //save in log
     }
 }
-
-
 
 /*=====================================
  * Private functions

@@ -56,6 +56,8 @@ void show_credits()
     printf("Press any key to go back to main menu...");
     readchar();
 }
+
+
 void welcome_screen()
 {
     printf("              ####################################################\n");
@@ -212,6 +214,7 @@ void show_menu()
         break;
     case 4:
         //show High scores//
+        show_highscores();
         show_menu();
         break;
     case 5:

@@ -21,6 +21,7 @@
 #include "PT_save_read_moves.h"
 #include "SP.h"
 #include "debug.h"
+#include "highscores.h"
 
 int finish_game_wrapper(position_t current_pos){
     char S[1024];
@@ -35,6 +36,8 @@ int finish_game_wrapper(position_t current_pos){
 * main
 *===================================*/
 int main(void){
+highscores_t highscores[MAX_HIGHSCORES];
+highscores[MAX_HIGHSCORES] = init_highscores(highscores);
 reset_data_structs();
 clearscr();
 welcome_screen();
@@ -73,6 +76,9 @@ if(G_current_game.game_mode==pvp){ //pvp mode
     cmp.current_player_move=cmp.previous_player_move;  //
     cmp.previous_player_move=cmp.tmp;
     board_print_raw();
+
+    verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, &highscores);
+
     printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
 }// end pvp mode
 

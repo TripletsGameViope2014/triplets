@@ -23,6 +23,7 @@
 #include "debug.h"
 #include "highscores.h"
 #include "util.h"
+#include "pl_htmlui.h"
 
 int finish_game_wrapper(position_t current_pos){
     char S[1024];
@@ -60,6 +61,7 @@ if(G_current_game.game_mode==pvp){ //pvp mode
     while( !finish_game_wrapper(pos) ){
             //system("cls");
             clearscr();
+            WriteHTML(get_current_game_ptr()->board,"test.html");
             board_print_raw();
                 do{
                         //
@@ -77,6 +79,8 @@ if(G_current_game.game_mode==pvp){ //pvp mode
     cmp.current_player_move=cmp.previous_player_move;  //
     cmp.previous_player_move=cmp.tmp;
     board_print_raw();
+
+    WriteHTML(get_current_game_ptr()->board,"test.html");
 
     verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, highscores);
 

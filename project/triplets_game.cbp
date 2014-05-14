@@ -31,6 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="PL_htmlui.h" />
 		<Unit filename="PL_ui.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -57,6 +58,12 @@
 		</Unit>
 		<Unit filename="highscores.h" />
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="pl_htmlui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="util.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

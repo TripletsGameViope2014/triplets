@@ -19,6 +19,7 @@
 #include "board.h"
 #include "data_structs.h"
 #include "PT_save_read_moves.h"
+#include "util.h"
 
 /*=====================================
  * Prototypes of **private** functions
@@ -51,12 +52,11 @@ void createLogs(int gameCounter, int dimension)
 {
     FILE *newLog;
     char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
-    char dateExtended[15] = "";
-    char gameCounterChar[5]="";
+    char dateExtended[32] = "";
 
-    sprintf(gameCounterChar, "%d", gameCounter);
-    strcat(logName, gameCounterChar);
-    strcat(logName,".txt");
+    getDate(dateExtended);
+
+    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
     newLog = fopen(logName, "w");
     if(newLog == NULL)
@@ -86,11 +86,8 @@ void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int g
 {
     FILE *playLog;
     char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
-    char gameCounterChar[5]="";
 
-    sprintf(gameCounterChar, "%d", gameCounter);
-    strcat(logName, gameCounterChar);
-    strcat(logName,".txt");
+    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
     playLog = fopen(logName, "a");
     if(playLog == NULL)
@@ -117,11 +114,8 @@ void closePlayLog(int playNumber, int gameCounter)
 {
     FILE *playLog;
     char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
-    char gameCounterChar[5]="";
 
-    sprintf(gameCounterChar, "%d", gameCounter);
-    strcat(logName, gameCounterChar);
-    strcat(logName,".txt");
+    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
     playLog = fopen(logName, "a");
     if(playLog == NULL)
@@ -153,7 +147,7 @@ void loadLogs(int gameCounter)
     position_t posMove;
     char logName[30] = "TripletsLog-";
     int playNumber;
-    char dateExtended[15];
+    char dateExtended[32];
     char playerName[30];
     int dimension;
     int i;
@@ -162,11 +156,8 @@ void loadLogs(int gameCounter)
     int lineCounter=0;
     int headLinesNumber=6;
     int ch;
-    char gameCounterChar[5]="";
 
-    sprintf(gameCounterChar, "%d", gameCounter);
-    strcat(logName, gameCounterChar);
-    strcat(logName,".txt");
+    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
     playLog = fopen(logName, "r");
     if(playLog == NULL)

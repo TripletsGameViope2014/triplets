@@ -22,6 +22,7 @@
 #include "SP.h"
 #include "debug.h"
 #include "highscores.h"
+#include "util.h"
 
 int finish_game_wrapper(position_t current_pos){
     char S[1024];

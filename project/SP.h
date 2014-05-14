@@ -4,7 +4,7 @@
 #include "data_structs.h"
 
 int validate (char board [MAX_BOARDSIZE][MAX_BOARDSIZE], int column, int row);
-//void random (char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
+void random_cpu (char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
 int finish_game (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnName,int rowNumber);
 int diagonally1 (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
 int diagonally2 (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);

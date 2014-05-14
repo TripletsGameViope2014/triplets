@@ -11,6 +11,7 @@
 #include "PL_ui.h"
 #include "unistd.h"
 #include "PT_save_read_moves.h"
+#include "highscores.h"
 
 void clearscr(void)
 {

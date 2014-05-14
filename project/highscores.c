@@ -18,7 +18,7 @@
 /* local includes */
 #include "data_structs.h"
 #include "highscores.h"
-
+#include "PL_ui.h"
 /*=====================================
  * Prototypes of **private** functions
  *===================================*/

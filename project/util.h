@@ -31,7 +31,6 @@
 /*=====================================
  * function prototypes
  *===================================*/
-
 extern void getDate(char dateExtended[]);
 
 

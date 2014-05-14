@@ -21,7 +21,9 @@
 #include "PT_save_read_moves.h"
 #include "SP.h"
 #include "debug.h"
-
+#include "highscores.h"
+#include "util.h"
+#include "pl_htmlui.h"
 int finish_game_wrapper(position_t current_pos){
     char S[1024];
     sprintf(S,"Calling finish_game: X=%d,Y=%d",current_pos.X, current_pos.Y_int);
@@ -35,6 +37,8 @@ int finish_game_wrapper(position_t current_pos){
 * main
 *===================================*/
 int main(void){
+highscores_t highscores[MAX_HIGHSCORES];
+highscores[MAX_HIGHSCORES] = init_highscores(highscores);
 reset_data_structs();
 clearscr();
 welcome_screen();
@@ -56,10 +60,11 @@ if(G_current_game.game_mode==pvp){ //pvp mode
     while( !finish_game_wrapper(pos) ){
             //system("cls");
             clearscr();
+            WriteHTML(get_current_game_ptr()->board,"test.html");
             board_print_raw();
                 do{
                         //
-                    printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+                    printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
                     read_move(&pos);
                     check = function_validate_move(pos);
                     }while(check != 0);
@@ -73,6 +78,9 @@ if(G_current_game.game_mode==pvp){ //pvp mode
     cmp.current_player_move=cmp.previous_player_move;  //
     cmp.previous_player_move=cmp.tmp;
     board_print_raw();
+    WriteHTML(get_current_game_ptr()->board,"test.html");
+    verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, highscores);
+
     printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
 }// end pvp mode
 
@@ -91,7 +99,7 @@ if(G_current_game.game_mode==pvc){ //pvc mode
             clearscr();
             board_print_raw();
             do{
-                printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+                printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
                 read_move(&pos);
                 check = function_validate_move(pos);
                 }while(check != 0);

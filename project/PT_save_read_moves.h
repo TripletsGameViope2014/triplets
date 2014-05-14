@@ -37,10 +37,10 @@ extern void read_move(position_t *pos);
 extern int function_validate_move(position_t pos);
 extern void clean_buffer_keyboard(void);
 extern char * terminate_string_at_first_slash_n(char *str);
-extern void createLogs(int wYear, int wMonth, int wDay, int wHour, int wMinute, int gameCounter, char logName[], int dimension);
-extern void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter, char logName[]);
-extern void closePlayLog(int playNumber, char logName[]);
-extern void loadLogs(int gameNum);
+extern void createLogs(int gameCounter, int dimension);
+extern void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter);
+extern void closePlayLog(int playNumber, int gameCounter);
+extern void loadLogs(int gameCounter);
 int input_is_digit(char position[3]);
 char input_is_char(char position[3]);
 /* Testing functions */

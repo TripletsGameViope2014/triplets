@@ -19,6 +19,7 @@
 #include "board.h"
 #include "data_structs.h"
 #include "PT_save_read_moves.h"
+#include "util.h"
 
 /*=====================================
  * Prototypes of **private** functions
@@ -47,31 +48,15 @@
  * @author	Eduardo Andrade (PT)
  **/
 
-void createLogs(int wYear, int wMonth, int wDay, int wHour, int wMinute, int gameCounter, char logName[], int dimension)
+void createLogs(int gameCounter, int dimension)
 {
     FILE *newLog;
-    char year[5];
-    char month[3];
-    char day[3];
-    char hour[3];
-    char minute[3];
-    char dateExtended[15] = "";
+    char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char dateExtended[32] = "";
 
-    sprintf(year, "%d", wYear);     // turn int variables into char for strcat
-    sprintf(month, "%d", wMonth);
-    sprintf(day, "%d", wDay);
-    sprintf(hour, "%d", wHour);
-    sprintf(minute, "%d", wMinute);
+    getDate(dateExtended);
 
-    strcat(dateExtended, year);     // joining date into single array
-    strcat(dateExtended, "/");
-    strcat(dateExtended, month);
-    strcat(dateExtended, "/");
-    strcat(dateExtended, day);
-    strcat(dateExtended, "-");
-    strcat(dateExtended, hour);
-    strcat(dateExtended, ":");
-    strcat(dateExtended, minute);
+    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
     newLog = fopen(logName, "w");
     if(newLog == NULL)
@@ -83,7 +68,6 @@ void createLogs(int wYear, int wMonth, int wDay, int wHour, int wMinute, int gam
         fprintf(newLog, "--Triplets Log--\n");
         fprintf(newLog, "Game #%d\n", gameCounter);
         fprintf(newLog, "Matrix Dimension: %d\n", dimension);
-        // call function to initiate matrix with dimension dimension (empty)
         fprintf(newLog, "Started on: %s\n", dateExtended);
     }
     fclose(newLog);
@@ -98,9 +82,12 @@ void createLogs(int wYear, int wMonth, int wDay, int wHour, int wMinute, int gam
  * @author	Eduardo Andrade (PT)
  **/
 
-void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter, char logName[])
+void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter)
 {
     FILE *playLog;
+    char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+
+    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
     playLog = fopen(logName, "a");
     if(playLog == NULL)
@@ -123,9 +110,12 @@ void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int g
  * @author João Ramos (PT)
  **/
 
-void closePlayLog(int playNumber, char logName[])
+void closePlayLog(int playNumber, int gameCounter)
 {
     FILE *playLog;
+    char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+
+    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
     playLog = fopen(logName, "a");
     if(playLog == NULL)
@@ -149,86 +139,83 @@ void closePlayLog(int playNumber, char logName[])
  * @author João Ramos (PT)
  **/
 
-void loadLogs(int gameNum)
+void loadLogs(int gameCounter)
 {
 
-    FILE *logFile;
+    FILE *playLog;
 
     position_t posMove;
     char logName[30] = "TripletsLog-";
-    char gameCounterChar[4];
     int playNumber;
-    int gameCounter;
-    char dateExtended[15];
+    char dateExtended[32];
     char playerName[30];
     int dimension;
     int i;
     int moveX;
     char moveY;
-    int check;
     int lineCounter=0;
-    char lines[1];
-    int headLinesNumber=4;
+    int headLinesNumber=6;
+    int ch;
 
-    sprintf(gameCounterChar, "%d", gameNum);
-    strcat(logName, gameCounterChar);
-    strcat(logName, ".txt");
+    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
-    logFile = fopen(logName, "r");
-    if(logFile == NULL)
+    playLog = fopen(logName, "r");
+    if(playLog == NULL)
     {
         printf("\n\tERR: Unable to read Log!");
     }
     else
     {
+
+
         do
         {
-
-            check = fscanf(logFile, "%s", lines);
-
-            if(check != EOF)
+            ch = fgetc(playLog);
+            if( ch== '\n')
             {
-                lineCounter++; // this counts how many lines the file has
+                lineCounter++;
             }
-
-
         }
-        while(check != EOF);
+        while( ch != EOF );
 
-        fclose(logFile);
+
+
+        fclose(playLog);
 
         lineCounter-=headLinesNumber;
+        lineCounter++; // to add the last line which doesn't have /n !!
+
 
     }
-    logFile = fopen(logName, "r");
-    if(logFile == NULL)
+    playLog = fopen(logName, "r");
+    if(playLog == NULL)
     {
         printf("\n\tERR: Unable to read Log!");
     }
     else
     {
-        fscanf(logFile, "--Triplets Log--\n");
-        fscanf(logFile, "Game #%d\n", &gameCounter);
-        fscanf(logFile, "# Matrix Dimension: %d", &dimension);
-        // call function to initiate an empty matrix with dimension dimension
-        fscanf(logFile, "Started on: %s\n", (char*)dateExtended);
-
+        gameCounter=0;
+        dimension=0;
+        fscanf(playLog, "--Triplets Log--\n");
+        fscanf(playLog, "Game #%d\n", &gameCounter);
+        fscanf(playLog, "Matrix Dimension: %d\n", &dimension);
+        fscanf(playLog, "Started on: %s\n", dateExtended);
 
         for (i=0; i<lineCounter; i++)
         {
-            fscanf(logFile, "Player %s ; Play %d ; Move [%d][%c]", (char*)playerName, &playNumber, &moveX, &moveY);
+            fscanf(playLog, "Player %s ; Play %d ; Move [%d][%c]\n", playerName, &playNumber, &moveX, &moveY);
+//         printf("player %s, play number %d, moveX %d, moveY %c\n",playerName, playNumber, moveX, moveY); // was just to test if it's reading right
             posMove.X=moveX;
             posMove.Y=moveY;
+
             read_move(&posMove);
             board_print_raw();
-//          Sleep(2000); // time between moves
         }
 
-//        Sleep(3000);
-//        Show menu
     }
 
-    fclose(logFile);
+    fclose(playLog);
+
 }
 
 

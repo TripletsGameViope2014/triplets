@@ -86,10 +86,6 @@ typedef struct
 }position_t;
 
 
-/**
- * FIXME: data structures to hold the game's statistics
- */
-
 /*=====================================
  * External declarations
  *===================================*/

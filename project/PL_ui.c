@@ -39,23 +39,26 @@ void show_game_rules()
 {
     clearscr();
     printf("This game is called Triplets Game. \n");
-    printf("Rules are:\n");
-    printf("1. Who will put THIRD piece vertically, horizontally or across - WINS\n");
-    printf("2. You can select small, medium or large board.\n");
-    printf("3. Matches can be played as Player vs Player or Player vs Computer.\n");
-    printf("Press any key to go back to main menu...");
+    printf("\nThe rules are:\n");
+    printf("1. The goal is to connect 3 pieces in a line\n\t-This can be vertically, horizontally or across\n\t-First to do this, is the winner\n");
+    printf("2. You can win with your own pieces or your opponent's pieces - be careful!\n");
+    printf("3. There's 3 board sizes: small (3x3) medium (6x6) and large (12x12).\n");
+    printf("4. Matches can be played as Player vs Player or Player vs Computer.\n");
+    printf("\nPress any key to go back to main menu...");
     readchar();
 }
 void show_credits()
 {
     clearscr();
-    printf("Triplet game authors:\n\n from Poland:\n -Paliga Krzysztof\n -Gradzi%cski Tomasz\n -Daniel W%cgrzyn\n\n",228,169);
-    printf(" from Portugal:\n -Jo%co Ramos\n -Eduardo Andrade\n -Gabriel Rodrigues\n\n",199);
-    printf(" from Spain:\n -Nuria MANCHADO BUSTELOS\n -Andres MARTIN DE LA IGLESIA\n\n");
-    printf(" promoter:\n -Patricio Domingues (from Portugal)\n\n");
+    printf("Triplets game developers:\n\n Poland Team:\n -Paliga Krzysztof\n -Gradzi%cski Tomasz\n -Daniel W%cgrzyn\n\n",228,169);
+    printf(" Portugal Team:\n -Jo%co Ramos\n -Eduardo Andrade\n -Gabriel Rodrigues\n\n",199);
+    printf(" Spain Team:\n -Nuria Manchado Bustelos\n -Andres Martin de la Iglesia\n\n");
+    printf(" Promoters:\n -Patricio Domingues (from Portugal)\n\n");
     printf("Press any key to go back to main menu...");
     readchar();
 }
+
+
 void welcome_screen()
 {
     printf("              ####################################################\n");
@@ -79,8 +82,8 @@ void choose_board()
     int size_board;
     do
     {
-        clearscr();
-        printf("Choose board size\n");
+        //clearscr();
+        printf("\nChoose board size\n");
         printf("1. Small board (3x3)\n");
         printf("2. Medium board (6x6)\n");
         printf("3. Large board (12x12)\n\n");
@@ -125,11 +128,11 @@ void show_menu()
     {
         clearscr();
         printf("Triplets Game\n\n");
-        printf("1. Game Player vs Computer\n");
-        printf("2. Game Player vs Player\n");
+        printf("1. Play : Player vs Computer (PvC)\n");
+        printf("2. Play : Player vs Player (PvP)\n");
         printf("3. Game rules\n");
         printf("4. High scores\n");
-        printf("5. Credits of the program\n\n");
+        printf("5. Credits\n\n");
         printf("6. Exit Game.\n\n");
         printf("(Choose an option and press enter): ");
 
@@ -149,16 +152,18 @@ void show_menu()
     case 1:
         G_current_game.game_mode=pvc;
         clearscr();
-        printf("enter your name: ");
+        printf("Triplets - Player vs Computer\n\n");
+        printf("Enter your name: ");
         scanf("%s",G_players[0].name);
-        strcpy(G_players[1].name, "cpu");// G_players[1] is cpu player
+        strcpy(G_players[1].name, "CPU");// G_players[1] is cpu player
         choose_board();
 
 
         do
         {
             clearscr();
-            printf("who first start game?\n1. %s\n2. %s\n (Choose an option and press enter): ",G_players[0].name,G_players[1].name);
+            printf("Triplets - %s vs %s\n\n", G_players[0].name, G_players[1].name);
+            printf("Select who goes first:\n1. %s\n2. %s\n\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
             control=scanf("%d",&who_first_start_game);
             clean_buffer_keyboard();
 
@@ -180,16 +185,18 @@ void show_menu()
     case 2:
         G_current_game.game_mode=pvp;
         clearscr();
-        printf("enter name player 1: ");
+        printf("Triplets - Player vs Player\n");
+        printf("Enter the name of player 1: ");
         scanf("%s",G_players[0].name);
-        printf("\nenter name player 2: ");
+        printf("\nEnter the name of player 2: ");
         scanf("%s",G_players[1].name);
         choose_board();
 
         do
         {
             clearscr();
-            printf("who first start game?\n1. %s\n2. %s\n (Choose an option and press enter): ",G_players[0].name,G_players[1].name);
+            printf("Triplets - %s vs %s\n\n", G_players[0].name, G_players[1].name);
+            printf("Select who goes first:\n1. %s\n2. %s\n\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
             control=scanf("%d",&who_first_start_game);
             clean_buffer_keyboard();
         }
@@ -212,6 +219,7 @@ void show_menu()
         break;
     case 4:
         //show High scores//
+        show_highscores();
         show_menu();
         break;
     case 5:

@@ -1,4 +1,4 @@
-
+#include "board.h"
 
 void random (char board[SIZE][SIZE])
 //We must use #include<time.h> and #include<stdlib.h>.

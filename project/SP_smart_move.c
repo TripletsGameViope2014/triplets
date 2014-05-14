@@ -1,3 +1,5 @@
+#include "board.h"
+
 void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {int i,j, m=3;
 position_t pos;

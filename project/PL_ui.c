@@ -183,6 +183,7 @@ void show_menu()
 
         clearscr();
         break;
+
     case 2:
         G_current_game.game_mode=pvp;
         clearscr();

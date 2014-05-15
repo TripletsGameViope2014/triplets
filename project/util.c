@@ -1,7 +1,7 @@
 /**
  * Triplets Game - VIOPE 2014
  *
- * @creation date	2014-03-27
+ * @creation date	2014-05-15
  *
  **/
 
@@ -36,14 +36,19 @@
  *===================================*/
 
 void getDate(char dateExtended[]);
+void set_game_counter(int gameCounter);
+int get_game_counter();
+int increment_game_counter();
+int get_file_lines(char fileName[]);
+
 
 /**
- * Brief description of the function
+ * This function receives a string and puts there the current date
  *
- * @v info_s	string hold with some info
- * @return	what does this function returns
- * @date	2014-03-27
- * @author	name of the author of the function
+ * @v Empty String
+ * @return	void
+ * @date	2014-05-15
+ * @author	João Ramos (PT)
  **/
 
 void getDate(char dateExtended[])
@@ -74,7 +79,115 @@ void getDate(char dateExtended[])
 #endif
 }
 
+/**
+ * This function saves the new game counter
+ *
+ * @v gameCounter
+ * @return	void
+ * @date	2014-05-16
+ * @author	João Ramos (PT)
+ **/
 
+void set_game_counter(int gameCounter)
+{
+    FILE *counter;
+
+    counter=fopen("gamecounter.txt", "w");
+    if (counter==NULL)
+    {
+        printf("Error writing on game counter file.");
+    }
+    else
+    {
+        fprintf(counter, "game counter = %d", gameCounter);
+
+        fclose(counter);
+    }
+
+}
+
+/**
+ * This function return the game counter
+ *
+ * @v
+ * @return	gameCounter
+ * @date	2014-05-16
+ * @author	João Ramos (PT)
+ **/
+
+int get_game_counter()
+{
+    FILE *counter;
+    int gameCounter=0;
+
+    counter=fopen("gamecounter.txt", "r");
+    if (counter==NULL)
+    {
+        printf("Error reading game counter file.");
+    }
+    else
+    {
+        fscanf(counter, "game counter = %d", &gameCounter);
+
+        fclose(counter);
+    }
+
+
+    return gameCounter;
+}
+
+/**
+ * Increments game counter and saves
+ *
+ * @v
+ * @return	gameCounter
+ * @date	2014-05-16
+ * @author	João Ramos (PT)
+ **/
+
+int increment_game_counter()
+{
+    int gameCounter;
+    gameCounter=get_game_counter();
+    gameCounter++;
+    set_game_counter(gameCounter);
+
+    return gameCounter;
+}
+
+/**
+ * This function returns the number of lines of a file
+ *
+ * @v
+ * @return	gameCounter
+ * @date	2014-05-16
+ * @author	João Ramos (PT)
+ **/
+
+int get_file_lines(char fileName[])
+{
+    FILE *fp;
+    int lineCounter=0;
+    int ch;
+
+    fp=fopen(fileName, "r");
+    if (fp!=NULL){
+    do
+        {
+            ch = fgetc(fp);
+            if( ch== '\n')
+            {
+                lineCounter++;
+            }
+        }
+        while( ch != EOF );
+
+        fclose(fp);
+
+}
+
+return lineCounter;
+}
 
 /*=====================================
  * Private functions

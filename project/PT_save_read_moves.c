@@ -20,6 +20,7 @@
 #include "data_structs.h"
 #include "PT_save_read_moves.h"
 #include "util.h"
+#include "PL_ui.h"
 
 /*=====================================
  * Prototypes of **private** functions
@@ -67,7 +68,7 @@ void createLogs(int gameCounter, int dimension)
     {
         fprintf(newLog, "--Triplets Log--\n");
         fprintf(newLog, "Game #%d\n", gameCounter);
-        fprintf(newLog, "Matrix Dimension: %d\n", dimension);
+        fprintf(newLog, "Matrix Dimension: %dx%d\n", dimension, dimension);
         fprintf(newLog, "Started on: %s\n", dateExtended);
     }
     fclose(newLog);
@@ -96,7 +97,7 @@ void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int g
     }
     else
     {
-        fprintf(playLog, "Player %s ; Play %d ; Move [%d][%c]", playerName, playNumber, moveX, moveY);
+        fprintf(playLog, "Player %s ; Play %d ; Move [%d][%c]\n", playerName, playNumber, moveX, moveY);
     }
     fclose(playLog);
 }
@@ -110,7 +111,7 @@ void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int g
  * @author João Ramos (PT)
  **/
 
-void closePlayLog(int playNumber, int gameCounter)
+void closePlayLog(int playNumber, int gameCounter, char playerName[])
 {
     FILE *playLog;
     char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
@@ -125,7 +126,7 @@ void closePlayLog(int playNumber, int gameCounter)
     else
     {
         fprintf(playLog, "# Game closed successfully!\n");
-        fprintf(playLog, "# Number of moves: %d", playNumber);
+        fprintf(playLog, "# Winner: %s - %d moves", playerName, playNumber);
     }
     fclose(playLog);
 }
@@ -144,7 +145,6 @@ void loadLogs(int gameCounter)
 
     FILE *playLog;
 
-    position_t posMove;
     char logName[30] = "TripletsLog-";
     int playNumber;
     char dateExtended[32];
@@ -155,38 +155,17 @@ void loadLogs(int gameCounter)
     char moveY;
     int lineCounter=0;
     int headLinesNumber=6;
-    int ch;
+
 
     sprintf(logName, "%s%d.txt", logName, gameCounter);
 
-    playLog = fopen(logName, "r");
-    if(playLog == NULL)
-    {
-        printf("\n\tERR: Unable to read Log!");
-    }
-    else
-    {
+    lineCounter=get_file_lines(logName);
+
+    lineCounter-=headLinesNumber;
+
+    lineCounter++; // to add the last line which doesn't have /n !!
 
 
-        do
-        {
-            ch = fgetc(playLog);
-            if( ch== '\n')
-            {
-                lineCounter++;
-            }
-        }
-        while( ch != EOF );
-
-
-
-        fclose(playLog);
-
-        lineCounter-=headLinesNumber;
-        lineCounter++; // to add the last line which doesn't have /n !!
-
-
-    }
     playLog = fopen(logName, "r");
     if(playLog == NULL)
     {
@@ -198,18 +177,25 @@ void loadLogs(int gameCounter)
         dimension=0;
         fscanf(playLog, "--Triplets Log--\n");
         fscanf(playLog, "Game #%d\n", &gameCounter);
-        fscanf(playLog, "Matrix Dimension: %d\n", &dimension);
+        fscanf(playLog, "Matrix Dimension: %dx%d\n", &dimension, &dimension);
         fscanf(playLog, "Started on: %s\n", dateExtended);
+
+        board_set_empty();
+        clearscr();
+        board_print_raw();
 
         for (i=0; i<lineCounter; i++)
         {
+            printf("\nPress any key to print next move...");
+            readchar();
+            clearscr();
             fscanf(playLog, "Player %s ; Play %d ; Move [%d][%c]\n", playerName, &playNumber, &moveX, &moveY);
-//         printf("player %s, play number %d, moveX %d, moveY %c\n",playerName, playNumber, moveX, moveY); // was just to test if it's reading right
-            posMove.X=moveX;
-            posMove.Y=moveY;
 
-            read_move(&posMove);
+
+            board_set_content_row_col(moveX, moveY);
             board_print_raw();
+            printf("\nPlayer Name: %s - Play Number: %d - Move: [%d][%c]\n",playerName, playNumber, moveX, moveY); // was just to test if it's reading right
+
         }
 
     }
@@ -290,7 +276,7 @@ void read_move(position_t *pos)
     }
     while(pos->Y_int == -1 || pos->Y_int >= dimension || pos->X < 1 || pos->X > dimension);
 
-    printf("Part of the board! \n");
+//    if the move reach this point is because is -> printf("Part of the board! \n");
 
 }
 
@@ -311,7 +297,7 @@ int function_validate_move(position_t pos)
     if(board_get_content_row_col(pos.X, pos.Y) == EMPTY)
     {
 
-        printf("Valid move!\n");
+//     if the move gets inside this if, then is a ->  printf("Valid move!\n");
         board_set_content_row_col(pos.X, pos.Y);
     }
     else

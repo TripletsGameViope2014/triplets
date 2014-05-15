@@ -4,7 +4,7 @@
 /**
  * Header file for...
  *
- * @creation date:
+ * @creation date: 2014-05-15
  *
  * Triplets Game - VIOPE 2014
  */
@@ -32,6 +32,10 @@
  * function prototypes
  *===================================*/
 extern void getDate(char dateExtended[]);
+extern void set_game_counter(int gameCounter);
+extern int get_game_counter();
+extern int increment_game_counter();
+extern int get_file_lines(char fileName[]);
 
 
 #endif

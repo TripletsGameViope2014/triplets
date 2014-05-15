@@ -39,7 +39,7 @@ extern void clean_buffer_keyboard(void);
 extern char * terminate_string_at_first_slash_n(char *str);
 extern void createLogs(int gameCounter, int dimension);
 extern void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter);
-extern void closePlayLog(int playNumber, int gameCounter);
+extern void closePlayLog(int playNumber, int gameCounter, char playerName[]);
 extern void loadLogs(int gameCounter);
 int input_is_digit(char position[3]);
 char input_is_char(char position[3]);

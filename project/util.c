@@ -40,6 +40,7 @@ void set_game_counter(int gameCounter);
 int get_game_counter();
 int increment_game_counter();
 int get_file_lines(char fileName[]);
+void create_folder(char folderName[]);
 
 
 /**
@@ -187,6 +188,22 @@ int get_file_lines(char fileName[])
 }
 
 return lineCounter;
+}
+
+/**
+ * This function creates a folder
+ *
+ * @v folderName
+ * @return	void
+ * @date	2014-05-15
+ * @author	João Ramos (PT)
+ **/
+
+void create_folder(char folderName[])
+{
+   #ifdef _WIN32
+   CreateDirectory(folderName,NULL);
+   #endif
 }
 
 /*=====================================

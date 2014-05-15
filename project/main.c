@@ -41,16 +41,17 @@ int finish_game_wrapper(position_t current_pos)
 int main(void)
 {
     init_highscores();
-    int gameCounter=0;
+    int gameCounter=get_game_counter();
     reset_data_structs();
     clearscr();
+    create_folder("logs");
+
     welcome_screen();
     show_menu();
 
     int check=0;
 
-    gameCounter=get_game_counter(); // this function increments gameCounter, save it in file and returns it
-    gameCounter=increment_game_counter();
+    gameCounter=increment_game_counter(); // this function increments gameCounter, save it in file and returns it
 
     createLogs(gameCounter, board_get_size());
 

@@ -36,6 +36,7 @@ extern void set_game_counter(int gameCounter);
 extern int get_game_counter();
 extern int increment_game_counter();
 extern int get_file_lines(char fileName[]);
+extern void create_folder(char folderName[]);
 
 
 #endif

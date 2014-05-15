@@ -19,6 +19,7 @@
 #include "data_structs.h"
 #include "highscores.h"
 #include "PL_ui.h"
+#include "PT_save_read_moves.h"
 /*=====================================
  * Prototypes of **private** functions
  *===================================*/
@@ -53,16 +54,22 @@ void init_highscores()
     {
         strcpy(highscores3x3[i].player_name, "DEFAULT");
         highscores3x3[i].player_moves = 999;
+        strcpy(highscores3x3[i].game_mode, "NONE");
+        highscores3x3[i].game_counter = 999;
     }
     for(i=0; i<MAX_HIGHSCORES; i++)
     {
         strcpy(highscores6x6[i].player_name, "DEFAULT");
         highscores6x6[i].player_moves = 999;
+        strcpy(highscores6x6[i].game_mode, "NONE");
+        highscores6x6[i].game_counter = 999;
     }
     for(i=0; i<MAX_HIGHSCORES; i++)
     {
         strcpy(highscores12x12[i].player_name, "DEFAULT");
         highscores12x12[i].player_moves = 999;
+        strcpy(highscores12x12[i].game_mode, "NONE");
+        highscores12x12[i].game_counter = 999;
     }
 
     // load highscores, if file doesn't exist, create new
@@ -166,12 +173,22 @@ void createHighscores(highscores_t highscores[], int highscore_type)
  * @author	Eduardo Andrade (PT Team)
  **/
 
-void verify_new_highscore(int new_player_moves, char new_player_name[], int game_size)
+void verify_new_highscore(int new_player_moves, char new_player_name[], int game_size, int gameCounter, int game_mode_i)
 {
     int i, o, highscoresChanged=0;
+    char game_mode[5];
     FILE *fileHighscores;
     char filename[20] = "highscores";
     highscores_t highscores[MAX_HIGHSCORES];
+
+    if(game_mode_i == 1)
+    {
+        strcpy(game_mode, "PVP");
+    }
+    else
+    {
+        strcpy(game_mode, "PVC");
+    }
 
     // use the game_size variable to obtain the filename to load
     sprintf(filename, "%s%d%s%d%s", filename, game_size, "x", game_size, ".dat");
@@ -192,13 +209,18 @@ void verify_new_highscore(int new_player_moves, char new_player_name[], int game
             {
                 highscoresChanged = 1;
                 /* New highscore found, adding to structure array */
-                for(o=MAX_HIGHSCORES-2; o>i; o--)
+                for(o=MAX_HIGHSCORES-2; o>i; o--)       // move older scores down
                 {
                     strcpy(highscores[o].player_name, highscores[o-1].player_name);
+                    strcpy(highscores[o].game_mode, highscores[o-1].game_mode);
                     highscores[o].player_moves = highscores[o-1].player_moves;
+                    highscores[o].game_counter = highscores[o-1].game_counter;
                 }
+                //  adding new highscore to the position found
                 highscores[i].player_moves = new_player_moves;
                 strcpy(highscores[i].player_name, new_player_name);
+                strcpy(highscores[i].game_mode, game_mode);
+                highscores[i].game_counter = gameCounter;
                 i=MAX_HIGHSCORES; // sets i to max number, to skip verifying or replacing more highscores
             }
         }
@@ -207,14 +229,16 @@ void verify_new_highscore(int new_player_moves, char new_player_name[], int game
         {
             printf("\nERROR: Could not find/write to %s\nCouldn't check for highscores.", filename);
         }
-        else{
-        fwrite(highscores, sizeof(highscores_t), MAX_HIGHSCORES, fileHighscores);
-        fclose(fileHighscores);
+        else
+        {
+            fwrite(highscores, sizeof(highscores_t), MAX_HIGHSCORES, fileHighscores);
+            fclose(fileHighscores);
 
-        if(highscoresChanged==1){
-            printf("\n\nCongratulations %s! You made it to the highscores!\nYou are on position %d on the %dx%d highscores, with %d moves!\n",
-                   new_player_name, o+1, game_size, game_size, new_player_moves);
-        }
+            if(highscoresChanged==1)
+            {
+                printf("\n\nCongratulations %s! You made it to the highscores!\nYou are on position %d on the %dx%d highscores, with %d moves!\n",
+                       new_player_name, o+1, game_size, game_size, new_player_moves);
+            }
         }
     }
 }
@@ -231,7 +255,7 @@ void verify_new_highscore(int new_player_moves, char new_player_name[], int game
 
 void show_highscores()
 {
-    int i, menuOption;
+    int i, menuOption, exitOption, maxReplay=-1;
     FILE *loadHighscores;
     highscores_t highscores[MAX_HIGHSCORES];
 
@@ -264,32 +288,65 @@ void show_highscores()
         {
             fread(highscores,sizeof(highscores_t),MAX_HIGHSCORES,loadHighscores);
         }
-        printf("\t\t\t-- Triplets Highscores -");
-        //cosmetic stuff
-        if(menuOption==1)
+        do
         {
-            printf(" 3x3 --\n");
-        }
-        else
-        {
-            if(menuOption==2)
+            printf("\t\t\t-- Triplets Highscores -");
+            //cosmetic stuff
+            if(menuOption==1)
             {
-                printf(" 6x6 --\n");
+                printf(" 3x3 --\n");
             }
             else
             {
-                printf(" 12x12 --\n");
+                if(menuOption==2)
+                {
+                    printf(" 6x6 --\n");
+                }
+                else
+                {
+                    printf(" 12x12 --\n");
+                }
             }
-        }
 
-        for(i=0; i<MAX_HIGHSCORES; i++)
-        {
-            printf("\n#%d - Player Name: %s / Player Score: %d", i+1, highscores[i].player_name, highscores[i].player_moves);
+            for(i=0; i<MAX_HIGHSCORES; i++)
+            {
+                printf("\n#%d - Player Name: %s / Player Score: %d @ %s Mode - Replay [%d]",
+                       i+1, highscores[i].player_name, highscores[i].player_moves, highscores[i].game_mode, highscores[i].game_counter);
+                if (highscores[i].game_counter > maxReplay)
+                {
+                    maxReplay = highscores[i].game_counter; // update maxReplay to know what the biggest number of replay is
+                }
+            }
+
+            printf("\n\n0. Exit to main menu");
+            printf("\n1-%d. Select match to replay", maxReplay);
+            printf("\nSelect option: ");
+            scanf("%d", &exitOption);
+
+            if(exitOption!=0)
+            {
+                for(i=0; i<MAX_HIGHSCORES; i++)
+                {
+                    if(exitOption==highscores[i].game_counter)
+                    {
+                        exitOption=-1;
+                        printf("\n\nThat replay does not exist in this highscore board!");
+                        printf("\nPress any key to try again.");
+                        readchar();
+                    }
+                }
+            }
+            clearscr();
         }
-        printf("\n\nPress any key to go back...\n");
-        readchar();
+        while (exitOption < 0 || exitOption > maxReplay);
+        fclose(loadHighscores);
+        if(exitOption == 0)
+        {
+
+        }
+        //call replay();
     }
-    fclose(loadHighscores);
+
 }
 
 /*=====================================

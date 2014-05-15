@@ -115,7 +115,7 @@ int main(void)
 
         printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
         closePlayLog(cmp.current_player_move.moves, gameCounter, cmp.current_player_move.name);
-        verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, G_current_game.board_columns);
+        verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, G_current_game.board_columns, gameCounter, 1);
 
         loadLogs(gameCounter);
     }// end pvp mode

@@ -27,3 +27,8 @@
 *.layout
 */[Bb]in/*
 */[Oo]bj/*
+
+*.dat
+*/logs/*
+*.html
+debug*.txt

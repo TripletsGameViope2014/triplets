@@ -34,16 +34,16 @@ int finish_game_wrapper(position_t current_pos)
     return finish_gamePL(get_current_game_ptr()->board);
 }
 
-//void select_move(){
-//    if(G_current_game.cpu_mode == easy){
-//        random_cpu(get_current_game_ptr()->board);
-//    }
-//    else{
-//        if(G_current_game.cpu_mode == hard){
-//            smart(get_current_game_ptr()->board);
-//        }
-//    }
-//}
+void select_move(){
+    if(G_current_game.cpu_mode == easy){
+        random_cpu(get_current_game_ptr()->board);
+    }
+    else{
+        //if(G_current_game.cpu_mode == hard){
+            smart(get_current_game_ptr()->board);
+       }
+    }
+
 
 
 /*=====================================
@@ -141,25 +141,37 @@ int main(void)
                 cmp.current_player_move=G_players[1];
                 cmp.previous_player_move=G_players[0];
             }
-            while(1)
+            while(!finish_game_wrapper(pos))
             {
                 //system("cls");
                 clearscr();
                 board_print_raw();
-                do
+
+                if(!strcmp(cmp.current_player_move.name,"CPU"))
+			    {
+				printf("Computers move was: ");
+				select_move();
+			    }
+			    else
                 {
-                    printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-                    read_move(&pos);
-                    check = function_validate_move(pos);
-                }
-                while(check != 0);
+			    do{
+                printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+                read_move(&pos);
+				}while(function_validate_move(pos));
 
 
+			}
+            cmp.current_player_move.moves+=1;
+			cmp.tmp=cmp.current_player_move;                   //swap current player
+			cmp.current_player_move=cmp.previous_player_move;  //
+			cmp.previous_player_move=cmp.tmp;
+            }
+                //clearscr();
+                board_print_raw();
                 cmp.current_player_move.moves+=1;
                 cmp.tmp=cmp.current_player_move;                   //swap current player
                 cmp.current_player_move=cmp.previous_player_move;  //
                 cmp.previous_player_move=cmp.tmp;                  //
-            }//end while(1)
         }// end pvc
         do
         {

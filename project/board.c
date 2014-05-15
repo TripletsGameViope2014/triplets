@@ -288,13 +288,16 @@ void board_set_content_row_col(int row, char col){
  **/
 int function_validate_move_cpu(position_t pos){
 
+    if((pos.X>=0&&pos.X<board_get_size())&&(pos.Y_int>=0&&pos.Y_int<board_get_size())){
+
     if(get_current_game_ptr()->board[pos.X][pos.Y_int] == EMPTY){
-	
-	return 1;
+	 return 1;
     }
     else{
-        return 0;
-        }
+     return 0;
+    }
+}
+return 0;
 }
 
 

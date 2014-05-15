@@ -255,7 +255,7 @@ void verify_new_highscore(int new_player_moves, char new_player_name[], int game
 
 void show_highscores()
 {
-    int i, menuOption, exitOption, maxReplay=-1;
+    int i, menuOption, exitOption, minReplay=999, maxReplay=-1;
     FILE *loadHighscores;
     highscores_t highscores[MAX_HIGHSCORES];
 
@@ -312,25 +312,32 @@ void show_highscores()
             {
                 printf("\n#%d - Player Name: %s / Player Score: %d @ %s Mode - Replay [%d]",
                        i+1, highscores[i].player_name, highscores[i].player_moves, highscores[i].game_mode, highscores[i].game_counter);
-                if (highscores[i].game_counter > maxReplay)
+                if (highscores[i].game_counter > maxReplay && highscores[i].game_counter != 999)
                 {
                     maxReplay = highscores[i].game_counter; // update maxReplay to know what the biggest number of replay is
+                }
+                if (highscores[i].game_counter < minReplay){
+                    minReplay = highscores[i].game_counter; // update minReplay to know what the lowest replay number is
                 }
             }
 
             printf("\n\n0. Exit to main menu");
-            printf("\n1-%d. Select match to replay", maxReplay);
+            printf("\n%d-%d. Select match to replay", minReplay, maxReplay);
             printf("\nSelect option: ");
             scanf("%d", &exitOption);
 
-            if(exitOption!=0)
+            if(exitOption==0)
+            {
+                break;
+            }
+            else
             {
                 for(i=0; i<MAX_HIGHSCORES; i++)
                 {
-                    if(exitOption==highscores[i].game_counter)
+                    if(!exitOption==highscores[i].game_counter)
                     {
                         exitOption=-1;
-                        printf("\n\nThat replay does not exist in this highscore board!");
+                        printf("\nThat replay does not exist in this highscore board!");
                         printf("\nPress any key to try again.");
                         readchar();
                     }
@@ -338,13 +345,12 @@ void show_highscores()
             }
             clearscr();
         }
-        while (exitOption < 0 || exitOption > maxReplay);
+        while (exitOption < minReplay || exitOption > maxReplay);
         fclose(loadHighscores);
-        if(exitOption == 0)
+        if(exitOption != 0)
         {
-
+            loadLogs(exitOption);
         }
-        //call replay();
     }
 
 }

@@ -132,7 +132,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
             else
             {
-                savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X, pos.Y, get_game_counter());
+                savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X, pos.Y_int+'A', get_game_counter());
             }
 
         }

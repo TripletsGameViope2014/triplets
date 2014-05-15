@@ -52,14 +52,16 @@
 void createLogs(int gameCounter, int dimension)
 {
     FILE *newLog;
-    char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
     char dateExtended[32] = "";
 
     getDate(dateExtended);
+    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
+    strcat(logName, fileName);
 
-    sprintf(logName, "%s%d.txt", logName, gameCounter);
 
-    newLog = fopen(logName, "w");
+    newLog = fopen(logName, "wt");
     if(newLog == NULL)
     {
         printf("\n\tERR: Unable to create Log!");
@@ -86,11 +88,13 @@ void createLogs(int gameCounter, int dimension)
 void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter)
 {
     FILE *playLog;
-    char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
 
-    sprintf(logName, "%s%d.txt", logName, gameCounter);
+    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
+    strcat(logName, fileName);
 
-    playLog = fopen(logName, "a");
+    playLog = fopen(logName, "at");
     if(playLog == NULL)
     {
         printf("\n\tERR: Couldn't write to %s", logName);
@@ -114,11 +118,13 @@ void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int g
 void closePlayLog(int playNumber, int gameCounter, char playerName[])
 {
     FILE *playLog;
-    char logName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
 
-    sprintf(logName, "%s%d.txt", logName, gameCounter);
+    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
+    strcat(logName, fileName);
 
-    playLog = fopen(logName, "a");
+    playLog = fopen(logName, "at");
     if(playLog == NULL)
     {
         printf("\n\tERR: Couldn't close %s", logName);
@@ -145,7 +151,8 @@ void loadLogs(int gameCounter)
 
     FILE *playLog;
 
-    char logName[30] = "TripletsLog-";
+    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
     int playNumber;
     char dateExtended[32];
     char playerName[30];
@@ -157,7 +164,8 @@ void loadLogs(int gameCounter)
     int headLinesNumber=6;
 
 
-    sprintf(logName, "%s%d.txt", logName, gameCounter);
+    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
+    strcat(logName, fileName);
 
     lineCounter=get_file_lines(logName);
 
@@ -166,7 +174,7 @@ void loadLogs(int gameCounter)
     lineCounter++; // to add the last line which doesn't have /n !!
 
 
-    playLog = fopen(logName, "r");
+    playLog = fopen(logName, "rt");
     if(playLog == NULL)
     {
         printf("\n\tERR: Unable to read Log!");

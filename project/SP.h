@@ -11,7 +11,10 @@ int diagonally2 (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int 
 int horizontal (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
 int vertical (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
 void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
-void write(char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
 int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
+int oneMovFinish (char board [MAX_BOARDSIZE][MAX_BOARDSIZE]);
+int okMove (position_t pos, char board [MAX_BOARDSIZE][MAX_BOARDSIZE]);
+int check_let_player_win(char board [MAX_BOARDSIZE][MAX_BOARDSIZE]);
+int emptyboard(char board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
 
 #endif // SP_H_INCLUDED

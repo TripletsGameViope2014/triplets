@@ -53,105 +53,137 @@ int main(void)
 {
     init_highscores();
     int gameCounter=get_game_counter();
+    int control;
+    int option;
+    if (gameCounter==0)
+    {
+        set_game_counter(gameCounter); // creates the file
+    }
+    create_folder("logs");
     reset_data_structs();
     clearscr();
-    create_folder("logs");
+
 
     welcome_screen();
-    show_menu();
-
-    int check=0;
-
-    gameCounter=increment_game_counter(); // this function increments gameCounter, save it in file and returns it
-
-    createLogs(gameCounter, board_get_size());
-
-    if(G_current_game.game_mode==pvp)  //pvp mode
+    do
     {
+        show_menu();
 
-        if(G_current_game.player_first==1)   // who first start game,  first move
+        int check=0;
+
+        gameCounter=increment_game_counter(); // this function increments gameCounter, save it in file and returns it
+
+        createLogs(gameCounter, board_get_size());
+
+        if(G_current_game.game_mode==pvp)  //pvp mode
         {
-            cmp.current_player_move=G_players[0];
-            cmp.previous_player_move=G_players[1];
-        }
-        else
-        {
-            cmp.current_player_move=G_players[1];
-            cmp.previous_player_move=G_players[0];
-        }
+
+            if(G_current_game.player_first==1)   // who first start game,  first move
+            {
+                cmp.current_player_move=G_players[0];
+                cmp.previous_player_move=G_players[1];
+            }
+            else
+            {
+                cmp.current_player_move=G_players[1];
+                cmp.previous_player_move=G_players[0];
+            }
 
 
 
 //    while(1){   // in while add finish_game...
-        while( !finish_game_wrapper(pos) )
-        {
-            //system("cls");
-            clearscr();
+            while( !finish_game_wrapper(pos) )
+            {
+                //system("cls");
+                clearscr();
+                WriteHTML(get_current_game_ptr()->board,"test.html");
+                board_print_raw();
+                do
+                {
+                    //
+                    printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+                    read_move(&pos);
+                    check = function_validate_move(pos);
+                }
+                while(check != 0);
+
+                cmp.current_player_move.moves+=1;
+
+                savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves, pos.X, pos.Y, gameCounter);
+
+                cmp.tmp=cmp.current_player_move;                   //swap current player
+                cmp.current_player_move=cmp.previous_player_move;  //
+                cmp.previous_player_move=cmp.tmp;                  //
+            }//end while(1)
+            cmp.tmp=cmp.current_player_move;                   //swap current player
+            cmp.current_player_move=cmp.previous_player_move;  //
+            cmp.previous_player_move=cmp.tmp;
+            board_print_raw();
+
             WriteHTML(get_current_game_ptr()->board,"test.html");
-            board_print_raw();
-            do
+
+            printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+            closePlayLog(cmp.current_player_move.moves, gameCounter, cmp.current_player_move.name);
+            verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, G_current_game.board_columns, gameCounter, 1);
+
+        }// end pvp mode
+
+        if(G_current_game.game_mode==pvc)  //pvc mode
+        {
+
+            if(G_current_game.player_first==1)   // who first start game,  first move
             {
-                //
-                printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-                read_move(&pos);
-                check = function_validate_move(pos);
+                cmp.current_player_move=G_players[0];
+                cmp.previous_player_move=G_players[1];// G_players[1] is cpu player
             }
-            while(check != 0);
-
-            cmp.current_player_move.moves+=1;
-
-            savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves, pos.X, pos.Y, gameCounter);
-
-            cmp.tmp=cmp.current_player_move;                   //swap current player
-            cmp.current_player_move=cmp.previous_player_move;  //
-            cmp.previous_player_move=cmp.tmp;                  //
-        }//end while(1)
-        cmp.tmp=cmp.current_player_move;                   //swap current player
-        cmp.current_player_move=cmp.previous_player_move;  //
-        cmp.previous_player_move=cmp.tmp;
-        board_print_raw();
-
-        WriteHTML(get_current_game_ptr()->board,"test.html");
-
-        printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-        closePlayLog(cmp.current_player_move.moves, gameCounter, cmp.current_player_move.name);
-        verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, G_current_game.board_columns, gameCounter, 1);
-
-        loadLogs(gameCounter);
-    }// end pvp mode
-
-    if(G_current_game.game_mode==pvc)  //pvc mode
-    {
-
-        if(G_current_game.player_first==1)   // who first start game,  first move
-        {
-            cmp.current_player_move=G_players[0];
-            cmp.previous_player_move=G_players[1];// G_players[1] is cpu player
-        }
-        else
-        {
-            cmp.current_player_move=G_players[1];
-            cmp.previous_player_move=G_players[0];
-        }
-        while(1)
-        {
-            //system("cls");
-            clearscr();
-            board_print_raw();
-            do
+            else
             {
-                printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-                read_move(&pos);
-                check = function_validate_move(pos);
+                cmp.current_player_move=G_players[1];
+                cmp.previous_player_move=G_players[0];
             }
-            while(check != 0);
+            while(1)
+            {
+                //system("cls");
+                clearscr();
+                board_print_raw();
+                do
+                {
+                    printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+                    read_move(&pos);
+                    check = function_validate_move(pos);
+                }
+                while(check != 0);
 
 
-            cmp.current_player_move.moves+=1;
-            cmp.tmp=cmp.current_player_move;                   //swap current player
-            cmp.current_player_move=cmp.previous_player_move;  //
-            cmp.previous_player_move=cmp.tmp;                  //
-        }//end while(1)
-    }// end pvc
+                cmp.current_player_move.moves+=1;
+                cmp.tmp=cmp.current_player_move;                   //swap current player
+                cmp.current_player_move=cmp.previous_player_move;  //
+                cmp.previous_player_move=cmp.tmp;                  //
+            }//end while(1)
+        }// end pvc
+        do
+        {
+
+            printf("\n1. Show Replay\n");
+            printf("2. Go back to menu\n");
+            printf("(Choose an option and press enter): ");
+
+            control=scanf("%d",&option);
+            clean_buffer_keyboard();
+
+
+        }
+        while (option<1 || option >2 || control==0);
+
+        switch (option)
+
+        {
+        case 1:
+            loadLogs(gameCounter);
+            break;
+        }
+
+    }
+    while (1);
     return 0;
 }

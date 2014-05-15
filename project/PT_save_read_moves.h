@@ -41,10 +41,13 @@ extern void createLogs(int gameCounter, int dimension);
 extern void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter);
 extern void closePlayLog(int playNumber, int gameCounter, char playerName[]);
 extern void loadLogs(int gameCounter);
+extern void replay_menu();
+extern void print_game_information(int gameCounter);
 int input_is_digit(char position[3]);
 char input_is_char(char position[3]);
 /* Testing functions */
 extern void test_reading_converting_validating();
 extern void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension);
+
 
 #endif /* __PT_SAVE_READ_MOVES_H__ */

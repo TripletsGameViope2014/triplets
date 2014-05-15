@@ -188,6 +188,7 @@ void loadLogs(int gameCounter)
         fscanf(playLog, "Matrix Dimension: %dx%d\n", &dimension, &dimension);
         fscanf(playLog, "Started on: %s\n", dateExtended);
 
+        board_set_size(dimension);
         board_set_empty();
         clearscr();
         board_print_raw();
@@ -205,6 +206,100 @@ void loadLogs(int gameCounter)
             printf("\nPlayer Name: %s - Play Number: %d - Move: [%d][%c]\n",playerName, playNumber, moveX, moveY); // was just to test if it's reading right
 
         }
+        printf("\nWINNER: %s\n", playerName);
+        printf("\nPress any key to go back to menu...");
+        readchar();
+
+
+
+    }
+
+    fclose(playLog);
+
+}
+
+void replay_menu()
+{
+    int gameCounter=get_game_counter();
+    int control;
+    int i;
+    int option;
+
+    if (gameCounter==0)
+    {
+        printf("There are no games available.\n");
+        printf("Press any key to go back to main menu...");
+        readchar();
+    }
+    else
+    {
+        do
+        {
+            printf("\nGames available to replay:\n");
+
+            for (i=1; i<=gameCounter; i++)
+            {
+                print_game_information(i);
+            }
+
+            printf("(Choose an option and press enter): ");
+
+            control=scanf("%d",&option);
+            clean_buffer_keyboard();
+
+        }
+        while (control ==0 || option<1 || option>gameCounter);
+
+        loadLogs(option);
+
+    }
+}
+
+void print_game_information(int gameCounter)
+{
+
+    FILE *playLog;
+
+    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
+    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
+    int playNumber;
+    char dateExtended[32];
+    char playerName1[30];
+    char playerName2[30];
+    int dimension;
+    int moveX;
+    char moveY;
+    int lineCounter=0;
+    int headLinesNumber=6;
+
+
+    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
+    strcat(logName, fileName);
+
+    lineCounter=get_file_lines(logName);
+
+    lineCounter-=headLinesNumber;
+
+    lineCounter++; // to add the last line which doesn't have /n !!
+
+    playLog = fopen(logName, "rt");
+    if(playLog == NULL)
+    {
+        printf("\nERR: Unable to read Log!");
+    }
+    else
+    {
+        gameCounter=0;
+        dimension=0;
+        fscanf(playLog, "--Triplets Log--\n");
+        fscanf(playLog, "Game #%d\n", &gameCounter);
+        fscanf(playLog, "Matrix Dimension: %dx%d\n", &dimension, &dimension);
+        fscanf(playLog, "Started on: %s\n", dateExtended);
+
+        fscanf(playLog, "Player %s ; Play %d ; Move [%d][%c]\n", playerName1, &playNumber, &moveX, &moveY); // for the first player
+        fscanf(playLog, "Player %s ; Play %d ; Move [%d][%c]\n", playerName2, &playNumber, &moveX, &moveY); // for the first player
+
+        printf("#%d Game - Players: %s vs. %s | Date: %s\n", gameCounter, playerName1, playerName2, dateExtended);
 
     }
 

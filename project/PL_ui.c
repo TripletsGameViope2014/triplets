@@ -125,7 +125,7 @@ void show_menu()
     int menu_choose;
     int control; // to verify if it is not a char!
 
-    do
+   do
     {
         clearscr();
         printf("Triplets Game\n\n");
@@ -133,8 +133,9 @@ void show_menu()
         printf("2. Play : Player vs Player (PvP)\n");
         printf("3. Game rules\n");
         printf("4. High scores\n");
-        printf("5. Credits\n\n");
-        printf("6. Exit Game.\n\n");
+        printf("5. Replay game\n");
+        printf("6. Credits\n\n");
+        printf("7. Exit Game.\n\n");
         printf("(Choose an option and press enter): ");
 
 
@@ -144,7 +145,7 @@ void show_menu()
 
 
     }
-    while (menu_choose<1 || menu_choose>6 || control == 0);
+    while (menu_choose<1 || menu_choose>7 || control == 0);
 
 
     switch(menu_choose)
@@ -227,10 +228,14 @@ void show_menu()
         show_menu();
         break;
     case 5:
-        show_credits();
+        replay_menu(); // this is in PT_save_read_moves.c
         show_menu();
         break;
     case 6:
+        show_credits();
+        show_menu();
+        break;
+    case 7:
         exit(0);
         break;
     default:

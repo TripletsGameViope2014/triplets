@@ -37,11 +37,9 @@
 /*=====================================
  * function prototypes
  *===================================*/
-extern void init_highscores(void);
-extern void verify_new_highscore(int new_player_moves, char new_player_name[], int gamemode);
+extern highscores_t init_highscores(highscores_t highscores[]);
+extern void verify_new_highscore(int new_player_moves, char new_player_name[], highscores_t highscores[]);
 extern void show_highscores();
-extern void createHighscores(highscores_t highscores[], int highscore_type);
+extern void createHighscores(highscores_t highscores[]);
 extern void clearscr(void);
 extern int readchar(void);
-
-int highscore_menu();

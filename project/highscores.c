@@ -30,49 +30,131 @@
  *===================================*/
 
 /**
- * Function that resets the highscores data and defaults them
- * Should be called at the start, before it attempts to load highscores
+ * Function that creates/loads highscores by default
+ * Is called at main, to load highscores or create them if they don't exist
  *
  * @return	void
  * @date	2014-05-14
  * @author	Eduardo Andrade (PT Team)
  */
 
-highscores_t init_highscores(highscores_t highscores[]){
-    FILE *highscoresFile;
-    int i;
+void init_highscores()
+{
+    highscores_t highscores3x3[MAX_HIGHSCORES];
+    highscores_t highscores6x6[MAX_HIGHSCORES];
+    highscores_t highscores12x12[MAX_HIGHSCORES];
+    FILE *highscoresFile3x3;
+    FILE *highscoresFile6x6;
+    FILE *highscoresFile12x12;
+    int i, highscore_type;
 
     /* Set default highscores */
-	for(i=0;i<MAX_HIGHSCORES;i++){
-        strcpy(highscores[i].player_name, "DEFAULT");
-        highscores[i].player_moves = 999;
-	}
+    for(i=0; i<MAX_HIGHSCORES; i++)
+    {
+        strcpy(highscores3x3[i].player_name, "DEFAULT");
+        highscores3x3[i].player_moves = 999;
+    }
+    for(i=0; i<MAX_HIGHSCORES; i++)
+    {
+        strcpy(highscores6x6[i].player_name, "DEFAULT");
+        highscores6x6[i].player_moves = 999;
+    }
+    for(i=0; i<MAX_HIGHSCORES; i++)
+    {
+        strcpy(highscores12x12[i].player_name, "DEFAULT");
+        highscores12x12[i].player_moves = 999;
+    }
 
-	highscoresFile = fopen("highscores.dat", "rb");
-	if (highscoresFile == NULL){
-        createHighscores(highscores);
-	}
-	else{
-        fread(highscores,sizeof(highscores_t),MAX_HIGHSCORES,highscoresFile);
-	}
-	fclose(highscoresFile);
+    // load highscores, if file doesn't exist, create new
+    highscoresFile3x3 = fopen("highscores3x3.dat", "rb");
+    if (highscoresFile3x3 == NULL)
+    {
+        highscore_type = 1;
+        createHighscores(highscores3x3, highscore_type);
+    }
+    else
+    {
+        fread(highscores3x3,sizeof(highscores_t),MAX_HIGHSCORES,highscoresFile3x3);
+    }
+    fclose(highscoresFile3x3);
 
-	return highscores[MAX_HIGHSCORES];
+    highscoresFile6x6 = fopen("highscores6x6.dat", "rb");
+    if (highscoresFile6x6 == NULL)
+    {
+        highscore_type = 2;
+        createHighscores(highscores6x6, highscore_type);
+    }
+    else
+    {
+        fread(highscores6x6,sizeof(highscores_t),MAX_HIGHSCORES,highscoresFile6x6);
+    }
+    fclose(highscoresFile6x6);
+
+    highscoresFile12x12 = fopen("highscores12x12.dat", "rb");
+    if (highscoresFile6x6 == NULL)
+    {
+        highscore_type = 3;
+        createHighscores(highscores12x12, highscore_type);
+    }
+    else
+    {
+        fread(highscores12x12,sizeof(highscores_t),MAX_HIGHSCORES,highscoresFile12x12);
+    }
+    fclose(highscoresFile12x12);
 }
 
-void createHighscores(highscores_t highscores[])
+void createHighscores(highscores_t highscores[], int highscore_type)
 {
     int i;
     FILE *createHighscoresFile;
 
-    createHighscoresFile = fopen("highscores.dat", "wb");
-    for(i=0;i<MAX_HIGHSCORES;i++)
+    if(highscore_type == 1)
     {
-        fwrite(highscores,sizeof(highscores_t),MAX_HIGHSCORES,createHighscoresFile);
+        createHighscoresFile = fopen("highscores3x3.dat", "wb");
+        if(createHighscoresFile == NULL)
+        {
+            printf("\nERROR: Couldn't create highscores3x3.dat file!");
+        }
+        else
+        {
+            for(i=0; i<MAX_HIGHSCORES; i++)
+            {
+                fwrite(highscores,sizeof(highscores_t),MAX_HIGHSCORES,createHighscoresFile);
+            }
+            fclose(createHighscoresFile);
+        }
     }
-
-    fclose(createHighscoresFile);
+    else
+    {
+        if(highscore_type == 2)
+        {
+            createHighscoresFile = fopen("highscores6x6.dat", "wb");
+            if(createHighscoresFile == NULL)
+            {
+                printf("\nERROR: Couldn't create highscores6x6.dat file!");
+            }
+            for(i=0; i<MAX_HIGHSCORES; i++)
+            {
+                fwrite(highscores,sizeof(highscores_t),MAX_HIGHSCORES,createHighscoresFile);
+            }
+            fclose(createHighscoresFile);
+        }
+        else
+        {
+            createHighscoresFile = fopen("highscores12x12.dat", "wb");
+            if(createHighscoresFile == NULL)
+            {
+                printf("\nERROR: Couldn't create highscores12x12.dat file!");
+            }
+            for(i=0; i<MAX_HIGHSCORES; i++)
+            {
+                fwrite(highscores,sizeof(highscores_t),MAX_HIGHSCORES,createHighscoresFile);
+            }
+            fclose(createHighscoresFile);
+        }
+    }
 }
+
 
 /**
  * This function recieves the winning player info and checks if it's a new highscore
@@ -84,33 +166,58 @@ void createHighscores(highscores_t highscores[])
  * @author	Eduardo Andrade (PT Team)
  **/
 
- void verify_new_highscore(int new_player_moves, char new_player_name[], highscores_t highscores[]){
-    int i, o;
-    FILE *saveHighscores;
+void verify_new_highscore(int new_player_moves, char new_player_name[], int game_size)
+{
+    int i, o, highscoresChanged=0;
+    FILE *fileHighscores;
+    char filename[20] = "highscores";
+    highscores_t highscores[MAX_HIGHSCORES];
 
-    for(i=0;i<MAX_HIGHSCORES;i++){
-        if(new_player_moves < highscores[i].player_moves){
-            /* New highscore found, adding to structure array */
-            for(o=MAX_HIGHSCORES-2;o>i;o--){
-                strcpy(highscores[o].player_name, highscores[o-1].player_name);
-                highscores[o].player_moves = highscores[o-1].player_moves;
+    // use the game_size variable to obtain the filename to load
+    sprintf(filename, "%s%d%s%d%s", filename, game_size, "x", game_size, ".dat");
+
+    fileHighscores = fopen(filename, "rb");
+    if (fileHighscores == NULL)
+    {
+        printf("\nERROR: Could not find/write to %s\nCouldn't check for highscores.", filename);
+    }
+    else
+    {
+        fread(highscores,sizeof(highscores_t),MAX_HIGHSCORES,fileHighscores);
+        fclose(fileHighscores);
+
+        for(i=0; i<MAX_HIGHSCORES; i++)
+        {
+            if(new_player_moves < highscores[i].player_moves)
+            {
+                highscoresChanged = 1;
+                /* New highscore found, adding to structure array */
+                for(o=MAX_HIGHSCORES-2; o>i; o--)
+                {
+                    strcpy(highscores[o].player_name, highscores[o-1].player_name);
+                    highscores[o].player_moves = highscores[o-1].player_moves;
+                }
+                highscores[i].player_moves = new_player_moves;
+                strcpy(highscores[i].player_name, new_player_name);
+                i=MAX_HIGHSCORES; // sets i to max number, to skip verifying or replacing more highscores
             }
-            highscores[i].player_moves = new_player_moves;
-            strcpy(highscores[i].player_name, new_player_name);
-            i=MAX_HIGHSCORES; // sets i to max number, to skip verifying or replacing more highscores
+        }
+        fileHighscores = fopen(filename, "wb");
+        if(fileHighscores == NULL)
+        {
+            printf("\nERROR: Could not find/write to %s\nCouldn't check for highscores.", filename);
+        }
+        else{
+        fwrite(highscores, sizeof(highscores_t), MAX_HIGHSCORES, fileHighscores);
+        fclose(fileHighscores);
+
+        if(highscoresChanged==1){
+            printf("\n\nCongratulations %s! You made it to the highscores!\nYou are on position %d on the %dx%d highscores, with %d moves!\n",
+                   new_player_name, o+1, game_size, game_size, new_player_moves);
+        }
         }
     }
-
-    saveHighscores = fopen("highscores.dat", "wb");
-    if (saveHighscores == NULL)
-    {
-        printf("\nERROR: Could not find/write to highscores.dat\nFailed to save the highscores.");
-    }
-    else{
-        fwrite(highscores, sizeof(highscores_t), MAX_HIGHSCORES, saveHighscores);
-    }
-    fclose(saveHighscores);
- }
+}
 
 /**
  * This function shows highscores when called
@@ -122,29 +229,65 @@ void createHighscores(highscores_t highscores[])
  **/
 
 
-void show_highscores(){
-    int i;
+void show_highscores()
+{
+    int i, menuOption;
     FILE *loadHighscores;
     highscores_t highscores[MAX_HIGHSCORES];
 
+    menuOption = highscore_menu();
+
     clearscr();
-    loadHighscores = fopen("highscores.dat", "rb");
-    if (loadHighscores == NULL)
+
+    if(menuOption==1)
+    {
+        loadHighscores = fopen("highscores3x3.dat", "rb");
+    }
+    else
+    {
+        if(menuOption==2)
+        {
+            loadHighscores = fopen("highscores6x6.dat", "rb");
+        }
+        else
+        {
+            loadHighscores = fopen("highscores12x12.dat", "rb");
+        }
+    }
+    if (loadHighscores == NULL)     // verify if file exists
     {
         printf("\nERROR: Couldn't read scores!");
     }
-    else{
-    for(i=0;i<MAX_HIGHSCORES;i++)
+    else
     {
-        fread(highscores,sizeof(highscores_t),MAX_HIGHSCORES,loadHighscores);
-    }
-    printf("\t\t-- Triplets Highscores --\n");
-    for(i=0;i<MAX_HIGHSCORES;i++)
-    {
-        printf("\n#%d - Player Name: %s / Player Score: %d", i+1, highscores[i].player_name, highscores[i].player_moves);
-    }
-    printf("\n\nPress any key to go back...\n");
-    readchar();
+        for(i=0; i<MAX_HIGHSCORES; i++)
+        {
+            fread(highscores,sizeof(highscores_t),MAX_HIGHSCORES,loadHighscores);
+        }
+        printf("\t\t\t-- Triplets Highscores -");
+        //cosmetic stuff
+        if(menuOption==1)
+        {
+            printf(" 3x3 --\n");
+        }
+        else
+        {
+            if(menuOption==2)
+            {
+                printf(" 6x6 --\n");
+            }
+            else
+            {
+                printf(" 12x12 --\n");
+            }
+        }
+
+        for(i=0; i<MAX_HIGHSCORES; i++)
+        {
+            printf("\n#%d - Player Name: %s / Player Score: %d", i+1, highscores[i].player_name, highscores[i].player_moves);
+        }
+        printf("\n\nPress any key to go back...\n");
+        readchar();
     }
     fclose(loadHighscores);
 }
@@ -153,3 +296,30 @@ void show_highscores(){
  * Private functions
  *===================================*/
 
+/**
+ * This function shows a menu to show the different highscores (based on the boardsize)
+ *
+ * @v info_s	shows a menu
+ * @return	an integer that is used in other functions
+ * @date	2014-05-15
+ * @author	PT Team
+ **/
+
+int highscore_menu()
+{
+    int option;
+
+    clearscr();
+    do
+    {
+        printf("Triplets - Highscores\n");
+        printf("\n1. 3x3 Highscores");
+        printf("\n2. 6x6 Highscores");
+        printf("\n3. 12x12 Highscores");
+        printf("\n\n(Choose an option and press enter): ");
+        scanf("%d", &option);
+    }
+    while(option < 1 || option > 3);
+
+    return option;
+}

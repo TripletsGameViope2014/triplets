@@ -40,8 +40,7 @@ int finish_game_wrapper(position_t current_pos)
 *===================================*/
 int main(void)
 {
-    highscores_t highscores[MAX_HIGHSCORES];
-    highscores[MAX_HIGHSCORES] = init_highscores(highscores);
+    init_highscores();
     int gameCounter=0;
     reset_data_structs();
     clearscr();
@@ -102,10 +101,9 @@ int main(void)
 
         WriteHTML(get_current_game_ptr()->board,"test.html");
 
-        verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, highscores);
-
         printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
         closePlayLog(cmp.current_player_move.moves, gameCounter, cmp.current_player_move.name);
+        verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, G_current_game.board_columns);
 
         loadLogs(gameCounter);
     }// end pvp mode

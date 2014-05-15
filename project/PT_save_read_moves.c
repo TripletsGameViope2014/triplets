@@ -218,6 +218,15 @@ void loadLogs(int gameCounter)
 
 }
 
+/**
+ * This function shows the replay menu
+ *
+ * @v Empty String
+ * @return	void
+ * @date	2014-05-15
+ * @author	João Ramos (PT)
+ **/
+
 void replay_menu()
 {
     int gameCounter=get_game_counter();
@@ -254,6 +263,15 @@ void replay_menu()
 
     }
 }
+
+/**
+ * This function prints the information of the (gameCounter) game
+ *
+ * @v gameCounter
+ * @return	void
+ * @date	2014-05-15
+ * @author	João Ramos (PT)
+ **/
 
 void print_game_information(int gameCounter)
 {

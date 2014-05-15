@@ -5,6 +5,7 @@
 #include "board.h"
 #include "data_structs.h"
 #include "PL_ui.h"
+#include "main.h"
 
 void WriteHTML(char board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
 {

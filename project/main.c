@@ -11,6 +11,7 @@
 * System includes
 *===================================*/
 #include <stdio.h>
+#include <string.h>
 
 /*=====================================
 * Local includes
@@ -34,15 +35,18 @@ int finish_game_wrapper(position_t current_pos)
     return finish_gamePL(get_current_game_ptr()->board);
 }
 
-void select_move(){
-    if(G_current_game.cpu_mode == easy){
+void select_move()
+{
+    if(G_current_game.cpu_mode == easy)
+    {
         random_cpu(get_current_game_ptr()->board);
     }
-    else{
+    else
+    {
         //if(G_current_game.cpu_mode == hard){
-            smart(get_current_game_ptr()->board);
-       }
+        smart(get_current_game_ptr()->board);
     }
+}
 
 
 
@@ -148,30 +152,49 @@ int main(void)
                 board_print_raw();
 
                 if(!strcmp(cmp.current_player_move.name,"CPU"))
-			    {
-				printf("Computers move was: ");
-				select_move();
-			    }
-			    else
                 {
-			    do{
-                printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-                read_move(&pos);
-				}while(function_validate_move(pos));
+                    printf("Computers move was: ");
+                    select_move();
+                }
+                else
+                {
+                    do
+                    {
+                        printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+                        read_move(&pos);
+                    }
+                    while(function_validate_move(pos));
 
 
-			}
-            cmp.current_player_move.moves+=1;
-			cmp.tmp=cmp.current_player_move;                   //swap current player
-			cmp.current_player_move=cmp.previous_player_move;  //
-			cmp.previous_player_move=cmp.tmp;
-            }
-                //clearscr();
-                board_print_raw();
+
+                }
                 cmp.current_player_move.moves+=1;
+
+                if (strcmp(cmp.current_player_move.name,"CPU"))
+                {
+                    savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves, pos.X, pos.Y, gameCounter);
+                }
+
+
                 cmp.tmp=cmp.current_player_move;                   //swap current player
                 cmp.current_player_move=cmp.previous_player_move;  //
-                cmp.previous_player_move=cmp.tmp;                  //
+                cmp.previous_player_move=cmp.tmp;
+            }
+
+            clearscr();
+            board_print_raw();
+            cmp.current_player_move.moves+=1;
+            cmp.tmp=cmp.current_player_move;                   //swap current player
+            cmp.current_player_move=cmp.previous_player_move;  //
+            cmp.previous_player_move=cmp.tmp;
+
+            printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+            closePlayLog(cmp.current_player_move.moves, gameCounter, cmp.current_player_move.name);
+
+            if (strcmp(cmp.current_player_move.name,"CPU"))
+            {
+                verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, G_current_game.board_columns, gameCounter, 0);
+            }
         }// end pvc
         do
         {

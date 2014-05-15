@@ -37,6 +37,7 @@ extern void board_set_content_row_col(int row, char col);
 extern char board_get_content_row_col(int row, char col);
 extern int board_row_to_matrix_idx(int row);
 extern int board_col_to_matrix_idx(char col);
+extern int function_validate_move_cpu(position_t pos);
 
 extern char **board_get_board(void);
 

@@ -1,22 +1,26 @@
 #include <stdlib.h>
+#include<stdio.h>
 #include <time.h>
 #include "board.h"
 #include "PL_ui.h"
 #include "PT_save_read_moves.h"
 
+
 void random_cpu (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
-{
-	//int randRow,randColumn;
-	position_t position;
-	srand(time (NULL));
-	int SIZE=board_get_size();
-	do
-	{
-		position.X=rand()%SIZE;
-		position.Y_int=rand()%SIZE;
-	}while(function_validate_move(position)!=0);
-	//Piece is a constant define char '#'
-	board[position.X][position.Y_int]=PIECE;
+{int randRow,randColumn;
+ position_t position;
+ srand(time (NULL));
+ int sizes=board_get_size();
+
+    do
+    {
+      position.X=rand()%sizes;
+      position.Y_int=rand()%sizes;
+
+    }while(!function_validate_move_cpu(position));
+
+    board[position.X][position.Y_int]=PIECE;//Piece is a constant define char '#'
+
 }
 
 
@@ -25,11 +29,6 @@ void random_cpu (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 //We must use #include<time.h> and #include<stdlib.h>.
 {int randRow,randColumn;
  //char columnName;
-=======
-void random (char board[SIZE][SIZE])
-//We must use #include<time.h> and #include<stdlib.h>.
-{int randRow,randColumn;
- position_t position;
  srand(time (NULL));
  int SIZE=board_get_size();
  int check=1;
@@ -42,7 +41,6 @@ void random (char board[SIZE][SIZE])
 
    // }while(!validate(board,randColumn,randRow));
 
-<<<<<<< HEAD
 do{
                 randRow=rand()%SIZE;
                 randColumn=rand()%SIZE;
@@ -55,16 +53,6 @@ do{
 
 
     board[randRow][randColumn]=PIECE;//Piece is a constant define char '#'
-=======
-    do
-    {
-      position.X=1+rand%SIZE;
-      position.Y_int=1+rand%SIZE;
-
-    }while(function_validate_move(position));
-
-    board[position.X][position.Y]=PIECE//Piece is a constant define char '#'
->>>>>>> c949a8ff44a88296c8a70658eac34645ef2ee615
 
 }
 */

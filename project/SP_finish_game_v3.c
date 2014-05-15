@@ -9,9 +9,9 @@ int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j;
     // Diagonally <-
-    for(i=0;i<MAX_BOARDSIZE-3;i++)
+    for(i=0;i<MAX_BOARDSIZE-2;i++)
     {
-        for(j=0;j<MAX_BOARDSIZE-3;j++)
+        for(j=0;j<MAX_BOARDSIZE-2;j++)
         {
             if(board[i][j] == PIECE &&
                board[i+1][j+1] == PIECE &&
@@ -20,9 +20,9 @@ int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
         }
     }
     // Diagonally ->
-    for(i=0;i<MAX_BOARDSIZE-3;i++)
+    for(i=0;i<MAX_BOARDSIZE-2;i++)
     {
-        for(j=0;j<MAX_BOARDSIZE-3;j++)
+        for(j=0;j<MAX_BOARDSIZE-2;j++)
         {
             if(board[i+2][j] == PIECE &&
                board[i+1][j+1] == PIECE &&
@@ -31,7 +31,7 @@ int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
         }
     }
     // Horizontally
-    for(i=0;i<MAX_BOARDSIZE-3;i++)
+    for(i=0;i<MAX_BOARDSIZE-2;i++)
     {
         for(j=0;j<MAX_BOARDSIZE;j++)
         {
@@ -44,7 +44,7 @@ int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
     // Vertically
     for(i=0;i<MAX_BOARDSIZE;i++)
     {
-        for(j=0;j<MAX_BOARDSIZE-3;j++)
+        for(j=0;j<MAX_BOARDSIZE-2;j++)
         {
             if(board[i][j] == PIECE &&
                board[i][j+1] == PIECE &&

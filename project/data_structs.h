@@ -50,6 +50,13 @@ typedef struct player
  */
 typedef enum {pvp, pvc, cvc} game_mode_t;
 
+/** The possible difficulty modes           //
+ * EASY - Player vs Computer (Easy)         //
+ * HARD - Player vs Computer (Hard)         // NEW enum type for the difficulty of the CPU
+ * NONE - Player vs Player                  //
+ */                                         //
+typedef enum {easy, hard, none} cpu_difficulty_t; //
+
 /**
  * Stores the configuration of the current game
  */
@@ -60,6 +67,7 @@ typedef struct game
 	char board[MAX_BOARDSIZE][MAX_BOARDSIZE];
 	int board_columns;  	// number of columns of the board
 	int board_rows;     	// number of rows of the board
+	cpu_difficulty_t cpu_mode;  ///represents the difficulty of the cpu in the PvC mode NEW
 }game_t;
 
 

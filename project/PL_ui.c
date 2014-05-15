@@ -84,7 +84,7 @@ void choose_board()
     do
     {
         //clearscr();
-        printf("\nChoose board size\n");
+        printf("\nChoose board size:\n");
         printf("1. Small board (3x3)\n");
         printf("2. Medium board (6x6)\n");
         printf("3. Large board (12x12)\n\n");
@@ -152,8 +152,9 @@ void show_menu()
 
     case 1:
         G_current_game.game_mode=pvc;
+        show_difficulty();
         clearscr();
-        printf("Triplets - Player vs Computer\n\n");
+        printf("Triplets - Player vs Computer \n\n");
         printf("Enter your name: ");
         scanf("%s",G_players[0].name);
         strcpy(G_players[1].name, "CPU");// G_players[1] is cpu player
@@ -186,6 +187,7 @@ void show_menu()
 
     case 2:
         G_current_game.game_mode=pvp;
+        G_current_game.cpu_mode = none;
         clearscr();
         printf("Triplets - Player vs Player\n");
         printf("Enter the name of player 1: ");
@@ -234,6 +236,36 @@ void show_menu()
     default:
         clearscr();
         show_menu();
+        break;
+    }
+}
+
+void show_difficulty(){
+
+    int menu_choose;
+    int control; // to verify if it is not a char!
+
+    do
+    {
+        clearscr();
+        printf("Triplets Game\n\n");
+        printf("Choose the CPU difficulty:\n");
+        printf("1. Player vs Computer: (EASY)\n");
+        printf("2. Player vs Computer: (HARD)\n\n");
+        printf("(Choose an option and press enter): ");
+
+        control=scanf("%d",&menu_choose);
+        clean_buffer_keyboard();
+    }
+    while(menu_choose<1 || menu_choose>2 || control == 0);
+
+    switch(menu_choose){
+
+    case 1:
+        G_current_game.cpu_mode = easy;
+        break;
+    case 2:
+        G_current_game.cpu_mode = hard;
         break;
     }
 }

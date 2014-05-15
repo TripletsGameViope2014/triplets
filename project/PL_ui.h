@@ -5,6 +5,7 @@ extern void welcome_screen();
 extern void show_menu();
 extern void clearscr(void);
 extern int readchar(void);
+extern void show_difficulty();
 
 player_t G_players[2];
 game_t G_current_game;

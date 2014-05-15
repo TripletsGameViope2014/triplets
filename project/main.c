@@ -34,6 +34,17 @@ int finish_game_wrapper(position_t current_pos)
     return finish_gamePL(get_current_game_ptr()->board);
 }
 
+//void select_move(){
+//    if(G_current_game.cpu_mode == easy){
+//        random_cpu(get_current_game_ptr()->board);
+//    }
+//    else{
+//        if(G_current_game.cpu_mode == hard){
+//            smart(get_current_game_ptr()->board);
+//        }
+//    }
+//}
+
 
 /*=====================================
 * main

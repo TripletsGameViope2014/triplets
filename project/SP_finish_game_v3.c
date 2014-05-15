@@ -132,3 +132,4 @@ int vertical (char board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int row
     return 0;
 }
 */
+

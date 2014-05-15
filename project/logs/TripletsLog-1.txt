@@ -1,9 +1,0 @@
---Triplets Log--
-Game #1
-Matrix Dimension: 6x6
-Started on: 2014/5/15-13:58
-Player Joao ; Play 1 ; Move [1][A]
-Player Pedro ; Play 2 ; Move [1][B]
-Player Joao ; Play 3 ; Move [1][C]
-# Game closed successfully!
-# Winner: Joao - 2 moves

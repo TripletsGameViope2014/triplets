@@ -228,8 +228,6 @@ int okMove (position_t pos, char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
             return 1;
     }
 
-    return 0;
-
 }
 
 

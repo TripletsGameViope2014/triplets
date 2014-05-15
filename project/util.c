@@ -14,9 +14,7 @@
 
 #include <Windows.h>
 
-#endif
-
-#ifdef linux
+#else
 
 #include <time.h>
 
@@ -203,6 +201,8 @@ void create_folder(char folderName[])
 {
    #ifdef _WIN32
    CreateDirectory(folderName,NULL);
+   #else
+   mkdir(folderName, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
    #endif
 }
 

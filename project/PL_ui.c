@@ -54,7 +54,7 @@ void show_credits()
     printf("Triplets game developers:\n\n Poland Team:\n -Paliga Krzysztof\n -Gradzi%cski Tomasz\n -Daniel W%cgrzyn\n\n",228,169);
     printf(" Portugal Team:\n -Jo%co Ramos\n -Eduardo Andrade\n -Gabriel Rodrigues\n\n",199);
     printf(" Spain Team:\n -Nuria Manchado Bustelos\n -Andres Martin de la Iglesia\n\n");
-    printf(" Promoters:\n -Patricio Domingues (from Portugal)\n\n");
+    printf(" Promoters:\n -Patricio Domingues (Portugal)\n -Vitor Carreira (Portugal)\n -Gustavo Reis (Portugal)\n\n");
     printf("Press any key to go back to main menu...");
     readchar();
 }

@@ -11,7 +11,7 @@ void random_cpu (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
  position_t position;
  srand(time (NULL));
- int sizes=board_get_size();
+ int sizes=MAX_BOARDSIZE;
 
     do
     {
@@ -19,9 +19,8 @@ void random_cpu (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
       position.Y_int=rand()%sizes;
 
     }while(!function_validate_move_cpu(position));
-    savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, position.X, position.Y_int+'A', get_game_counter());
+    savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, position.X+1, position.Y_int+'A', get_game_counter());
     board[position.X][position.Y_int]=PIECE;//Piece is a constant define char '#'
-
 }
 
 
@@ -31,7 +30,7 @@ void random_cpu (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {int randRow,randColumn;
  //char columnName;
  srand(time (NULL));
- int SIZE=board_get_size();
+ int SIZE=MAX_BOARDSIZE;
  int check=1;
 
    // do

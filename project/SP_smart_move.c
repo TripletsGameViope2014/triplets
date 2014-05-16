@@ -25,6 +25,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
             for(i=0; i<MAX_BOARDSIZE&&m!=0; i++)
             {
+
                 for(j=0; j<MAX_BOARDSIZE&&m!=0; j++)
                 {
                     if(board[i][j]==PIECE)
@@ -132,7 +133,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
             else
             {
-                savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X, pos.Y_int+'A', get_game_counter());
+                savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X+1, pos.Y_int+'A', get_game_counter());
             }
 
         }
@@ -144,9 +145,9 @@ int oneMovFinish (char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j;
     position_t pos;
-    for(i=0; i<MAX_BOARDSIZE; i++)
+    for(i=0; i<board_get_size(); i++)
     {
-        for(j=0; j<MAX_BOARDSIZE; j++)
+        for(j=0; j<board_get_size(); j++)
         {
             if(board[i][j]==EMPTY)
             {
@@ -155,8 +156,9 @@ int oneMovFinish (char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
                 pos.Y_int=j;
                 if (finish_game_wrapper(pos))
                 {
-
+                    savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X+1, pos.Y_int+'A', get_game_counter());
                     return 1;
+
                 }
                 else
                     board[i][j]= EMPTY;
@@ -226,6 +228,10 @@ int okMove (position_t pos, char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
         }
         else
             return 1;
+    }
+    else
+    {
+        return 0;
     }
 
 }

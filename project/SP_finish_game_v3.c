@@ -1,5 +1,6 @@
 #include "data_structs.h"
 #include "SP.h"
+#include "board.h"
 
 /* Number of aligned pieces that are needed to finish the game */
 #define NUM_ALIGNED_PIECES_FINISH (3)

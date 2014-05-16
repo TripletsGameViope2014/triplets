@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "board.h"
 #ifdef WIN32
 #include "conio.h"
@@ -12,6 +13,7 @@
 #include "unistd.h"
 #include "PT_save_read_moves.h"
 #include "highscores.h"
+#include "util.h"
 
 void clearscr(void)
 {
@@ -124,8 +126,10 @@ void show_menu()
     int who_first_start_game;
     int menu_choose;
     int control; // to verify if it is not a char!
+    char player1nameAux[MAX_PLAYERNAME_LENGTH]="";
+    char player2nameAux[MAX_PLAYERNAME_LENGTH]="";
 
-   do
+    do
     {
         clearscr();
         printf("Triplets Game\n\n");
@@ -156,8 +160,19 @@ void show_menu()
         show_difficulty();
         clearscr();
         printf("Triplets - Player vs Computer \n\n");
-        printf("Enter your name: ");
-        scanf("%s",G_players[0].name);
+        do
+        {
+            printf("Enter your name: ");
+            scanf("%s",G_players[0].name);
+            strcpy(player1nameAux,G_players[0].name);
+            string_to_lower(player1nameAux);
+
+            if (!strcmp(player1nameAux,"cpu"))
+            {
+                printf("Invalid name.\n");
+            }
+        }
+        while (!strcmp(player1nameAux,"cpu"));
         strcpy(G_players[1].name, "CPU");// G_players[1] is cpu player
         choose_board();
 
@@ -191,61 +206,87 @@ void show_menu()
         G_current_game.cpu_mode = none;
         clearscr();
         printf("Triplets - Player vs Player\n");
-        printf("Enter the name of player 1: ");
-        scanf("%s",G_players[0].name);
-        printf("\nEnter the name of player 2: ");
-        scanf("%s",G_players[1].name);
-        choose_board();
-
         do
         {
-            clearscr();
-            printf("Triplets - %s vs %s\n\n", G_players[0].name, G_players[1].name);
-            printf("Select who goes first:\n1. %s\n2. %s\n\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
-            control=scanf("%d",&who_first_start_game);
-            clean_buffer_keyboard();
-        }
-        while (who_first_start_game<1 || who_first_start_game>2 || control==0);
-        switch(who_first_start_game)
-        {
-        case 1:
-            G_current_game.player_first= 1;
-            break;
-        case 2:
-            G_current_game.player_first= 0;
-            break;
-        }
-        clearscr();
-        break;
+            printf("Enter the name of player 1: ");
+            scanf("%s",G_players[0].name);
 
-    case 3:
+            strcpy(player1nameAux,G_players[0].name);
+            string_to_lower(player1nameAux);
+
+            if (!(strcmp(player1nameAux,"cpu")))
+        {
+            printf("Invalid name.\n");
+            }
+        }
+        while (!(strcmp(player1nameAux,"cpu")));
+        do
+        {
+            printf("\nEnter the name of player 2: ");
+            scanf("%s",G_players[1].name);
+
+            strcpy(player2nameAux,G_players[1].name);
+            string_to_lower(player2nameAux);
+
+            if (!(strcmp(player2nameAux,"cpu")) || !(strcmp(player2nameAux,player1nameAux)))
+            {
+                printf("Invalid name.\n");
+            }
+        }
+        while (!(strcmp(player2nameAux,"cpu")) || !(strcmp(player2nameAux,player1nameAux)));
+
+                choose_board();
+
+                do
+        {
+            clearscr();
+                printf("Triplets - %s vs %s\n\n", G_players[0].name, G_players[1].name);
+                printf("Select who goes first:\n1. %s\n2. %s\n\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
+                control=scanf("%d",&who_first_start_game);
+                clean_buffer_keyboard();
+            }
+            while (who_first_start_game<1 || who_first_start_game>2 || control==0);
+            switch(who_first_start_game)
+            {
+            case 1:
+                G_current_game.player_first= 1;
+                break;
+            case 2:
+                G_current_game.player_first= 0;
+                break;
+            }
+    clearscr();
+    break;
+
+case 3:
         show_game_rules();
         show_menu();
         break;
     case 4:
-        //show High scores//
-        show_highscores();
-        show_menu();
-        break;
-    case 5:
-        replay_menu(); // this is in PT_save_read_moves.c
-        show_menu();
-        break;
-    case 6:
-        show_credits();
-        show_menu();
-        break;
-    case 7:
-        exit(0);
-        break;
-    default:
-        clearscr();
-        show_menu();
-        break;
-    }
+            //show High scores//
+            show_highscores();
+            show_menu();
+            break;
+        case 5:
+                replay_menu(); // this is in PT_save_read_moves.c
+                show_menu();
+                break;
+            case 6:
+                    show_credits();
+                    show_menu();
+                    break;
+                case 7:
+                        exit(0);
+                        break;
+                    default:
+                            clearscr();
+                            show_menu();
+                            break;
+                        }
 }
 
-void show_difficulty(){
+void show_difficulty()
+{
 
     int menu_choose;
     int control; // to verify if it is not a char!
@@ -264,7 +305,8 @@ void show_difficulty(){
     }
     while(menu_choose<1 || menu_choose>2 || control == 0);
 
-    switch(menu_choose){
+    switch(menu_choose)
+    {
 
     case 1:
         G_current_game.cpu_mode = easy;

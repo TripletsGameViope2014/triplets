@@ -9,6 +9,7 @@
  * System includes
  *===================================*/
 #include <stdio.h>
+#include <ctype.h>
 
 #ifdef _WIN32
 
@@ -40,6 +41,7 @@ int get_game_counter();
 int increment_game_counter();
 int get_file_lines(char fileName[]);
 void create_folder(char folderName[]);
+void string_to_lower(char string[]);
 
 
 /**
@@ -205,6 +207,16 @@ void create_folder(char folderName[])
    #else
    mkdir(folderName, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
    #endif
+}
+
+void string_to_lower(char string[])
+{
+    int i;
+
+    for (i=0;string[i]!='\0';i++)
+    {
+        string[i]=tolower(string[i]);
+    }
 }
 
 /*=====================================

@@ -244,23 +244,24 @@ void replay_menu()
     {
         do
         {
-            printf("\nGames available to replay:\n");
+            printf("\nGames available to replay:\n\n");
 
             for (i=1; i<=gameCounter; i++)
             {
                 print_game_information(i);
             }
 
-            printf("(Choose an option and press enter): ");
+            printf("\n(Choose an option and press enter).\nInsert 0 to return to main menu: ");
 
             control=scanf("%d",&option);
             clean_buffer_keyboard();
 
         }
-        while (control ==0 || option<1 || option>gameCounter);
-
-        loadLogs(option);
-
+        while (control ==0 || option<0 || option>gameCounter);
+        if (option!=0)
+        {
+            loadLogs(option);
+        }
     }
 }
 

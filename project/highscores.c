@@ -261,84 +261,94 @@ void show_highscores()
 
     menuOption = highscore_menu();
 
-    clearscr();
-
-    if(menuOption==1)
+    if (menuOption==0)
     {
-        loadHighscores = fopen("highscores3x3.dat", "rb");
+
     }
     else
     {
-        if(menuOption==2)
+        clearscr();
+
+        if(menuOption==1)
         {
-            loadHighscores = fopen("highscores6x6.dat", "rb");
+            loadHighscores = fopen("highscores3x3.dat", "rb");
         }
         else
         {
-            loadHighscores = fopen("highscores12x12.dat", "rb");
-        }
-    }
-    if (loadHighscores == NULL)     // verify if file exists
-    {
-        printf("\nERROR: Couldn't read scores!");
-    }
-    else
-    {
-        for(i=0; i<MAX_HIGHSCORES; i++)
-        {
-            fread(highscores,sizeof(highscores_t),MAX_HIGHSCORES,loadHighscores);
-        }
-        do
-        {
-            printf("\t\t\t-- Triplets Highscores -");
-            //cosmetic stuff
-            if(menuOption==1)
+            if(menuOption==2)
             {
-                printf(" 3x3 --\n");
+                loadHighscores = fopen("highscores6x6.dat", "rb");
             }
             else
             {
-                if(menuOption==2)
+                loadHighscores = fopen("highscores12x12.dat", "rb");
+            }
+        }
+        if (loadHighscores == NULL)     // verify if file exists
+        {
+            printf("\nERROR: Couldn't read scores!");
+        }
+        else
+        {
+            for(i=0; i<MAX_HIGHSCORES; i++)
+            {
+                fread(highscores,sizeof(highscores_t),MAX_HIGHSCORES,loadHighscores);
+            }
+            do
+            {
+                printf("\t\t\t-- Triplets Highscores -");
+                //cosmetic stuff
+                if(menuOption==1)
                 {
-                    printf(" 6x6 --\n");
+                    printf(" 3x3 --\n");
                 }
                 else
                 {
-                    printf(" 12x12 --\n");
+                    if(menuOption==2)
+                    {
+                        printf(" 6x6 --\n");
+                    }
+                    else
+                    {
+                        printf(" 12x12 --\n");
+                    }
                 }
-            }
 
-            for(i=0; i<MAX_HIGHSCORES; i++)
-            {
-                if(highscores[i].player_moves != 999){
-                printf("\n#%d - Player Name: %s / Player Score: %d @ %s Mode",
-                       i+1, highscores[i].player_name, highscores[i].player_moves, highscores[i].game_mode);
-                numHighscores++;
+                for(i=0; i<MAX_HIGHSCORES; i++)
+                {
+                    if(highscores[i].player_moves != 999)
+                    {
+                        printf("\n#%d - Player Name: %s / Player Score: %d @ %s Mode",
+                               i+1, highscores[i].player_name, highscores[i].player_moves, highscores[i].game_mode);
+                        numHighscores++;
+                    }
                 }
-            }
-            if(numHighscores==0){
-                printf("\nThere are still no highscores to see here!");
-                printf("\nPress any key to go back...");
-                readchar();
-                break;
-            }
-            else{
-            printf("\n\n1-%d. Select match to replay", numHighscores);
-            printf("\n0. Exit to main menu");
-            printf("\nSelect option: ");
-            scanf("%d", &exitOption);
-            logToLoad = highscores[exitOption-1].game_counter;
-            }
+                if(numHighscores==0)
+                {
+                    printf("\nThere are still no highscores to see here!");
+                    printf("\nPress any key to go back...");
+                    readchar();
+                    break;
+                }
+                else
+                {
+                    printf("\n\n1-%d. Select match to replay", numHighscores);
+                    printf("\n0. Exit to main menu");
+                    printf("\nSelect option: ");
+                    scanf("%d", &exitOption);
+                    logToLoad = highscores[exitOption-1].game_counter;
+                }
 
-            if(exitOption==0)
-            {
-                break;
+                if(exitOption==0)
+                {
+                    break;
+                }
+                clearscr();
             }
-            clearscr();
+            while (exitOption < 0 || exitOption > numHighscores);
+            fclose(loadHighscores);
+            loadLogs(logToLoad);
         }
-        while (exitOption < 0 || exitOption > numHighscores);
-        fclose(loadHighscores);
-        loadLogs(logToLoad);
     }
 }
 
@@ -366,10 +376,10 @@ int highscore_menu()
         printf("\n1. 3x3 Highscores");
         printf("\n2. 6x6 Highscores");
         printf("\n3. 12x12 Highscores");
-        printf("\n\n(Choose an option and press enter): ");
+        printf("\n(Choose an option and press enter).\nInsert 0 to return to main menu: ");
         scanf("%d", &option);
     }
-    while(option < 1 || option > 3);
+    while(option < 0 || option > 3);
 
     return option;
 }

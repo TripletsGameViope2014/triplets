@@ -67,12 +67,14 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="main.h" />
 		<Unit filename="pl_htmlui.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="util.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="util.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

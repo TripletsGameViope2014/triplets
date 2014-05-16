@@ -17,6 +17,7 @@
 #else
 
 #include <time.h>
+#include <sys/types.h>
 
 #endif
 

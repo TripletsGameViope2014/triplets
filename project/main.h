@@ -39,9 +39,9 @@
 /*=====================================
  * function prototypes
  *===================================*/
-extern int finish_game_wrapper();
 extern void select_move();
 extern int main(void);
+extern int finish_game_wrapper(position_t current_pos);
 
 
 

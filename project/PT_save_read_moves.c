@@ -579,7 +579,7 @@ int input_is_digit(char position[3])
  * @author	Gabriel Rodrigues(PT Team)
  **/
 
-void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension)
+void test_representation_matrix(board_t matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension)
 {
     int i, j;
     printf("GAME BOARD! %d x %d\n\n", dimension, dimension);
@@ -592,7 +592,7 @@ void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int d
         for(j = 0; j < dimension; j++)
         {
             +
-            printf("|%c|   ", matrix[i][j]);
+            printf("|%c|   ", matrix[i][j].piece);
         }
         printf("\n\n");
 

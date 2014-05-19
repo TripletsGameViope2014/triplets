@@ -75,7 +75,7 @@ void board_set_empty(void){
 
 	for(i=0;i<board_size;i++){
 		for(j=0;j<board_size;j++){
-			get_current_game_ptr()->board[i][j] = EMPTY;
+			get_current_game_ptr()->board[i][j].piece = EMPTY;
 		}
 	}
 }
@@ -137,7 +137,7 @@ void board_print_raw(void){
 		}
 		for(j=0;j<board_size;j++){
 			printf("| ");
-			printf("%c ", get_current_game_ptr()->board[i][j]);
+			printf("%c ", get_current_game_ptr()->board[i][j].piece);
 		}
 		printf("|\n");
 	}
@@ -253,7 +253,7 @@ char board_get_content_row_col(int row, char col){
 	pos.X = board_row_to_matrix_idx(row);
 
 	pos.Y_int = board_col_to_matrix_idx(col);
-	piece_on = get_current_game_ptr()->board[pos.X][pos.Y_int]; //get_current_game_ptr()->board[i][j]
+	piece_on = get_current_game_ptr()->board[pos.X][pos.Y_int].piece; //get_current_game_ptr()->board[i][j]
 
 	return piece_on;
 }
@@ -273,7 +273,7 @@ void board_set_content_row_col(int row, char col){
 	position_t pos;
 	pos.X = board_row_to_matrix_idx(row);
 	pos.Y_int = board_col_to_matrix_idx(col);
-	get_current_game_ptr()->board[pos.X][pos.Y_int] = PIECE;
+	get_current_game_ptr()->board[pos.X][pos.Y_int].piece = PIECE;
 
 }
 
@@ -290,7 +290,7 @@ int function_validate_move_cpu(position_t pos){
 
     if((pos.X>=0&&pos.X<board_get_size())&&(pos.Y_int>=0&&pos.Y_int<board_get_size())){
 
-    if(get_current_game_ptr()->board[pos.X][pos.Y_int] == EMPTY){
+    if(get_current_game_ptr()->board[pos.X][pos.Y_int].piece == EMPTY){
 	 return 1;
     }
     else{

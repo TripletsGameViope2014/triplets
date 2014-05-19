@@ -6,7 +6,7 @@
 #define NUM_ALIGNED_PIECES_FINISH (3)
 
 
-int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
+int finish_gamePL(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j;
     // Diagonally <-
@@ -14,9 +14,9 @@ int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
     {
         for(j=0;j<MAX_BOARDSIZE-2;j++)
         {
-            if(board[i][j] == PIECE &&
-               board[i+1][j+1] == PIECE &&
-               board[i+2][j+2] == PIECE)
+            if(board[i][j].piece == PIECE &&
+               board[i+1][j+1].piece == PIECE &&
+               board[i+2][j+2].piece == PIECE)
                 return 1;
         }
     }
@@ -25,9 +25,9 @@ int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
     {
         for(j=0;j<MAX_BOARDSIZE-2;j++)
         {
-            if(board[i+2][j] == PIECE &&
-               board[i+1][j+1] == PIECE &&
-               board[i][j+2] == PIECE)
+            if(board[i+2][j].piece == PIECE &&
+               board[i+1][j+1].piece == PIECE &&
+               board[i][j+2].piece == PIECE)
                 return 1;
         }
     }
@@ -36,9 +36,9 @@ int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
     {
         for(j=0;j<MAX_BOARDSIZE;j++)
         {
-            if(board[i][j] == PIECE &&
-               board[i+1][j] == PIECE &&
-               board[i+2][j] == PIECE)
+            if(board[i][j].piece == PIECE &&
+               board[i+1][j].piece == PIECE &&
+               board[i+2][j].piece == PIECE)
                 return 1;
         }
     }
@@ -47,9 +47,9 @@ int finish_gamePL(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
     {
         for(j=0;j<MAX_BOARDSIZE-2;j++)
         {
-            if(board[i][j] == PIECE &&
-               board[i][j+1] == PIECE &&
-               board[i][j+2] == PIECE)
+            if(board[i][j].piece == PIECE &&
+               board[i][j+1].piece == PIECE &&
+               board[i][j+2].piece == PIECE)
                 return 1;
         }
     }

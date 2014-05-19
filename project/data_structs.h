@@ -29,6 +29,9 @@
 #define PIECE '#' //board position occupied
 #define MAX_PLAYERNAME_LENGTH 20 //maximum size for a player’s nickname
 #define MAX_BOARDSIZE 12 //maximum size of the board
+#define BLACK 0
+#define WHITE 7
+#define RED 1
 
 /*=====================================
  * typedefs
@@ -60,11 +63,17 @@ typedef enum {easy, hard, none} cpu_difficulty_t; //
 /**
  * Stores the configuration of the current game
  */
+ typedef struct board
+ {
+     int player;
+     char piece;
+ } board_t;
+
 typedef struct game
 {
 	int player_first;  	// represents the player first option
 	game_mode_t game_mode; 	//represents the game mode
-	char board[MAX_BOARDSIZE][MAX_BOARDSIZE];
+	board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE];
 	int board_columns;  	// number of columns of the board
 	int board_rows;     	// number of rows of the board
 	cpu_difficulty_t cpu_mode;  ///represents the difficulty of the cpu in the PvC mode NEW

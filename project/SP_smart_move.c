@@ -6,7 +6,7 @@
 #include "util.h"
 #include "main.h"
 
-void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
+void smart (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j, m=3;
     position_t pos;
@@ -28,7 +28,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                 for(j=0; j<MAX_BOARDSIZE&&m!=0; j++)
                 {
-                    if(board[i][j]==PIECE)
+                    if(board[i][j].piece==PIECE)
                     {
 
                         pos.X=i-2;
@@ -36,7 +36,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                         if(okMove(pos, get_current_game_ptr()->board))
                         {
-                            board[i-2][j-1]=PIECE;
+                            board[i-2][j-1].piece=PIECE;
                             m=0;
                         }
                         else
@@ -47,7 +47,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                             if(okMove(pos, get_current_game_ptr()->board))
                             {
-                                board[i-2][j+1]=PIECE;
+                                board[i-2][j+1].piece=PIECE;
                                 m=0;
                             }
                             else
@@ -58,7 +58,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                                 if(okMove(pos, get_current_game_ptr()->board))
                                 {
-                                    board[i-1][j+2]=PIECE;
+                                    board[i-1][j+2].piece=PIECE;
                                     m=0;
                                 }
                                 else
@@ -69,7 +69,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                                     if(okMove(pos, get_current_game_ptr()->board))
                                     {
-                                        board[i+1][j+2]=PIECE;
+                                        board[i+1][j+2].piece=PIECE;
                                         m=0;
                                     }
                                     else
@@ -80,7 +80,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                                         if(okMove(pos, get_current_game_ptr()->board))
                                         {
-                                            board[i+2][j+1]=PIECE;
+                                            board[i+2][j+1].piece=PIECE;
                                             m=0;
                                         }
                                         else
@@ -91,7 +91,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                                             if(okMove(pos, get_current_game_ptr()->board))
                                             {
-                                                board[i+2][j-1]=PIECE;
+                                                board[i+2][j-1].piece=PIECE;
                                                 m=0;
                                             }
                                             else
@@ -101,7 +101,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                                                 if(okMove(pos, get_current_game_ptr()->board))
                                                 {
-                                                    board[i+1][j-2]=PIECE;
+                                                    board[i+1][j-2].piece=PIECE;
                                                     m=0;
                                                 }
                                                 else
@@ -111,7 +111,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                                                     if(okMove(pos, get_current_game_ptr()->board))
                                                     {
-                                                        board[i-1][j-2]=PIECE;
+                                                        board[i-1][j-2].piece=PIECE;
                                                         m=0;
                                                     }
                                                 }
@@ -141,7 +141,7 @@ void smart (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
 }
 
-int oneMovFinish (char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
+int oneMovFinish (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j;
     position_t pos;
@@ -149,9 +149,9 @@ int oneMovFinish (char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
     {
         for(j=0; j<board_get_size(); j++)
         {
-            if(board[i][j]==EMPTY)
+            if(board[i][j].piece==EMPTY)
             {
-                board[i][j]=PIECE;
+                board[i][j].piece=PIECE;
                 pos.X=i;
                 pos.Y_int=j;
                 if (finish_game_wrapper(pos))
@@ -161,7 +161,7 @@ int oneMovFinish (char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 
                 }
                 else
-                    board[i][j]= EMPTY;
+                    board[i][j].piece=EMPTY;
             }
 
         }
@@ -170,7 +170,7 @@ int oneMovFinish (char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
     return 0;
 }
 
-int emptyboard(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
+int emptyboard(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i, j;
 
@@ -178,7 +178,7 @@ int emptyboard(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
     {
         for(j=0; j<MAX_BOARDSIZE; j++)
         {
-            if(board[i][j]!=EMPTY)
+            if(board[i][j].piece!=EMPTY)
                 return 0;
         }
     }
@@ -186,7 +186,7 @@ int emptyboard(char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
 }
 
-int check_let_player_win(char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
+int check_let_player_win(board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j;
     position_t pos;
@@ -194,18 +194,18 @@ int check_let_player_win(char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
     {
         for(j=0; j<MAX_BOARDSIZE; j++)
         {
-            if(board[i][j]==EMPTY)
+            if(board[i][j].piece==EMPTY)
             {
-                board[i][j]=PIECE;
+                board[i][j].piece=PIECE;
                 pos.X=i;
                 pos.Y_int=j;
                 if (finish_game_wrapper(pos))
                 {
-                    board[i][j]=EMPTY;
+                    board[i][j].piece=EMPTY;
                     return 1;
                 }
                 else
-                    board[i][j]= EMPTY;
+                    board[i][j].piece=EMPTY;
             }
 
         }
@@ -216,14 +216,14 @@ int check_let_player_win(char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 
 }
 
-int okMove (position_t pos, char board [MAX_BOARDSIZE][MAX_BOARDSIZE])
+int okMove (position_t pos, board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     if(function_validate_move_cpu(pos))
     {
-        board[pos.X][pos.Y_int]=PIECE;
+        board[pos.X][pos.Y_int].piece=PIECE;
         if(check_let_player_win(get_current_game_ptr()->board))
         {
-            board[pos.X][pos.Y_int]=EMPTY;
+            board[pos.X][pos.Y_int].piece=EMPTY;
             return 0;
         }
         else

@@ -57,7 +57,7 @@ void WriteHTML(char board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
             {
                 fprintf(HTML,"<td style=\"border:none;\">%d</td>",i+1);
                 //fprintf(HTML,"<td>%c</td>",get_current_game_ptr()->board[i][j]);
-                if(get_current_game_ptr()->board[i][j] == PIECE)
+                if(get_current_game_ptr()->board[i][j].piece == PIECE)
                 {
                     fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./piece.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
                 }
@@ -69,7 +69,7 @@ void WriteHTML(char board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
             else
             {
                 //fprintf(HTML,"<td>%c</td>",get_current_game_ptr()->board[i][j]);
-                if(get_current_game_ptr()->board[i][j] == PIECE)
+                if(get_current_game_ptr()->board[i][j].piece == PIECE)
                 {
                     fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./piece.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
                 }

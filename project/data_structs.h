@@ -47,7 +47,7 @@ typedef struct player
 }player_t;
 
 /** The possible game modes
- * PvP - player vs Player
+ * PvP - Player vs Player
  * PvC - player vs Computer
  * CvC - computer vs computer
  */
@@ -59,6 +59,14 @@ typedef enum {pvp, pvc, cvc} game_mode_t;
  * NONE - Player vs Player                  //
  */                                         //
 typedef enum {easy, hard, none} cpu_difficulty_t; //
+
+/** The possible difficulty modes           //
+ * NORMAL - Player vs Player (Normal Mode)         //
+ * COLUMN - Player vs Player (Column Mode)         // NEW enum type for the mode of the PvP
+ * NONE   - Player vs Player                  //
+ */                                         //
+typedef enum {normal, column, notpvp} pvp_mode_t;
+
 
 /**
  * Stores the configuration of the current game
@@ -77,6 +85,7 @@ typedef struct game
 	int board_columns;  	// number of columns of the board
 	int board_rows;     	// number of rows of the board
 	cpu_difficulty_t cpu_mode;  ///represents the difficulty of the cpu in the PvC mode NEW
+	pvp_mode_t pvp_mode; ///represents the game mode
 }game_t;
 
 

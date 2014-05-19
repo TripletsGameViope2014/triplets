@@ -304,3 +304,36 @@ void show_who_first()
     }
     clearscr();
 }
+
+void show_pvp_mode()
+{
+
+    int menu_choose;
+    int control; // to verify if it is not a char!
+
+    do
+    {
+        clearscr();
+        printf("Triplets Game\n\n");
+        printf("Choose the PvP Mode:\n");
+        printf("1. Normal Mode: \n");
+        printf("2. Column Mode (it's a challenge!): \n\n");
+        printf("(Choose an option and press enter): ");
+
+        control=scanf("%d",&menu_choose);
+        clean_buffer_keyboard();
+    }
+    while(menu_choose<1 || menu_choose>2 || control == 0);
+
+    switch(menu_choose)
+    {
+
+    case 1:
+        G_current_game.cpu_mode = easy;
+        break;
+    case 2:
+        G_current_game.cpu_mode = hard;
+        break;
+    }
+}
+

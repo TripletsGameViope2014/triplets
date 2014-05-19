@@ -102,6 +102,10 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="game_mode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="game_mode.h" />
 		<Unit filename="highscores.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />

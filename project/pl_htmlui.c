@@ -5,7 +5,6 @@
 #include "board.h"
 #include "data_structs.h"
 #include "PL_ui.h"
-#include "main.h"
 
 void WriteHTML(char board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
 {
@@ -16,6 +15,7 @@ void WriteHTML(char board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
     fprintf(HTML,"<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />");
     fprintf(HTML,"<script src=\"./js/jquery-2.1.1.min.js\"></script>");
     fprintf(HTML,"<script src=\"./js/reload.js\"></script>");
+    fprintf(HTML,"<script src=\"./js/click.js\"></script>");
     fprintf(HTML,"<body><center>");
     //fprintf(HTML,"TEST <br/>TEST2 <br/>TEST3");
     int board_size = board_get_size();
@@ -26,7 +26,7 @@ void WriteHTML(char board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
     }
     else
     {
-        fprintf(HTML,"%s won! (In %d moves!)",cmp.current_player_move.name, cmp.current_player_move.moves);
+        fprintf(HTML,"<b>%s won! (In %d moves!)</b>",cmp.current_player_move.name, cmp.current_player_move.moves);
     }
     fprintf(HTML,"<table>");
 
@@ -59,11 +59,11 @@ void WriteHTML(char board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
                 //fprintf(HTML,"<td>%c</td>",get_current_game_ptr()->board[i][j]);
                 if(get_current_game_ptr()->board[i][j] == PIECE)
                 {
-                    fprintf(HTML,"<td> <img src = \"./piece.png\" width = \"40\" height = \"40\" /> </td>");
+                    fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./piece.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
                 }
                 else
                 {
-                    fprintf(HTML, "<td></td>");
+                    fprintf(HTML, "<td id=\"%c%d\"><a href = \"\"></a></td>",'a'+j,i+1);
                 }
             }
             else
@@ -71,11 +71,11 @@ void WriteHTML(char board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
                 //fprintf(HTML,"<td>%c</td>",get_current_game_ptr()->board[i][j]);
                 if(get_current_game_ptr()->board[i][j] == PIECE)
                 {
-                    fprintf(HTML,"<td> <img src = \"./piece.png\" width = \"40\" height = \"40\" /> </td>");
+                    fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./piece.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
                 }
                 else
                 {
-                    fprintf(HTML, "<td></td>");
+                    fprintf(HTML, "<td id=\"%c%d\"><a href = \"\"></a></td>",'a'+j,i+1);
                 }
             }
         }

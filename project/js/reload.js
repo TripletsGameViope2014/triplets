@@ -1,4 +1,4 @@
-window.onclick = setupRefresh;
+window.onload = setupRefresh;
 
 function setupRefresh() {
   setTimeout("refreshPage();", 1000);

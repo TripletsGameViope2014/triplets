@@ -25,6 +25,7 @@
 #include "highscores.h"
 #include "util.h"
 #include "pl_htmlui.h"
+#include "sockets.h"
 
 int finish_game_wrapper(position_t current_pos)
 {
@@ -80,6 +81,7 @@ do{
 
         createLogs(gameCounter, board_get_size());
 
+       OpenHTML("game.html");
         if(G_current_game.game_mode==pvp)  //pvp mode
         {
 
@@ -101,13 +103,14 @@ do{
             {
                 //system("cls");
                 clearscr();
-                WriteHTML(get_current_game_ptr()->board,"test.html");
+                WriteHTML(get_current_game_ptr()->board,"game.html");
                 board_print_raw();
                 do
                 {
                     //
                     printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
                     read_move(&pos);
+                   // PL_HTMLread_move(&pos);
                     check = function_validate_move(pos);
                 }
                 while(check != 0);
@@ -125,7 +128,7 @@ do{
             cmp.previous_player_move=cmp.tmp;
             board_print_raw();
 
-            WriteHTML(get_current_game_ptr()->board,"test.html");
+            WriteHTML(get_current_game_ptr()->board,"game.html");
 
             printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
             closePlayLog(cmp.current_player_move.moves, gameCounter, cmp.current_player_move.name);

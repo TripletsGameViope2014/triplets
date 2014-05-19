@@ -638,7 +638,6 @@ void test_reading_converting_validating()
 
 void PL_HTMLread_move(position_t *pos)
 {
-
     /* Maximum size for the buffer to read a move: 3 characters + 1 \n + 1 \0 => 5 */
 #define READ_MOVE_MAX_BUFF_LEN      (5)
 

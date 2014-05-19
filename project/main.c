@@ -76,11 +76,9 @@ int main(void)
 
 do{
         int check=0;
-
         gameCounter=increment_game_counter(); // this function increments gameCounter, save it in file and returns it
-
         createLogs(gameCounter, board_get_size());
-
+        WriteHTML(get_current_game_ptr()->board,"game.html");
        OpenHTML("game.html");
         if(G_current_game.game_mode==pvp)  //pvp mode
         {
@@ -109,8 +107,8 @@ do{
                 {
                     //
                     printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-                    read_move(&pos);
-                   // PL_HTMLread_move(&pos);
+                   // read_move(&pos);
+                   PL_HTMLread_move(&pos);
                     check = function_validate_move(pos);
                 }
                 while(check != 0);

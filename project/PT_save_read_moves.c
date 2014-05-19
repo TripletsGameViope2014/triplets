@@ -53,14 +53,11 @@
 void createLogs(int gameCounter, int dimension)
 {
     FILE *newLog;
-    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
-    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
+    char logName[255];
     char dateExtended[32] = "";
-
     getDate(dateExtended);
-    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
-    strcat(logName, fileName);
 
+    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
 
     newLog = fopen(logName, "wt");
     if(newLog == NULL)
@@ -89,11 +86,9 @@ void createLogs(int gameCounter, int dimension)
 void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter)
 {
     FILE *playLog;
-    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
-    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
+    char logName[255]="logs/";
 
-    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
-    strcat(logName, fileName);
+    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
 
     playLog = fopen(logName, "at");
     if(playLog == NULL)
@@ -655,15 +650,12 @@ void PL_HTMLread_move(position_t *pos)
             mov = fopen("move.mv","r+");
             fgets(move_in_board, maxLength, mov);
             fclose(mov);
-
             /* Terminate the string at the first \n */
             terminate_string_at_first_slash_n(move_in_board);
-
         pos->X = input_is_digit(move_in_board);
         pos->Y = input_is_char(move_in_board);
         pos->Y = toupper(pos->Y);
         pos->Y_int = board_col_to_matrix_idx(pos->Y);
-
 }
 
 

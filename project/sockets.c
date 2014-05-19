@@ -45,7 +45,7 @@ void OpenHTML(char* HTMLName)
     #else
     sprintf(command, "open %s", HTMLName);
     #endif // __linux__
-
+    printf("ABout to execute %s\n", command);
     system(command);
 }
 
@@ -95,27 +95,18 @@ if ( setsockopt(mainSocket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1 )
     int bytesSent;
     int bytesRecv = -1;
     char sendbuf[ 20 ] = "";
-    char recvbuf[ 9 ] = "";
+    char recvbuf[ 20 ] = "";
     char move[4] = "";
-    bytesRecv = recv( cli, recvbuf, 9, 0 );
+    bytesRecv = recv( cli, recvbuf, 20, 0 );
+    recvbuf[bytesRecv] = '\0';
     printf( "Bytes received: %d\n", bytesRecv );
     printf( "Received text: %s\n", recvbuf );
 
-    bytesSent = send( cli, sendbuf, strlen( sendbuf ), 0 );
+    //bytesSent = send( cli, sendbuf, strlen( sendbuf ), 0 );
 
-    int a;
-    int b=0;
-    for (a=5;a<8;a++)
-    {
-        if((recvbuf[a] == '/') || (recvbuf[a] == ' '))
-            continue;
-        move[b] = recvbuf[a];
-        b++;
-
-        //printf("\n");
-    }
-    //printf("%s", move);
-
+    char letter; int number;
+    int token = sscanf(recvbuf, "GET /%c%d", &letter, &number);
+    sprintf(move, "%c%d", letter, number);
     FILE *mov = fopen("move.mv", "w+");
     fprintf(mov,"%s", move);
     fclose(mov);

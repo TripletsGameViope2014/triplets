@@ -15,10 +15,14 @@
 
 #include <Windows.h>
 
+void setWinTextColor(int, int);
+
 #else
 
 #include <time.h>
 #include <sys/stat.h>
+
+void setLinuxTextColor(int, int);
 
 #endif
 
@@ -222,4 +226,26 @@ void string_to_lower(char string[])
 /*=====================================
  * Private functions
  *===================================*/
+
+void setTextColor(int foreground, int background) {
+    #ifdef _WIN32
+        setWinTextColor(foreground, background);
+    #else
+        setLinuxTextColor(foreground, background);
+    #endif
+}
+
+#ifdef _WIN32
+void setWinTextColor(int foreground, int background) {
+    HANDLE  hConsole;
+    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    int k = foreground + background * 16;
+    SetConsoleTextAttribute(hConsole, k);
+}
+#else
+void setLinuxTextColor(int foreground, int background) {
+    printf("\033[%d;%dm", 30 + foreground, 40 + background);
+    fflush(stdout);
+}
+#endif
 

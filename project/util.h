@@ -39,5 +39,17 @@ extern int get_file_lines(char fileName[]);
 extern void create_folder(char folderName[]);
 extern void string_to_lower(char string[]);
 
+/*
+ *	Color codes:
+ *	0 - black
+ *	1 - red
+ *	2 - green
+ *	3 - yellow
+ *	4 - blue
+ *	5 - magenta
+ *	6 - cyan
+ *	7 - white
+*/
+extern void setTextColor(int foreground, int background);
 
 #endif

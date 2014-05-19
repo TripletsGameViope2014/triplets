@@ -26,6 +26,7 @@
 #include "util.h"
 #include "pl_htmlui.h"
 #include "sockets.h"
+#include "game_mode.h"
 
 int finish_game_wrapper(position_t current_pos)
 {
@@ -47,6 +48,20 @@ void select_move()
         //if(G_current_game.cpu_mode == hard){
         smart(get_current_game_ptr()->board);
     }
+}
+
+position_t select_pvp_mode(position_t pos)
+{
+    if(G_current_game.pvp_mode == normal)
+    {
+        pos = pvp_normal_mode(pos);
+    }
+    else
+    {
+        pos = pvp_alternative_mode(pos);
+    }
+
+    return pos;
 }
 
 
@@ -75,7 +90,7 @@ int main(void)
         show_menu();
 
 do{
-        int check=0;
+        //int check=0;
         gameCounter=increment_game_counter(); // this function increments gameCounter, save it in file and returns it
         createLogs(gameCounter, board_get_size());
         WriteHTML(get_current_game_ptr()->board,"game.html");
@@ -103,15 +118,8 @@ do{
                 clearscr();
                 WriteHTML(get_current_game_ptr()->board,"game.html");
                 board_print_raw();
-                do
-                {
-                    //
-                    printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-                   // read_move(&pos);
-                   PL_HTMLread_move(&pos);
-                    check = function_validate_move(pos);
-                }
-                while(check != 0);
+
+                pvp_normal_mode(pos);
 
                 cmp.current_player_move.moves+=1;
 

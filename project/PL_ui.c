@@ -329,10 +329,10 @@ void show_pvp_mode()
     {
 
     case 1:
-        G_current_game.cpu_mode = easy;
+        G_current_game.pvp_mode = normal;
         break;
     case 2:
-        G_current_game.cpu_mode = hard;
+        G_current_game.pvp_mode = column;
         break;
     }
 }

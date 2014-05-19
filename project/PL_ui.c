@@ -123,7 +123,6 @@ void choose_board()
 }
 void show_menu()
 {
-    int who_first_start_game;
     int menu_choose;
     int control; // to verify if it is not a char!
     char player1nameAux[MAX_PLAYERNAME_LENGTH]="";
@@ -177,28 +176,8 @@ void show_menu()
         choose_board();
 
 
-        do
-        {
-            clearscr();
-            printf("Triplets - %s vs %s\n\n", G_players[0].name, G_players[1].name);
-            printf("Select who goes first:\n1. %s\n2. %s\n\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
-            control=scanf("%d",&who_first_start_game);
-            clean_buffer_keyboard();
+        show_who_first();
 
-        }
-        while (who_first_start_game<1 || who_first_start_game>2 || control==0);
-
-        switch(who_first_start_game)
-        {
-        case 1:
-            G_current_game.player_first= 1;
-            break;
-        case 2:
-            G_current_game.player_first= 0;
-            break;
-        }
-
-        clearscr();
         break;
 
     case 2:
@@ -215,8 +194,8 @@ void show_menu()
             string_to_lower(player1nameAux);
 
             if (!(strcmp(player1nameAux,"cpu")))
-        {
-            printf("Invalid name.\n");
+            {
+                printf("Invalid name.\n");
             }
         }
         while (!(strcmp(player1nameAux,"cpu")));
@@ -235,54 +214,36 @@ void show_menu()
         }
         while (!(strcmp(player2nameAux,"cpu")) || !(strcmp(player2nameAux,player1nameAux)));
 
-                choose_board();
+        choose_board();
+        show_who_first();
 
-                do
-        {
-            clearscr();
-                printf("Triplets - %s vs %s\n\n", G_players[0].name, G_players[1].name);
-                printf("Select who goes first:\n1. %s\n2. %s\n\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
-                control=scanf("%d",&who_first_start_game);
-                clean_buffer_keyboard();
-            }
-            while (who_first_start_game<1 || who_first_start_game>2 || control==0);
-            switch(who_first_start_game)
-            {
-            case 1:
-                G_current_game.player_first= 1;
-                break;
-            case 2:
-                G_current_game.player_first= 0;
-                break;
-            }
-    clearscr();
-    break;
+        break;
 
-case 3:
+    case 3:
         show_game_rules();
         show_menu();
         break;
     case 4:
-            //show High scores//
-            show_highscores();
-            show_menu();
-            break;
-        case 5:
-                replay_menu(); // this is in PT_save_read_moves.c
-                show_menu();
-                break;
-            case 6:
-                    show_credits();
-                    show_menu();
-                    break;
-                case 7:
-                        exit(0);
-                        break;
-                    default:
-                            clearscr();
-                            show_menu();
-                            break;
-                        }
+        //show High scores//
+        show_highscores();
+        show_menu();
+        break;
+    case 5:
+        replay_menu(); // this is in PT_save_read_moves.c
+        show_menu();
+        break;
+    case 6:
+        show_credits();
+        show_menu();
+        break;
+    case 7:
+        exit(0);
+        break;
+    default:
+        clearscr();
+        show_menu();
+        break;
+    }
 }
 
 void show_difficulty()
@@ -317,3 +278,29 @@ void show_difficulty()
     }
 }
 
+void show_who_first()
+
+{
+    int control;
+    int who_first_start_game;
+
+    do
+    {
+        clearscr();
+        printf("Triplets - %s vs %s\n\n", G_players[0].name, G_players[1].name);
+        printf("Select who goes first:\n1. %s\n2. %s\n\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
+        control=scanf("%d",&who_first_start_game);
+        clean_buffer_keyboard();
+    }
+    while (who_first_start_game<1 || who_first_start_game>2 || control==0);
+    switch(who_first_start_game)
+    {
+    case 1:
+        G_current_game.player_first= 1;
+        break;
+    case 2:
+        G_current_game.player_first= 0;
+        break;
+    }
+    clearscr();
+}

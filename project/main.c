@@ -73,6 +73,7 @@ int main(void)
     {
         show_menu();
 
+do{
         int check=0;
 
         gameCounter=increment_game_counter(); // this function increments gameCounter, save it in file and returns it
@@ -199,8 +200,9 @@ int main(void)
         do
         {
 
-            printf("\n1. Show Replay\n");
-            printf("2. Go back to menu\n");
+            printf("\n1. Rematch\n");
+            printf("2. Show Replay\n");
+            printf("3. Go back to menu\n");
             printf("(Choose an option and press enter): ");
 
             control=scanf("%d",&option);
@@ -208,17 +210,22 @@ int main(void)
 
 
         }
-        while (option<1 || option >2 || control==0);
+        while (option<1 || option >3 || control==0);
 
         switch (option)
 
         {
-        case 1:
+    case 1:
+board_set_empty();
+show_who_first();
+        break;
+        case 2:
             loadLogs(gameCounter);
             break;
         }
 
-    }
+    } while (option==1);
+}
     while (1);
     return 0;
 }

@@ -48,6 +48,7 @@ char input_is_char(char position[3]);
 /* Testing functions */
 extern void test_reading_converting_validating();
 extern void test_representation_matrix(char matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension);
+extern void PL_HTMLread_move(position_t *pos);
 
 
 #endif /* __PT_SAVE_READ_MOVES_H__ */

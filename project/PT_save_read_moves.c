@@ -21,6 +21,7 @@
 #include "PT_save_read_moves.h"
 #include "util.h"
 #include "PL_ui.h"
+#include "sockets.h"
 
 /*=====================================
  * Prototypes of **private** functions
@@ -635,6 +636,36 @@ void test_reading_converting_validating()
     }
 }
 
+void PL_HTMLread_move(position_t *pos)
+{
+
+    /* Maximum size for the buffer to read a move: 3 characters + 1 \n + 1 \0 => 5 */
+#define READ_MOVE_MAX_BUFF_LEN      (5)
+
+    //The move_in_board (being the move read from the user) is 5 to verify the length of the input
+    //char move_in_board[READ_MOVE_MAX_BUFF_LEN];
+    char move_in_board[READ_MOVE_MAX_BUFF_LEN];
+
+    // Maximum number of characters we want to read with fgets (includes '\n' and '\0')
+    int maxLength = READ_MOVE_MAX_BUFF_LEN; //This allows one more character in order to verify the length of the input
+
+    FILE *mov;
+            startServer();
+            printf("Write your move [3 characters max]: ");
+            //fgets(move_in_board, maxLength, stdin);    //gets in the string move_in_board a maximum of maxLength characters coming from the STDIN
+            mov = fopen("move.mv","r+");
+            fgets(move_in_board, maxLength, mov);
+            fclose(mov);
+
+            /* Terminate the string at the first \n */
+            terminate_string_at_first_slash_n(move_in_board);
+
+        pos->X = input_is_digit(move_in_board);
+        pos->Y = input_is_char(move_in_board);
+        pos->Y = toupper(pos->Y);
+        pos->Y_int = board_col_to_matrix_idx(pos->Y);
+
+}
 
 
 /*=====================================

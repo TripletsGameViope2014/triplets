@@ -394,7 +394,7 @@ void print_char_board(int i, int j)
         }
         else
         {
-            setTextColor(DIFFERENT_COLORS, BACKGROUND_FINISH);
+            setTextColor(GREEN, BACKGROUND_FINISH);
         }
         break;
     case (3):

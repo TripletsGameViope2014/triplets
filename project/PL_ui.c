@@ -309,8 +309,43 @@ void show_who_first()
     clearscr();
 }
 
+<<<<<<< HEAD
 void init_players()
 {
         cmp.current_player_move.number=1;
         cmp.previous_player_move.number=2;
 }
+=======
+void show_pvp_mode()
+{
+
+    int menu_choose;
+    int control; // to verify if it is not a char!
+
+    do
+    {
+        clearscr();
+        printf("Triplets Game\n\n");
+        printf("Choose the PvP Mode:\n");
+        printf("1. Normal Mode: \n");
+        printf("2. Column Mode (it's a challenge!): \n\n");
+        printf("(Choose an option and press enter): ");
+
+        control=scanf("%d",&menu_choose);
+        clean_buffer_keyboard();
+    }
+    while(menu_choose<1 || menu_choose>2 || control == 0);
+
+    switch(menu_choose)
+    {
+
+    case 1:
+        G_current_game.pvp_mode = normal;
+        break;
+    case 2:
+        G_current_game.pvp_mode = column;
+        break;
+    }
+}
+
+>>>>>>> b5e69e1e88b1e5df34a8cd356bbb94171cc5bec8

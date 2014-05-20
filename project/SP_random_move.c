@@ -5,6 +5,7 @@
 #include "PL_ui.h"
 #include "PT_save_read_moves.h"
 #include "util.h"
+#include "SP.h"
 
 
 void random_cpu (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])

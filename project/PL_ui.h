@@ -8,6 +8,7 @@ extern int readchar(void);
 extern void show_difficulty();
 extern void show_who_first();
 extern void init_players();
+extern void show_pvp_mode();
 
 player_t G_players[2];
 game_t G_current_game;

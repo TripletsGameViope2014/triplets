@@ -45,7 +45,7 @@ void OpenHTML(char* HTMLName)
     #else
     sprintf(command, "open %s", HTMLName);
     #endif // __linux__
-    printf("ABout to execute %s\n", command);
+    printf("About to execute %s\n", command);
     system(command);
 }
 

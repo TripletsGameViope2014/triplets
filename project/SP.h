@@ -16,5 +16,6 @@ int oneMovFinish (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE]);
 int okMove (position_t pos, board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE]);
 int check_let_player_win(board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE]);
 int emptyboard(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
+extern void refresh_last_piece(int i, int j);
 
 #endif // SP_H_INCLUDED

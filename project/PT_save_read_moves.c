@@ -22,6 +22,7 @@
 #include "util.h"
 #include "PL_ui.h"
 #include "sockets.h"
+#include "SP.h"
 
 /*=====================================
  * Prototypes of **private** functions
@@ -194,6 +195,10 @@ void loadLogs(int gameCounter)
 
 
             board_set_content_row_col(moveX, moveY);
+            if (i==lineCounter-1)
+            {
+                finish_gamePL(get_current_game_ptr()->board);
+            }
             board_print_raw();
             printf("\nPlayer Name: %s - Play Number: %d - Move: [%d][%c]\n",playerName, playNumber, moveX, moveY); // was just to test if it's reading right
 

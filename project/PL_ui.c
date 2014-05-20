@@ -309,13 +309,12 @@ void show_who_first()
     clearscr();
 }
 
-<<<<<<< HEAD
 void init_players()
 {
         cmp.current_player_move.number=1;
         cmp.previous_player_move.number=2;
 }
-=======
+
 void show_pvp_mode()
 {
 
@@ -348,4 +347,4 @@ void show_pvp_mode()
     }
 }
 
->>>>>>> b5e69e1e88b1e5df34a8cd356bbb94171cc5bec8
+

@@ -64,6 +64,17 @@ position_t select_pvp_mode(position_t pos)
     return pos;
 }
 
+position_t select_interface_gameplay(position_t pos){
+    if(G_current_game.interface_mode == html){
+        PL_HTMLread_move(&pos);
+    }
+    else{
+        read_move(&pos);
+    }
+
+    return pos;
+}
+
 
 
 /*=====================================
@@ -93,7 +104,9 @@ do{
         gameCounter=increment_game_counter(); // this function increments gameCounter, save it in file and returns it
         createLogs(gameCounter, board_get_size());
         WriteHTML(get_current_game_ptr()->board,"game.html");
-        OpenHTML("game.html");
+        if(G_current_game.interface_mode == html){
+            OpenHTML("game.html");
+        }
         if(G_current_game.game_mode==pvp)  //pvp mode
         {
 
@@ -115,10 +128,11 @@ do{
             {
                 //system("cls");
                 clearscr();
-                WriteHTML(get_current_game_ptr()->board,"game.html");
+                if(G_current_game.interface_mode == html){
+                    WriteHTML(get_current_game_ptr()->board,"game.html");
+                }
                 board_print_raw();
 
-               // pos = pvp_normal_mode(pos);
                 pos = select_pvp_mode(pos);
 
                 cmp.current_player_move.moves+=1;
@@ -173,7 +187,8 @@ do{
                     {
                         printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
                         //read_move(&pos);
-                        PL_HTMLread_move(&pos);
+                        //PL_HTMLread_move(&pos);
+                        pos = select_interface_gameplay(pos);
                     }
                     while(function_validate_move(pos));
 

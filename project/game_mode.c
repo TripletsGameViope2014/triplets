@@ -17,6 +17,7 @@
 #include "board.h"
 #include "PL_ui.h"
 #include "PT_save_read_moves.h"
+#include "main.h"
 
 /*=====================================
  * Prototypes of **private** functions
@@ -49,8 +50,8 @@ position_t pvp_normal_mode(position_t pos){
     do
     {
         printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-        read_move(&pos);
-        //PL_HTMLread_move(&pos);
+        pos = select_interface_gameplay(pos);
+//        read_move(&pos);
         check = function_validate_move(pos);
     }
     while(check != 0);
@@ -74,9 +75,9 @@ position_t pvp_column_mode(position_t pos){
     do
     {
 
-        printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-        //read_move(&pos);
-        PL_HTMLread_move(&pos);
+        printf("It's your move %s! (all your moves: %d): %c",cmp.current_player_move.name,cmp.current_player_move.moves, pos.Y);
+        read_row(&pos);
+        //PL_HTMLread_move(&pos);
 
         check = function_validate_move(pos);
     }

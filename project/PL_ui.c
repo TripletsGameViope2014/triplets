@@ -158,6 +158,7 @@ void show_menu()
         G_current_game.game_mode=pvc;
         G_current_game.pvp_mode = notpvp;
         show_difficulty();
+        choose_interface();
         clearscr();
         printf("Triplets - Player vs Computer \n\n");
         do
@@ -216,6 +217,7 @@ void show_menu()
         while (!(strcmp(player2nameAux,"cpu")) || !(strcmp(player2nameAux,player1nameAux)));
 
         show_pvp_mode();
+        choose_interface();
         choose_board();
         show_who_first();
 
@@ -345,6 +347,36 @@ void show_pvp_mode()
         break;
     case 2:
         G_current_game.pvp_mode = column;
+        break;
+    }
+}
+
+
+void choose_interface(){
+    int menu_choose;
+    int control; // to verify if it is not a char!
+
+    do
+    {
+        printf("Triplets Game\n\n");
+        printf("Choose the Gameplay interface: \n");
+        printf("1. HTML: \n");
+        printf("2. Console: \n\n");
+        printf("(Choose an option and press enter): ");
+
+        control=scanf("%d",&menu_choose);
+        clean_buffer_keyboard();
+    }
+    while(menu_choose<1 || menu_choose>2 || control == 0);
+
+    switch(menu_choose)
+    {
+
+    case 1:
+        G_current_game.interface_mode = html;
+        break;
+    case 2:
+        G_current_game.interface_mode = console;
         break;
     }
 }

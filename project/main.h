@@ -42,6 +42,8 @@
 extern void select_move();
 extern int main(void);
 extern int finish_game_wrapper(position_t current_pos);
+extern void select_pvp_mode(position_t pos);
+extern position_t select_interface_gameplay(position_t pos);
 
 
 

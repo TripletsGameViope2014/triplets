@@ -77,6 +77,12 @@ typedef enum {easy, hard, none} cpu_difficulty_t; //
  */                                         //
 typedef enum {normal, column, notpvp} pvp_mode_t;
 
+/** The possible interface                       //
+ * HTML - HTML interface                         //
+ * CONSOLE - Console interface                   // NEW enum type for the mode of the PvP
+ */
+typedef enum {html, console} game_interface_t;
+
 
 /**
  * Stores the configuration of the current game
@@ -97,6 +103,7 @@ typedef struct game
 	int board_rows;     	// number of rows of the board
 	cpu_difficulty_t cpu_mode;  ///represents the difficulty of the cpu in the PvC mode NEW
 	pvp_mode_t pvp_mode; ///represents the game mode
+	game_interface_t interface_mode; // represents the interface of the game play
 }game_t;
 
 

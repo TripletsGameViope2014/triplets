@@ -16,6 +16,8 @@
  *===================================*/
 #include "board.h"
 #include "data_structs.h"
+#include "util.h"
+#include "PL_ui.h"
 
 
 /*=====================================
@@ -137,7 +139,7 @@ void board_print_raw(void){
 		}
 		for(j=0;j<board_size;j++){
 			printf("| ");
-			printf("%c ", get_current_game_ptr()->board[i][j].piece);
+			print_char_board(i, j, get_current_game_ptr()->board[i][j].player);
 		}
 		printf("|\n");
 	}
@@ -274,6 +276,7 @@ void board_set_content_row_col(int row, char col){
 	pos.X = board_row_to_matrix_idx(row);
 	pos.Y_int = board_col_to_matrix_idx(col);
 	get_current_game_ptr()->board[pos.X][pos.Y_int].piece = PIECE;
+	get_current_game_ptr()->board[pos.X][pos.Y_int].player = cmp.current_player_move.number;
 
 }
 
@@ -300,6 +303,20 @@ int function_validate_move_cpu(position_t pos){
 return 0;
 }
 
+void print_char_board(int i, int j, int player)
+{
+    switch(player)
+    {
+    case 1: setTextColor(RED, BLACK);
+        break;
+    case 2: setTextColor(BLUE, BLACK);
+        break;
+    }
+
+    printf("%c ", get_current_game_ptr()->board[i][j].piece);
+
+    setTextColor(WHITE, BLACK);
+}
 
 /*=====================================
  * Private functions

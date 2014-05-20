@@ -32,6 +32,8 @@
 #define BLACK 0
 #define WHITE 7
 #define RED 1
+#define BLUE 4
+
 
 /*=====================================
  * typedefs
@@ -43,6 +45,7 @@
 typedef struct player
 {
 	int moves;	// number of moves
+	int number;
 	char name[MAX_PLAYERNAME_LENGTH];
 }player_t;
 

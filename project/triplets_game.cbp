@@ -60,6 +60,7 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="PT_save_read_moves.h" />
 		<Unit filename="SP.h">
 			<Option target="Debug" />
 			<Option target="Release" />

@@ -297,10 +297,20 @@ void show_who_first()
     {
     case 1:
         G_current_game.player_first= 1;
+        G_players[0].number=1;
+        G_players[1].number=2;
         break;
     case 2:
         G_current_game.player_first= 0;
+        G_players[0].number=2;
+        G_players[1].number=1;
         break;
     }
     clearscr();
+}
+
+void init_players()
+{
+        cmp.current_player_move.number=1;
+        cmp.previous_player_move.number=2;
 }

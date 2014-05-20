@@ -114,11 +114,9 @@ void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int g
 void closePlayLog(int playNumber, int gameCounter, char playerName[])
 {
     FILE *playLog;
-    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
-    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
+    char logName[255]="logs/";
 
-    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
-    strcat(logName, fileName);
+    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
 
     playLog = fopen(logName, "at");
     if(playLog == NULL)
@@ -147,8 +145,6 @@ void loadLogs(int gameCounter)
 
     FILE *playLog;
 
-    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
-    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
     int playNumber;
     char dateExtended[32];
     char playerName[30];
@@ -158,10 +154,9 @@ void loadLogs(int gameCounter)
     char moveY;
     int lineCounter=0;
     int headLinesNumber=6;
+    char logName[255]="logs/";
 
-
-    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
-    strcat(logName, fileName);
+    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
 
     lineCounter=get_file_lines(logName);
 
@@ -188,6 +183,7 @@ void loadLogs(int gameCounter)
         board_set_empty();
         clearscr();
         board_print_raw();
+        init_players();
 
         for (i=0; i<lineCounter; i++)
         {
@@ -200,6 +196,10 @@ void loadLogs(int gameCounter)
             board_set_content_row_col(moveX, moveY);
             board_print_raw();
             printf("\nPlayer Name: %s - Play Number: %d - Move: [%d][%c]\n",playerName, playNumber, moveX, moveY); // was just to test if it's reading right
+
+            cmp.tmp=cmp.current_player_move;                   //swap current player
+            cmp.current_player_move=cmp.previous_player_move;  //
+            cmp.previous_player_move=cmp.tmp;
 
         }
         printf("\nWINNER: %s\n", playerName);
@@ -275,8 +275,6 @@ void print_game_information(int gameCounter)
 
     FILE *playLog;
 
-    char fileName[MAX_PLAYERNAME_LENGTH] = "TripletsLog-";
-    char logName[MAX_PLAYERNAME_LENGTH]="logs/";
     int playNumber;
     char dateExtended[32];
     char playerName1[30];
@@ -287,9 +285,9 @@ void print_game_information(int gameCounter)
     int lineCounter=0;
     int headLinesNumber=6;
 
+    char logName[255]="logs/";
 
-    sprintf(fileName, "%s%d.txt", fileName, gameCounter);
-    strcat(logName, fileName);
+    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
 
     lineCounter=get_file_lines(logName);
 
@@ -644,18 +642,18 @@ void PL_HTMLread_move(position_t *pos)
     int maxLength = READ_MOVE_MAX_BUFF_LEN; //This allows one more character in order to verify the length of the input
 
     FILE *mov;
-            startServer();
-            printf("Write your move [3 characters max]: ");
-            //fgets(move_in_board, maxLength, stdin);    //gets in the string move_in_board a maximum of maxLength characters coming from the STDIN
-            mov = fopen("move.mv","r+");
-            fgets(move_in_board, maxLength, mov);
-            fclose(mov);
-            /* Terminate the string at the first \n */
-            terminate_string_at_first_slash_n(move_in_board);
-        pos->X = input_is_digit(move_in_board);
-        pos->Y = input_is_char(move_in_board);
-        pos->Y = toupper(pos->Y);
-        pos->Y_int = board_col_to_matrix_idx(pos->Y);
+    startServer();
+    printf("Write your move [3 characters max]: ");
+    //fgets(move_in_board, maxLength, stdin);    //gets in the string move_in_board a maximum of maxLength characters coming from the STDIN
+    mov = fopen("move.mv","r+");
+    fgets(move_in_board, maxLength, mov);
+    fclose(mov);
+    /* Terminate the string at the first \n */
+    terminate_string_at_first_slash_n(move_in_board);
+    pos->X = input_is_digit(move_in_board);
+    pos->Y = input_is_char(move_in_board);
+    pos->Y = toupper(pos->Y);
+    pos->Y_int = board_col_to_matrix_idx(pos->Y);
 }
 
 

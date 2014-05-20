@@ -109,5 +109,3 @@ static void player_reset(player_t* const player_ptr) {
     player_ptr->moves = 0;
 }
 
-
-

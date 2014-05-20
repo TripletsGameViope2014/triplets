@@ -134,6 +134,7 @@ void smart (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
             else
             {
                 savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X+1, pos.Y_int+'A', get_game_counter());
+                board[pos.X][pos.Y_int].player = cmp.current_player_move.number;
             }
 
         }
@@ -157,6 +158,7 @@ int oneMovFinish (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
                 if (finish_game_wrapper(pos))
                 {
                     savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X+1, pos.Y_int+'A', get_game_counter());
+                    board[pos.X][pos.Y_int].player = cmp.current_player_move.number;
                     return 1;
 
                 }

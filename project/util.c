@@ -127,11 +127,7 @@ int get_game_counter()
     int gameCounter=0;
 
     counter=fopen("logs/gamecounter.txt", "rt");
-    if (counter==NULL)
-    {
-        printf("Error reading game counter file.");
-    }
-    else
+    if (counter!=NULL)
     {
         fscanf(counter, "game counter = %d", &gameCounter);
 

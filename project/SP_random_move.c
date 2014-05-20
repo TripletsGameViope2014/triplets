@@ -9,20 +9,20 @@
 
 void random_cpu (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
-    position_t position;
-    srand(time (NULL));
-    int sizes=MAX_BOARDSIZE;
+ position_t position;
+ srand(time (NULL));
+ int sizes=MAX_BOARDSIZE;
 
     do
     {
-        position.X=rand()%sizes;
-        position.Y_int=rand()%sizes;
+      position.X=rand()%sizes;
+      position.Y_int=rand()%sizes;
 
-    }
-    while(!function_validate_move_cpu(position));
+    }while(!function_validate_move_cpu(position));
     savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, position.X+1, position.Y_int+'A', get_game_counter());
     board[position.X][position.Y_int].piece=PIECE;//Piece is a constant define char '#'
     board[position.X][position.Y_int].player = cmp.current_player_move.number;
+    set_last_piece(position.X, position.Y_int);
 }
 
 

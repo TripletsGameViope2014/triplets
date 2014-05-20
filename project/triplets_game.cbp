@@ -65,15 +65,11 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="SP_finish_game_v3.c">
+		<Unit filename="SP_finish_game.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
-		<Unit filename="SP_random_move_v2.c">
+		<Unit filename="SP_random_move.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="SP_smart_move.c">
 			<Option compilerVar="CC" />

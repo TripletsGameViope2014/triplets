@@ -18,6 +18,7 @@
 #include "data_structs.h"
 #include "util.h"
 #include "PL_ui.h"
+#include "SP.h"
 
 
 /*=====================================
@@ -353,30 +354,57 @@ int function_validate_move_cpu(position_t pos)
 
 void print_char_board(int i, int j)
 {
-    if (get_current_game_ptr()->board[i][j].lastPiece==1)
+    switch (get_current_game_ptr()->board[i][j].lastPiece)
     {
-        setTextColor(LAST_MOVE_COLOR, BLACK);
-    }
-    else
-    { if (DIFFERENT_COLORS==0){
-        switch(get_current_game_ptr()->board[i][j].player)
+
+    case (0):
+        if (DIFFERENT_COLORS==0)
         {
-        case 1:
-            setTextColor(PLAYER_1_COLOR, BLACK);
-            break;
-        case 2:
-            setTextColor(PLAYER_2_COLOR, BLACK);
-            break;
+            switch(get_current_game_ptr()->board[i][j].player)
+            {
+            case 1:
+                setTextColor(PLAYER_1_COLOR, BLACK);
+                break;
+            case 2:
+                setTextColor(PLAYER_2_COLOR, BLACK);
+                break;
+            }
         }
+        else
+        {
+            setTextColor(DIFFERENT_COLORS, BLACK);
+        }
+        break;
+
+    case (1):
+        setTextColor(LAST_MOVE_COLOR, BLACK);
+        break;
+    case (2):
+        if (DIFFERENT_COLORS==0)
+        {
+            switch(get_current_game_ptr()->board[i][j].player)
+            {
+            case 1:
+                setTextColor(PLAYER_1_COLOR, BACKGROUND_FINISH);
+                break;
+            case 2:
+                setTextColor(PLAYER_2_COLOR, BACKGROUND_FINISH);
+                break;
+            }
+        }
+        else
+        {
+            setTextColor(DIFFERENT_COLORS, BACKGROUND_FINISH);
+        }
+        break;
+    case (3):
+            setTextColor(LAST_MOVE_COLOR, BACKGROUND_FINISH);
     }
-    else
-    {
-        setTextColor(DIFFERENT_COLORS, BLACK);
-    }
-    }
-    printf("%c ", get_current_game_ptr()->board[i][j].piece);
+    printf("%c", get_current_game_ptr()->board[i][j].piece);
 
     setTextColor(WHITE, BLACK);
+
+    printf(" ");
 }
 void set_last_piece(int x, int y)
 {

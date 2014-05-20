@@ -52,8 +52,9 @@ static void player_reset(player_t* const player_ptr);
  * @return	the address of the global variable G_current_game
  * @date	2014-03-27
  **/
-game_t* get_current_game_ptr(void){
-	return &G_current_game;
+game_t* get_current_game_ptr(void)
+{
+    return &G_current_game;
 }
 
 
@@ -63,8 +64,9 @@ game_t* get_current_game_ptr(void){
  * @date	2014-03-27
  * @author	Triplet VIOPE 2014
  **/
-player_t* get_players_ptr(void){
-	return &G_players[0];		// same as returning G_players
+player_t* get_players_ptr(void)
+{
+    return &G_players[0];		// same as returning G_players
 }
 
 /**
@@ -75,23 +77,25 @@ player_t* get_players_ptr(void){
  * @date	2014-03-31
  * @author	Triplet VIOPE 2014
  */
-void reset_data_structs(void){
-	game_t *game_ptr;
-	int i;
+void reset_data_structs(void)
+{
+    game_t *game_ptr;
+    int i;
 
-	game_ptr = get_current_game_ptr();
-	game_ptr->player_first = -1;
-	game_ptr->board_columns = -1;
-	game_ptr->board_rows = -1;
-	game_ptr->game_mode = -1;
+    game_ptr = get_current_game_ptr();
+    game_ptr->player_first = -1;
+    game_ptr->board_columns = -1;
+    game_ptr->board_rows = -1;
+    game_ptr->game_mode = -1;
 
-	/* Set the whole board as empty */
-	board_set_empty();
+    /* Set the whole board as empty */
+    board_set_empty();
 
-	/* Deal with G_players */
-	for(i=0;i<2;i++){
-		player_reset(&(get_players_ptr()[i]));
-	}
+    /* Deal with G_players */
+    for(i=0; i<2; i++)
+    {
+        player_reset(&(get_players_ptr()[i]));
+    }
 }
 
 
@@ -104,7 +108,8 @@ void reset_data_structs(void){
  * player_ptr parameter (a pointer) is not changed by the function
  * player_reset(...).
  */
-static void player_reset(player_t* const player_ptr) {
+static void player_reset(player_t* const player_ptr)
+{
     player_ptr->name[0] = '\0';
     player_ptr->moves = 0;
 }

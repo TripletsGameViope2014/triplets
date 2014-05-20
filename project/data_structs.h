@@ -40,7 +40,7 @@
 #define PLAYER_1_COLOR GREEN
 #define PLAYER_2_COLOR YELLOW
 #define DIFFERENT_COLORS YELLOW // NOTE!!! if = 0 it prints different colors. if != 0 it prints all in the color represented by the constant!
-
+#define BACKGROUND_FINISH WHITE
 
 /*=====================================
  * typedefs

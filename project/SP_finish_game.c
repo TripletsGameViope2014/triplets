@@ -17,7 +17,13 @@ int finish_gamePL(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
             if(board[i][j].piece == PIECE &&
                board[i+1][j+1].piece == PIECE &&
                board[i+2][j+2].piece == PIECE)
-                return 1;
+               {
+                board[i][j].lastPiece = 2;
+                board[i+1][j+1].lastPiece = 2;
+                board[i+2][j+2].lastPiece = 2;
+                   return 1;
+               }
+
         }
     }
     // Diagonally ->
@@ -28,7 +34,12 @@ int finish_gamePL(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
             if(board[i+2][j].piece == PIECE &&
                board[i+1][j+1].piece == PIECE &&
                board[i][j+2].piece == PIECE)
-                return 1;
+                              {
+                board[i+2][j].lastPiece = 2;
+                board[i+1][j+1].lastPiece = 2;
+                board[i][j+2].lastPiece = 2;
+                   return 1;
+               }
         }
     }
     // Horizontally
@@ -39,7 +50,12 @@ int finish_gamePL(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
             if(board[i][j].piece == PIECE &&
                board[i+1][j].piece == PIECE &&
                board[i+2][j].piece == PIECE)
-                return 1;
+                               {
+                board[i][j].lastPiece = 2;
+                board[i+1][j].lastPiece = 2;
+                board[i+2][j].lastPiece = 2;
+                   return 1;
+               }
         }
     }
     // Vertically
@@ -50,7 +66,12 @@ int finish_gamePL(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
             if(board[i][j].piece == PIECE &&
                board[i][j+1].piece == PIECE &&
                board[i][j+2].piece == PIECE)
-                return 1;
+                               {
+                board[i][j].lastPiece = 2;
+                board[i][j+1].lastPiece = 2;
+                board[i][j+2].lastPiece = 2;
+                   return 1;
+               }
         }
     }
     return 0;

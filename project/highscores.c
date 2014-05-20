@@ -236,7 +236,7 @@ void verify_new_highscore(int new_player_moves, char new_player_name[], int game
 
             if(highscoresChanged==1)
             {
-                printf("\n\nCongratulations %s! You made it to the highscores!\nYou are on position %d on the %dx%d highscores, with %d moves!\n",
+                printf("\nCongratulations %s! You made it to the highscores!\nYou are on position %d on the %dx%d highscores, with %d moves!\n",
                        new_player_name, o+1, game_size, game_size, new_player_moves);
             }
         }

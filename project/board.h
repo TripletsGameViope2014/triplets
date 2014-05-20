@@ -38,7 +38,9 @@ extern char board_get_content_row_col(int row, char col);
 extern int board_row_to_matrix_idx(int row);
 extern int board_col_to_matrix_idx(char col);
 extern int function_validate_move_cpu(position_t pos);
-extern void print_char_board(int i, int j, int player);
+extern void print_char_board(int i, int j);
+extern void last_play_reset(void);
+extern void set_last_piece();
 
 extern char **board_get_board(void);
 

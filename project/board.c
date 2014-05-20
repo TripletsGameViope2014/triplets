@@ -35,8 +35,9 @@
  * @date 2014-03-31
  * @author Triplet VIOPE 2014
  */
-int board_get_size(void){
-	return get_current_game_ptr()->board_rows;
+int board_get_size(void)
+{
+    return get_current_game_ptr()->board_rows;
 }
 
 /**
@@ -50,18 +51,19 @@ int board_get_size(void){
  */
 int board_set_size(const int board_size)
 {
-	if( ! board_is_valid_size(board_size) ){
-		fprintf(stderr, "[Err] Invalid board size:%d\n", board_size);
-		return 0;
-	}
+    if( ! board_is_valid_size(board_size) )
+    {
+        fprintf(stderr, "[Err] Invalid board size:%d\n", board_size);
+        return 0;
+    }
 
-	/* Setting the board size */
-	get_current_game_ptr()->board_rows = board_size;
+    /* Setting the board size */
+    get_current_game_ptr()->board_rows = board_size;
 
-	/* Clear board */
-	board_set_empty();
+    /* Clear board */
+    board_set_empty();
 
-	return board_size;
+    return board_size;
 }
 
 /**
@@ -71,15 +73,33 @@ int board_set_size(const int board_size)
  * @date 2014-03-31
  * @author Triplet VIOPE 2014
  */
-void board_set_empty(void){
-	int i,j;
-	int board_size = MAX_BOARDSIZE;
+void board_set_empty(void)
+{
+    int i,j;
+    int board_size = MAX_BOARDSIZE;
 
-	for(i=0;i<board_size;i++){
-		for(j=0;j<board_size;j++){
-			get_current_game_ptr()->board[i][j].piece = EMPTY;
-		}
-	}
+    for(i=0; i<board_size; i++)
+    {
+        for(j=0; j<board_size; j++)
+        {
+            get_current_game_ptr()->board[i][j].piece = EMPTY;
+        }
+    }
+    last_play_reset();
+}
+
+void last_play_reset(void)
+{
+    int i,j;
+    int board_size = MAX_BOARDSIZE;
+
+    for(i=0; i<board_size; i++)
+    {
+        for(j=0; j<board_size; j++)
+        {
+            get_current_game_ptr()->board[i][j].lastPiece = 0;
+        }
+    }
 }
 
 
@@ -94,14 +114,15 @@ void board_set_empty(void){
  */
 int board_is_valid_size(const int board_size)
 {
-	if( board_size == BOARD_SMALL
-			|| board_size == BOARD_MEDIUM
-			|| board_size == BOARD_LARGE ){
-		return 1;
-	}
+    if( board_size == BOARD_SMALL
+            || board_size == BOARD_MEDIUM
+            || board_size == BOARD_LARGE )
+    {
+        return 1;
+    }
 
-	/* Still here? Not valid... */
-	return 0;
+    /* Still here? Not valid... */
+    return 0;
 }
 
 /**
@@ -115,43 +136,60 @@ int board_is_valid_size(const int board_size)
  * @date 2014-04-21
  * @author  PL team -Triplet VIOPE 2014
  */
-void board_print_raw(void){
-	int i,j,k,l,m;
-	int board_size = board_get_size();
-	printf("[INFO] Board: %d x %d\n", board_size,board_size);
-	if(board_size==BOARD_SMALL){
-		printf("     GAME BOARD\n");}
-	if(board_size==BOARD_MEDIUM){
-		printf("           GAME BOARD\n");}
-	if(board_size==BOARD_LARGE){
-		printf("                     GAME BOARD\n");}
+void board_print_raw(void)
+{
+    int i,j,k,l,m;
+    int board_size = board_get_size();
+    printf("[INFO] Board: %d x %d\n", board_size,board_size);
+    if(board_size==BOARD_SMALL)
+    {
+        printf("     GAME BOARD\n");
+    }
+    if(board_size==BOARD_MEDIUM)
+    {
+        printf("           GAME BOARD\n");
+    }
+    if(board_size==BOARD_LARGE)
+    {
+        printf("                     GAME BOARD\n");
+    }
 
-	for(i=0;i<board_size;i++){
-		printf("    ");
-		for(k=0;k<board_size;k++){
-			printf("+---");}
-		printf("+\n");
-		if (i>8){
-			printf(" %d ",i+1);
-		}
-		else{
-			printf("  %d ",i+1);
-		}
-		for(j=0;j<board_size;j++){
-			printf("| ");
-			print_char_board(i, j, get_current_game_ptr()->board[i][j].player);
-		}
-		printf("|\n");
-	}
-	printf("    ");
-	for(l=0;l<board_size;l++){
-		printf("+---");}
-	printf("+\n     ");
-	char f=65;
-	for(m=0;m<board_size;m++){
-		printf(" %c  ",f);
-		f=f+1;}
-	printf("\n");
+    for(i=0; i<board_size; i++)
+    {
+        printf("    ");
+        for(k=0; k<board_size; k++)
+        {
+            printf("+---");
+        }
+        printf("+\n");
+        if (i>8)
+        {
+            printf(" %d ",i+1);
+        }
+        else
+        {
+            printf("  %d ",i+1);
+        }
+        for(j=0; j<board_size; j++)
+        {
+            printf("| ");
+            print_char_board(i, j);
+        }
+        printf("|\n");
+    }
+    printf("    ");
+    for(l=0; l<board_size; l++)
+    {
+        printf("+---");
+    }
+    printf("+\n     ");
+    char f=65;
+    for(m=0; m<board_size; m++)
+    {
+        printf(" %c  ",f);
+        f=f+1;
+    }
+    printf("\n");
 }
 
 
@@ -164,9 +202,10 @@ void board_print_raw(void){
  * @date		2014-04-14
  * @author		Triplet VIOPE 2014 (PT TEAM)
  */
-int board_row_to_matrix_idx(int row){
-	row -= 1;
-	return row;
+int board_row_to_matrix_idx(int row)
+{
+    row -= 1;
+    return row;
 }
 
 /**
@@ -178,63 +217,65 @@ int board_row_to_matrix_idx(int row){
  * @date		2014-04-14
  * @author		Triplet VIOPE 2014 (PT TEAM)
  */
-int board_col_to_matrix_idx(char col){
-	int col_int;
-	switch(col){
-	   case 'a':
-		case 'A':
-			col_int = 0;
-			break;
-		case 'b':
-		case 'B':
-			col_int = 1;
-			break;
-        case 'c':
-		case 'C':
-			col_int = 2;
-			break;
-        case 'd':
-		case 'D':
-			col_int = 3;
-			break;
-        case 'e':
-		case 'E':
-			col_int = 4;
-			break;
-        case 'f':
-		case 'F':
-			col_int = 5;
-			break;
-        case 'g':
-		case 'G':
-			col_int = 6;
-			break;
-        case 'h':
-		case 'H':
-			col_int = 7;
-			break;
-        case 'i':
-		case 'I':
-			col_int = 8;
-			break;
-        case 'j':
-		case 'J':
-			col_int = 9;
-			break;
-        case 'k':
-		case 'K':
-			col_int = 10;
-			break;
-        case 'l':
-		case 'L':
-			col_int = 11;
-			break;
-		default:
-			col_int = -1;
-			printf("Invalid column!");
-	}
+int board_col_to_matrix_idx(char col)
+{
+    int col_int;
+    switch(col)
+    {
+    case 'a':
+    case 'A':
+        col_int = 0;
+        break;
+    case 'b':
+    case 'B':
+        col_int = 1;
+        break;
+    case 'c':
+    case 'C':
+        col_int = 2;
+        break;
+    case 'd':
+    case 'D':
+        col_int = 3;
+        break;
+    case 'e':
+    case 'E':
+        col_int = 4;
+        break;
+    case 'f':
+    case 'F':
+        col_int = 5;
+        break;
+    case 'g':
+    case 'G':
+        col_int = 6;
+        break;
+    case 'h':
+    case 'H':
+        col_int = 7;
+        break;
+    case 'i':
+    case 'I':
+        col_int = 8;
+        break;
+    case 'j':
+    case 'J':
+        col_int = 9;
+        break;
+    case 'k':
+    case 'K':
+        col_int = 10;
+        break;
+    case 'l':
+    case 'L':
+        col_int = 11;
+        break;
+    default:
+        col_int = -1;
+        printf("Invalid column!");
+    }
 
-	return col_int;
+    return col_int;
 }
 
 
@@ -247,17 +288,18 @@ int board_col_to_matrix_idx(char col){
  * @date		2014-04-14
  * @author		Triplet VIOPE 2014 (PT TEAM)
  */
-char board_get_content_row_col(int row, char col){
+char board_get_content_row_col(int row, char col)
+{
 
-	char piece_on;
-	//matrix -> get_current_game->board[i][j];
-	position_t pos;
-	pos.X = board_row_to_matrix_idx(row);
+    char piece_on;
+    //matrix -> get_current_game->board[i][j];
+    position_t pos;
+    pos.X = board_row_to_matrix_idx(row);
 
-	pos.Y_int = board_col_to_matrix_idx(col);
-	piece_on = get_current_game_ptr()->board[pos.X][pos.Y_int].piece; //get_current_game_ptr()->board[i][j]
+    pos.Y_int = board_col_to_matrix_idx(col);
+    piece_on = get_current_game_ptr()->board[pos.X][pos.Y_int].piece; //get_current_game_ptr()->board[i][j]
 
-	return piece_on;
+    return piece_on;
 }
 
 
@@ -270,13 +312,15 @@ char board_get_content_row_col(int row, char col){
  * @date		2014-04-14
  * @author		Triplet VIOPE 2014 (PT TEAM)
  */
-void board_set_content_row_col(int row, char col){
+void board_set_content_row_col(int row, char col)
+{
 
-	position_t pos;
-	pos.X = board_row_to_matrix_idx(row);
-	pos.Y_int = board_col_to_matrix_idx(col);
-	get_current_game_ptr()->board[pos.X][pos.Y_int].piece = PIECE;
-	get_current_game_ptr()->board[pos.X][pos.Y_int].player = cmp.current_player_move.number;
+    position_t pos;
+    pos.X = board_row_to_matrix_idx(row);
+    pos.Y_int = board_col_to_matrix_idx(col);
+    get_current_game_ptr()->board[pos.X][pos.Y_int].piece = PIECE;
+    get_current_game_ptr()->board[pos.X][pos.Y_int].player = cmp.current_player_move.number;
+    set_last_piece(pos.X, pos.Y_int);
 
 }
 
@@ -289,33 +333,55 @@ void board_set_content_row_col(int row, char col){
  * @date	2014-04-15
  * @author	Gabriel Rodrigues (PT Team)
  **/
-int function_validate_move_cpu(position_t pos){
-
-    if((pos.X>=0&&pos.X<board_get_size())&&(pos.Y_int>=0&&pos.Y_int<board_get_size())){
-
-    if(get_current_game_ptr()->board[pos.X][pos.Y_int].piece == EMPTY){
-	 return 1;
-    }
-    else{
-     return 0;
-    }
-}
-return 0;
-}
-
-void print_char_board(int i, int j, int player)
+int function_validate_move_cpu(position_t pos)
 {
-    switch(player)
-    {
-    case 1: setTextColor(RED, BLACK);
-        break;
-    case 2: setTextColor(BLUE, BLACK);
-        break;
-    }
 
+    if((pos.X>=0&&pos.X<board_get_size())&&(pos.Y_int>=0&&pos.Y_int<board_get_size()))
+    {
+
+        if(get_current_game_ptr()->board[pos.X][pos.Y_int].piece == EMPTY)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    return 0;
+}
+
+void print_char_board(int i, int j)
+{
+    if (get_current_game_ptr()->board[i][j].lastPiece==1)
+    {
+        setTextColor(LAST_MOVE_COLOR, BLACK);
+    }
+    else
+    { if (DIFFERENT_COLORS==0){
+        switch(get_current_game_ptr()->board[i][j].player)
+        {
+        case 1:
+            setTextColor(PLAYER_1_COLOR, BLACK);
+            break;
+        case 2:
+            setTextColor(PLAYER_2_COLOR, BLACK);
+            break;
+        }
+    }
+    else
+    {
+        setTextColor(DIFFERENT_COLORS, BLACK);
+    }
+    }
     printf("%c ", get_current_game_ptr()->board[i][j].piece);
 
     setTextColor(WHITE, BLACK);
+}
+void set_last_piece(int x, int y)
+{
+    last_play_reset();
+    get_current_game_ptr()->board[x][y].lastPiece = 1;
 }
 
 /*=====================================

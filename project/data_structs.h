@@ -30,9 +30,16 @@
 #define MAX_PLAYERNAME_LENGTH 20 //maximum size for a player’s nickname
 #define MAX_BOARDSIZE 12 //maximum size of the board
 #define BLACK 0
+#define GREEN 10
 #define WHITE 7
-#define RED 1
-#define BLUE 4
+#define RED 12
+#define BLUE 9
+#define YELLOW 14
+#define LIGHT_GRAY 7
+#define LAST_MOVE_COLOR RED
+#define PLAYER_1_COLOR GREEN
+#define PLAYER_2_COLOR YELLOW
+#define DIFFERENT_COLORS YELLOW // NOTE!!! if = 0 it prints different colors. if != 0 it prints all in the color represented by the constant!
 
 
 /*=====================================
@@ -77,6 +84,7 @@ typedef enum {normal, column, notpvp} pvp_mode_t;
  typedef struct board
  {
      int player;
+     int lastPiece;
      char piece;
  } board_t;
 

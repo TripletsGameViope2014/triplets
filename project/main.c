@@ -58,7 +58,7 @@ position_t select_pvp_mode(position_t pos)
     }
     else
     {
-        pos = pvp_alternative_mode(pos);
+        pos = pvp_column_mode(pos);
     }
 
     return pos;
@@ -118,7 +118,8 @@ do{
                 WriteHTML(get_current_game_ptr()->board,"game.html");
                 board_print_raw();
 
-                pvp_normal_mode(pos);
+               // pos = pvp_normal_mode(pos);
+                pos = select_pvp_mode(pos);
 
                 cmp.current_player_move.moves+=1;
 

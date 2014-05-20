@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include<stdio.h>
+#include <stdio.h>
 #include <time.h>
 #include "board.h"
 #include "PL_ui.h"

@@ -49,8 +49,8 @@ position_t pvp_normal_mode(position_t pos){
     do
     {
         printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-        // read_move(&pos);
-        PL_HTMLread_move(&pos);
+        read_move(&pos);
+        //PL_HTMLread_move(&pos);
         check = function_validate_move(pos);
     }
     while(check != 0);
@@ -59,21 +59,24 @@ position_t pvp_normal_mode(position_t pos){
 
 }
 
-position_t pvp_alternative_mode(position_t pos){
+position_t pvp_column_mode(position_t pos){
 
     int check=0;
 
     pos.Y_int++;
     if(pos.Y_int == board_get_size() + 1){
-        pos.Y_int = 0;
-        pos.Y = pos.Y_int + 64;
+        pos.Y_int = 1;
     }
+
+    pos.Y = pos.Y_int + 64;
 
 
     do
     {
-        printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-        read_move(&pos);
+        printf("It's your move %s! (all your moves: %d): %c ",cmp.current_player_move.name,cmp.current_player_move.moves, pos.Y);
+        //read_move(&pos);
+        read_row(&pos);
+
         check = function_validate_move(pos);
     }
     while(check != 0);

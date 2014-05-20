@@ -72,7 +72,7 @@ void welcome_screen()
     printf("              #     @    @   @  @  @      @     @         @      #\n");
     printf("              #     @    @   @  @  @      @@@@  @@@@@     @ GAME #\n");
     printf("              #                                                  #\n");
-    printf("              #                    Viope 2014                    #\n");
+    printf("              #                    Viope 2014 LOLO                    #\n");
     printf("              #                                                  #\n");
     printf("              ####################################################\n\n");
     printf("Press any key to continue...");
@@ -87,9 +87,9 @@ void choose_board()
     {
         //clearscr();
         printf("\nChoose board size:\n");
-        printf("1. Small board (3x3)\n");
-        printf("2. Medium board (6x6)\n");
-        printf("3. Large board (12x12)\n\n");
+        printf("1. Small board (%dx%d)\n", BOARD_SMALL, BOARD_SMALL);
+        printf("2. Medium board (%dx%d)\n", BOARD_MEDIUM, BOARD_MEDIUM);
+        printf("3. Large board (%dx%d)\n\n", BOARD_LARGE, BOARD_LARGE);
         printf("(Choose an option and press enter): ");
 
         control=scanf("%d",&size_board);
@@ -156,6 +156,7 @@ void show_menu()
 
     case 1:
         G_current_game.game_mode=pvc;
+        G_current_game.pvp_mode = notpvp;
         show_difficulty();
         clearscr();
         printf("Triplets - Player vs Computer \n\n");
@@ -214,6 +215,7 @@ void show_menu()
         }
         while (!(strcmp(player2nameAux,"cpu")) || !(strcmp(player2nameAux,player1nameAux)));
 
+        show_pvp_mode();
         choose_board();
         show_who_first();
 

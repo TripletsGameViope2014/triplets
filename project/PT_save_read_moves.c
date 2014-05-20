@@ -656,6 +656,27 @@ void PL_HTMLread_move(position_t *pos)
     pos->Y_int = board_col_to_matrix_idx(pos->Y);
 }
 
+void read_row(position_t *pos){
+
+    int control;
+    int dimension = board_get_size();
+    do
+    {
+
+        control = scanf("%d", &pos->X);
+//        pos->Y_int = board_col_to_matrix_idx(pos->Y);
+
+        if(pos->X < 1 || pos->X > dimension || control == 0)
+        {
+            printf("Invalid number!\nThe number has to be between 1 - %d\n\n", dimension);
+        }
+        clean_buffer_keyboard();
+    }
+    while(pos->X < 1 || pos->X > dimension || control == 0);
+
+//    if the move reach this point is because is -> printf("Part of the board! \n");
+
+}
 
 /*=====================================
  * Private functions

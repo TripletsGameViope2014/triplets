@@ -31,7 +31,7 @@
  *===================================*/
 
 extern position_t pvp_normal_mode(position_t pos);
-extern position_t pvp_alternative_mode(position_t pos);
+extern position_t pvp_column_mode(position_t pos);
 
 
 

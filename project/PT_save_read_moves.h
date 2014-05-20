@@ -49,6 +49,7 @@ char input_is_char(char position[3]);
 extern void test_reading_converting_validating();
 extern void test_representation_matrix(board_t matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension);
 extern void PL_HTMLread_move(position_t *pos);
+extern void read_row(position_t *pos); //to read just the row
 
 
 #endif /* __PT_SAVE_READ_MOVES_H__ */

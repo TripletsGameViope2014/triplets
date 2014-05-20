@@ -83,7 +83,6 @@ int main(void)
     reset_data_structs();
     clearscr();
 
-
     welcome_screen();
     do
     {

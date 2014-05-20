@@ -27,7 +27,12 @@ void WriteHTML(board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
     }
     else
     {
-        fprintf(HTML,"<b>%s won! (In %d moves!)</b>",cmp.current_player_move.name, cmp.current_player_move.moves);
+        if(G_current_game.game_mode == pvc)
+        {
+            fprintf(HTML,"<b>%s won! (In %d moves!)</b>",cmp.previous_player_move.name, cmp.previous_player_move.moves);
+        }
+        else
+            fprintf(HTML,"<b>%s won! (In %d moves!)</b>",cmp.current_player_move.name, cmp.current_player_move.moves);
     }
     fprintf(HTML,"<table>");
 

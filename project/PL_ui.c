@@ -170,7 +170,8 @@ void show_menu()
         do
         {
             printf("Enter your name: ");
-            scanf("%s",G_players[0].name);
+            fgets(G_players[0].name, MAX_PLAYERNAME_LENGTH, stdin);
+            terminate_string_at_first_slash_n(G_players[0].name);
             strcpy(player1nameAux,G_players[0].name);
             string_to_lower(player1nameAux);
 
@@ -196,8 +197,8 @@ void show_menu()
         do
         {
             printf("Enter the name of player 1: ");
-            scanf("%s",G_players[0].name);
-
+            fgets(G_players[0].name, MAX_PLAYERNAME_LENGTH, stdin);
+            terminate_string_at_first_slash_n(G_players[0].name);
             strcpy(player1nameAux,G_players[0].name);
             string_to_lower(player1nameAux);
 
@@ -210,8 +211,8 @@ void show_menu()
         do
         {
             printf("\nEnter the name of player 2: ");
-            scanf("%s",G_players[1].name);
-
+            fgets(G_players[1].name, MAX_PLAYERNAME_LENGTH, stdin);
+            terminate_string_at_first_slash_n(G_players[1].name);
             strcpy(player2nameAux,G_players[1].name);
             string_to_lower(player2nameAux);
 

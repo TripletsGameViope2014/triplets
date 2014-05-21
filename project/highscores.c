@@ -44,9 +44,11 @@ void init_highscores()
     highscores_t highscores3x3[MAX_HIGHSCORES];
     highscores_t highscores6x6[MAX_HIGHSCORES];
     highscores_t highscores12x12[MAX_HIGHSCORES];
+    highscores_t highscores9x9[MAX_HIGHSCORES];
     FILE *highscoresFile3x3;
     FILE *highscoresFile6x6;
     FILE *highscoresFile12x12;
+    FILE *highscoresFile9x9;
     int i, highscore_type;
 
     /* Set default highscores */
@@ -70,6 +72,13 @@ void init_highscores()
         highscores12x12[i].player_moves = 999;
         strcpy(highscores12x12[i].game_mode, "NONE");
         highscores12x12[i].game_counter = 999;
+    }
+    for(i=0; i<MAX_HIGHSCORES; i++)
+    {
+        strcpy(highscores9x9[i].player_name, "DEFAULT");
+        highscores9x9[i].player_moves = 999;
+        strcpy(highscores9x9[i].game_mode, "NONE");
+        highscores9x9[i].game_counter = 999;
     }
 
     // load highscores, if file doesn't exist, create new
@@ -98,7 +107,7 @@ void init_highscores()
     fclose(highscoresFile6x6);
 
     highscoresFile12x12 = fopen("highscores12x12.dat", "rb");
-    if (highscoresFile6x6 == NULL)
+    if (highscoresFile12x12 == NULL)
     {
         highscore_type = 3;
         createHighscores(highscores12x12, highscore_type);
@@ -108,6 +117,13 @@ void init_highscores()
         fread(highscores12x12,sizeof(highscores_t),MAX_HIGHSCORES,highscoresFile12x12);
     }
     fclose(highscoresFile12x12);
+
+    highscoresFile9x9 = fopen("highscores9x9.dat", "rb");
+    if(highscoresFile9x9==NULL)
+    {
+        highscore_type = 4;
+        createHighscores(highscores9x9, highscore_type);
+    }
 }
 
 void createHighscores(highscores_t highscores[], int highscore_type)
@@ -148,16 +164,32 @@ void createHighscores(highscores_t highscores[], int highscore_type)
         }
         else
         {
-            createHighscoresFile = fopen("highscores12x12.dat", "wb");
-            if(createHighscoresFile == NULL)
+            if(highscore_type == 3)
             {
-                printf("\nERROR: Couldn't create highscores12x12.dat file!");
+                createHighscoresFile = fopen("highscores12x12.dat", "wb");
+                if(createHighscoresFile == NULL)
+                {
+                    printf("\nERROR: Couldn't create highscores12x12.dat file!");
+                }
+                for(i=0; i<MAX_HIGHSCORES; i++)
+                {
+                    fwrite(highscores,sizeof(highscores_t),MAX_HIGHSCORES,createHighscoresFile);
+                }
+                fclose(createHighscoresFile);
             }
-            for(i=0; i<MAX_HIGHSCORES; i++)
+            else
             {
-                fwrite(highscores,sizeof(highscores_t),MAX_HIGHSCORES,createHighscoresFile);
+                createHighscoresFile = fopen("highscores9x9.dat", "wb");
+                if(createHighscoresFile == NULL)
+                {
+                    printf("\nERROR: Couldn't create highscores9x9.dat file!");
+                }
+                for(i=0; i<MAX_HIGHSCORES; i++)
+                {
+                    fwrite(highscores,sizeof(highscores_t),MAX_HIGHSCORES,createHighscoresFile);
+                }
+                fclose(createHighscoresFile);
             }
-            fclose(createHighscoresFile);
         }
     }
 }
@@ -263,7 +295,7 @@ void show_highscores()
 
     if (menuOption==0)
     {
-
+        //back to main menu
     }
     else
     {
@@ -281,12 +313,17 @@ void show_highscores()
             }
             else
             {
-                loadHighscores = fopen("highscores12x12.dat", "rb");
+                if(menuOption==3){
+                    loadHighscores = fopen("highscores9x9.dat", "rb");
+                }
+                else{
+                    loadHighscores = fopen("highscores12x12.dat", "rb");
+                }
             }
         }
         if (loadHighscores == NULL)     // verify if file exists
         {
-            printf("\nERROR: Couldn't read scores!");
+            printf("\nERROR: Couldn't read scores!\n");
         }
         else
         {
@@ -310,7 +347,12 @@ void show_highscores()
                     }
                     else
                     {
-                        printf(" 12x12 --\n");
+                        if(menuOption==4){
+                            printf(" 12x12 --\n");
+                        }
+                        else{
+                            printf(" 9x9 --\n");
+                        }
                     }
                 }
 
@@ -375,11 +417,12 @@ int highscore_menu()
         printf("Triplets - Highscores\n");
         printf("\n1. 3x3 Highscores");
         printf("\n2. 6x6 Highscores");
-        printf("\n3. 12x12 Highscores");
+        printf("\n3. 9x9 Highscores");
+        printf("\n4. 12x12 Highscores");
         printf("\n(Choose an option and press enter).\nInsert 0 to return to main menu: ");
         scanf("%d", &option);
     }
-    while(option < 0 || option > 3);
+    while(option < 0 || option > 4);
 
     return option;
 }

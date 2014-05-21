@@ -43,7 +43,6 @@
 				<Linker>
 					<Add option="-s" />
 					<Add library="C:\Program Files x86\CodeBlocks\MinGW\lib\libws2_32.a" />
-					<Add library="C:\Program Files x86\CodeBlocks\MinGW\lib\libws2_32.a" />
 				</Linker>
 			</Target>
 		</Build>
@@ -53,105 +52,105 @@
 		<Linker>
 			<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libws2_32.a" />
 		</Linker>
-		<Unit filename="PL_htmlui.h">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/PL_htmlui.h">
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="PL_ui.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/PL_ui.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="PL_ui.h">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/PL_ui.h">
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="PT_save_read_moves.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/PT_save_read_moves.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="PT_save_read_moves.h" />
-		<Unit filename="SP.h">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/PT_save_read_moves.h" />
+		<Unit filename="../../../../Documents/GitHub/triplets/project/SP.h">
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="SP_finish_game.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/SP_finish_game.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="SP_random_move.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/SP_random_move.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="SP_smart_move.c">
-			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="board.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/SP_smart_move.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="board.h">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="data_structs.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/board.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="data_structs.h">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/board.h">
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="debug.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/data_structs.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="game_mode.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="game_mode.h" />
-		<Unit filename="highscores.c">
-			<Option compilerVar="CC" />
+		<Unit filename="../../../../Documents/GitHub/triplets/project/data_structs.h">
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="highscores.h">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="main.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/debug.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="main.h">
-			<Option target="Debug" />
-			<Option target="Release" />
+		<Unit filename="../../../../Documents/GitHub/triplets/project/game_mode.c">
+			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="pl_htmlui.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/game_mode.h" />
+		<Unit filename="../../../../Documents/GitHub/triplets/project/highscores.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="sockets.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/highscores.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="../../../../Documents/GitHub/triplets/project/main.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="sockets.h">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/main.h">
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="util.c">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/pl_htmlui.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="util.h">
+		<Unit filename="../../../../Documents/GitHub/triplets/project/sockets.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="../../../../Documents/GitHub/triplets/project/sockets.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="../../../../Documents/GitHub/triplets/project/util.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="../../../../Documents/GitHub/triplets/project/util.h">
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>

@@ -82,7 +82,7 @@ void init_highscores()
     }
 
     // load highscores, if file doesn't exist, create new
-    highscoresFile3x3 = fopen("highscores3x3.dat", "rb");
+    highscoresFile3x3 = fopen("data/highscores/highscores3x3.dat", "rb");
     if (highscoresFile3x3 == NULL)
     {
         highscore_type = 1;
@@ -106,7 +106,7 @@ void init_highscores()
     }
     fclose(highscoresFile6x6);
 
-    highscoresFile12x12 = fopen("highscores12x12.dat", "rb");
+    highscoresFile12x12 = fopen("data/highscores/highscores12x12.dat", "rb");
     if (highscoresFile12x12 == NULL)
     {
         highscore_type = 3;
@@ -118,7 +118,7 @@ void init_highscores()
     }
     fclose(highscoresFile12x12);
 
-    highscoresFile9x9 = fopen("highscores9x9.dat", "rb");
+    highscoresFile9x9 = fopen("data/highscores/highscores9x9.dat", "rb");
     if(highscoresFile9x9==NULL)
     {
         highscore_type = 4;
@@ -133,7 +133,7 @@ void createHighscores(highscores_t highscores[], int highscore_type)
 
     if(highscore_type == 1)
     {
-        createHighscoresFile = fopen("highscores3x3.dat", "wb");
+        createHighscoresFile = fopen("data/highscores/highscores3x3.dat", "wb");
         if(createHighscoresFile == NULL)
         {
             printf("\nERROR: Couldn't create highscores3x3.dat file!");
@@ -151,7 +151,7 @@ void createHighscores(highscores_t highscores[], int highscore_type)
     {
         if(highscore_type == 2)
         {
-            createHighscoresFile = fopen("highscores6x6.dat", "wb");
+            createHighscoresFile = fopen("data/highscores/highscores6x6.dat", "wb");
             if(createHighscoresFile == NULL)
             {
                 printf("\nERROR: Couldn't create highscores6x6.dat file!");
@@ -166,7 +166,7 @@ void createHighscores(highscores_t highscores[], int highscore_type)
         {
             if(highscore_type == 3)
             {
-                createHighscoresFile = fopen("highscores12x12.dat", "wb");
+                createHighscoresFile = fopen("data/highscores/highscores12x12.dat", "wb");
                 if(createHighscoresFile == NULL)
                 {
                     printf("\nERROR: Couldn't create highscores12x12.dat file!");
@@ -179,7 +179,7 @@ void createHighscores(highscores_t highscores[], int highscore_type)
             }
             else
             {
-                createHighscoresFile = fopen("highscores9x9.dat", "wb");
+                createHighscoresFile = fopen("data/highscores/highscores9x9.dat", "wb");
                 if(createHighscoresFile == NULL)
                 {
                     printf("\nERROR: Couldn't create highscores9x9.dat file!");
@@ -223,7 +223,7 @@ void verify_new_highscore(int new_player_moves, char new_player_name[], int game
     }
 
     // use the game_size variable to obtain the filename to load
-    sprintf(filename, "%s%d%s%d%s", filename, game_size, "x", game_size, ".dat");
+    sprintf(filename, "data/highscores/%s%d%s%d%s", filename, game_size, "x", game_size, ".dat");
 
     fileHighscores = fopen(filename, "rb");
     if (fileHighscores == NULL)
@@ -303,21 +303,21 @@ void show_highscores()
 
         if(menuOption==1)
         {
-            loadHighscores = fopen("highscores3x3.dat", "rb");
+            loadHighscores = fopen("data/highscores/highscores3x3.dat", "rb");
         }
         else
         {
             if(menuOption==2)
             {
-                loadHighscores = fopen("highscores6x6.dat", "rb");
+                loadHighscores = fopen("data/highscores/highscores6x6.dat", "rb");
             }
             else
             {
                 if(menuOption==3){
-                    loadHighscores = fopen("highscores9x9.dat", "rb");
+                    loadHighscores = fopen("data/highscores/highscores9x9.dat", "rb");
                 }
                 else{
-                    loadHighscores = fopen("highscores12x12.dat", "rb");
+                    loadHighscores = fopen("data/highscores/highscores12x12.dat", "rb");
                 }
             }
         }

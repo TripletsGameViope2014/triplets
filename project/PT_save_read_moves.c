@@ -58,7 +58,7 @@ void createLogs(int gameCounter, int dimension)
     char dateExtended[32] = "";
     getDate(dateExtended);
 
-    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
+    sprintf(logName, "data/logs/TripletsLog-%d.txt", gameCounter);
 
     newLog = fopen(logName, "wt");
     if(newLog == NULL)
@@ -87,9 +87,9 @@ void createLogs(int gameCounter, int dimension)
 void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int gameCounter)
 {
     FILE *playLog;
-    char logName[255]="logs/";
+    char logName[255];
 
-    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
+    sprintf(logName, "data/logs/TripletsLog-%d.txt", gameCounter);
 
     playLog = fopen(logName, "at");
     if(playLog == NULL)
@@ -115,9 +115,9 @@ void savePlayLog(char playerName[], int playNumber, int moveX, char moveY, int g
 void closePlayLog(int playNumber, int gameCounter, char playerName[])
 {
     FILE *playLog;
-    char logName[255]="logs/";
+    char logName[255];
 
-    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
+    sprintf(logName, "data/logs/TripletsLog-%d.txt", gameCounter);
 
     playLog = fopen(logName, "at");
     if(playLog == NULL)
@@ -155,9 +155,9 @@ void loadLogs(int gameCounter)
     char moveY;
     int lineCounter=0;
     int headLinesNumber=6;
-    char logName[255]="logs/";
+    char logName[255];
 
-    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
+    sprintf(logName, "data/logs/TripletsLog-%d.txt", gameCounter);
 
     lineCounter=get_file_lines(logName);
 
@@ -290,9 +290,9 @@ void print_game_information(int gameCounter)
     int lineCounter=0;
     int headLinesNumber=6;
 
-    char logName[255]="logs/";
+    char logName[255];
 
-    sprintf(logName, "logs/TripletsLog-%d.txt", gameCounter);
+    sprintf(logName, "data/logs/TripletsLog-%d.txt", gameCounter);
 
     lineCounter=get_file_lines(logName);
 

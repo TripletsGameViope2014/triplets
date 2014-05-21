@@ -65,7 +65,7 @@ position_t pvp_column_mode(position_t pos){
     int check=0;
 
     pos.Y_int++;
-    if(pos.Y_int == board_get_size() + 1){
+    if(pos.Y_int >= board_get_size() + 1){
         pos.Y_int = 1;
     }
 
@@ -75,7 +75,7 @@ position_t pvp_column_mode(position_t pos){
     do
     {
 
-        printf("It's your move %s! (all your moves: %d): %c",cmp.current_player_move.name,cmp.current_player_move.moves, pos.Y);
+        printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
         read_row(&pos);
         //PL_HTMLread_move(&pos);
 

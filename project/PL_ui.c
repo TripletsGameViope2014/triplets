@@ -72,7 +72,7 @@ void welcome_screen()
     printf("              #     @    @   @  @  @      @     @         @      #\n");
     printf("              #     @    @   @  @  @      @@@@  @@@@@     @ GAME #\n");
     printf("              #                                                  #\n");
-    printf("              #                    Viope 2014 LOLO                    #\n");
+    printf("              #                    Viope 2014                    #\n");
     printf("              #                                                  #\n");
     printf("              ####################################################\n\n");
     printf("Press any key to continue...");

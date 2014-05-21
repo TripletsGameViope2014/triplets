@@ -143,6 +143,9 @@ do{
                 cmp.current_player_move=cmp.previous_player_move;  //
                 cmp.previous_player_move=cmp.tmp;                  //
             }//end while(1)
+
+            clearscr();
+
             cmp.tmp=cmp.current_player_move;                   //swap current player
             cmp.current_player_move=cmp.previous_player_move;  //
             cmp.previous_player_move=cmp.tmp;

@@ -383,7 +383,6 @@ void read_move(position_t *pos)
         pos->Y = input_is_char(move_in_board);
         pos->Y = toupper(pos->Y);
         pos->Y_int = board_col_to_matrix_idx(pos->Y);
-        //extern int board_col_to_matrix_idx(char col);
 
         if(pos->X < 1 || pos->X > dimension)
         {
@@ -667,13 +666,12 @@ void read_row(position_t *pos){
     int dimension = board_get_size();
     do
     {
-
+        printf("Write your move: %c", pos->Y);
         control = scanf("%d", &pos->X);
-//        pos->Y_int = board_col_to_matrix_idx(pos->Y);
 
         if(pos->X < 1 || pos->X > dimension || control == 0)
         {
-            printf("Invalid number!\nThe number has to be between 1 - %d\n\n", dimension);
+            printf("Invalid number!\nThe number has to be between 1 - %d\n", dimension);
         }
         clean_buffer_keyboard();
     }

@@ -24,12 +24,19 @@
  * Local includes
  *===================================*/
 #include "util.h"
+#include "data_structs.h"
+#include "board.h"
+#include "game_mode.h"
 
 /*=====================================
  * Prototypes of **private** functions
  *===================================*/
+
+#ifdef _WIN32
 static void startWindowsServer(void);
+#else
 static void startUnixServer(void);
+#endif
 
 /*=====================================
  * Public functions
@@ -57,9 +64,9 @@ void startServer() {
 	startUnixServer();
 	#endif
 }
-
+	#ifndef _WIN32
 void startUnixServer(void) {
-    #ifndef _WIN32
+    
     int mainSocket = socket( AF_INET, SOCK_STREAM, 0);
     if( mainSocket == -1)
     {
@@ -112,11 +119,13 @@ if ( setsockopt(mainSocket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1 )
     fclose(mov);
     close(cli);
     close(mainSocket);
-    #endif
+   
 
 }
+ #endif
 
 
+#ifdef _WIN32
 /**
  * Brief description of the function
  *
@@ -128,7 +137,7 @@ if ( setsockopt(mainSocket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1 )
 
  void startWindowsServer(void)
  {
-     #ifdef _WIN32
+     
     WSADATA wsaData;
 
     int result = WSAStartup( MAKEWORD( 2, 2 ), & wsaData );
@@ -176,34 +185,24 @@ if ( setsockopt(mainSocket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1 )
         //return 1;
     }
 
-    int bytesSent;
-    int bytesRecv = SOCKET_ERROR;
     char sendbuf[ 20 ] = "";
     char recvbuf[ 9 ] = "";
     char move[4] = "";
-    bytesRecv = recv( mainSocket, recvbuf, 9, 0 );
+    recv( mainSocket, recvbuf, 9, 0 );
     //printf( "Bytes received: %d\n", bytesRecv );
     //printf( "Received text: %s\n", recvbuf );
 
-    bytesSent = send( mainSocket, sendbuf, strlen( sendbuf ), 0 );
+    send( mainSocket, sendbuf, strlen( sendbuf ), 0 );
     //printf( "Bytes sent: %d\n", bytesSent );
     WSACleanup();
 
-    int a;
-    int b=0;
-    for (a=5;a<8;a++)
-    {
-        if((recvbuf[a] == '/') || (recvbuf[a] == ' '))
-            continue;
-        move[b] = recvbuf[a];
-        b++;
-
-        //printf("\n");
-    }
-    //printf("%s", move);
+    char letter; int number;
+    sscanf(recvbuf, "GET /%c%d", &letter, &number);
+    sprintf(move, "%c%d", letter, number);
 
     FILE *mov = fopen("move.mv", "w+");
     fprintf(mov,"%s", move);
     fclose(mov);
-    #endif
+    
  }
+#endif

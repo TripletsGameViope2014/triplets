@@ -90,14 +90,14 @@ void choose_board()
         printf("1. Small board (%dx%d)\n", BOARD_SMALL, BOARD_SMALL);
         printf("2. Medium board (%dx%d)\n", BOARD_MEDIUM, BOARD_MEDIUM);
         printf("3. Big board (%dx%d)\n", BOARD_BIG, BOARD_BIG);
-        printf("3. Large board (%dx%d)\n\n", BOARD_LARGE, BOARD_LARGE);
+        printf("4. Large board (%dx%d)\n\n", BOARD_LARGE, BOARD_LARGE);
         printf("(Choose an option and press enter): ");
 
         control=scanf("%d",&size_board);
         clean_buffer_keyboard();
 
     }
-    while (size_board<1 || size_board>3 || control ==0);
+    while (size_board<1 || size_board>4 || control ==0);
 
     switch(size_board)
     {

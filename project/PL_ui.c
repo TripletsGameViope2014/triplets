@@ -224,7 +224,14 @@ void show_menu()
         while (!(strcmp(player2nameAux,"cpu")) || !(strcmp(player2nameAux,player1nameAux)));
 
         show_pvp_mode();
-        choose_interface();
+        if (G_current_game.pvp_mode == normal)
+        {
+            choose_interface();
+        }
+        else
+        {
+            G_current_game.interface_mode = console;
+        }
         choose_board();
         show_who_first();
 

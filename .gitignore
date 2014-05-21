@@ -29,6 +29,6 @@
 */[Oo]bj/*
 
 *.dat
-*/logs/*
+*/data/logs/*
 *.html
 debug*.txt

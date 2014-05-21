@@ -21,6 +21,7 @@ void setWinTextColor(int, int);
 
 #include <time.h>
 #include <sys/stat.h>
+#include <string.h>
 
 void setLinuxTextColor(int, int);
 

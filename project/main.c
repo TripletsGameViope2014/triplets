@@ -85,17 +85,17 @@ position_t select_interface_gameplay(position_t pos)
 *===================================*/
 int main(void)
 {
-    init_highscores();
     int gameCounter=get_game_counter();
     int control;
     int option;
+    create_folder("data");
+    create_folder("data/logs");
+    create_folder("data/highscores");
+    init_highscores();
     if (gameCounter==0)
     {
         set_game_counter(gameCounter); // creates the file
     }
-    create_folder("data");
-    create_folder("data/logs");
-    create_folder("data/highscores");
     reset_data_structs();
     clearscr();
 
@@ -185,7 +185,7 @@ int main(void)
                 {
                     //system("cls");
                     clearscr();
-                    WriteHTML(get_current_game_ptr()->board,"game.html");
+
                     board_print_raw();
 
                     if(!strcmp(cmp.current_player_move.name,"CPU"))
@@ -195,6 +195,7 @@ int main(void)
                     }
                     else
                     {
+                        WriteHTML(get_current_game_ptr()->board,"game.html");
                         do
                         {
                             printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);

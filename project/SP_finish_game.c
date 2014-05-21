@@ -5,6 +5,22 @@
 /* Number of aligned pieces that are needed to finish the game */
 #define NUM_ALIGNED_PIECES_FINISH (3)
 
+void refresh_last_piece(int i, int j)
+{
+                if (get_current_game_ptr()->board[i][j].lastPiece==0)
+                {
+                    get_current_game_ptr()->board[i][j].lastPiece = 2;
+                }
+
+                else
+                {
+                    if (get_current_game_ptr()->board[i][j].lastPiece==1)
+                    {
+                        get_current_game_ptr()->board[i][j].lastPiece = 3;
+                    }
+                }
+
+}
 
 int finish_gamePL(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
@@ -81,22 +97,6 @@ int finish_gamePL(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
     return 0;
 }
 
-void refresh_last_piece(int i, int j)
-{
-                if (get_current_game_ptr()->board[i][j].lastPiece==0)
-                {
-                    get_current_game_ptr()->board[i][j].lastPiece = 2;
-                }
-
-                else
-                {
-                    if (get_current_game_ptr()->board[i][j].lastPiece==1)
-                    {
-                        get_current_game_ptr()->board[i][j].lastPiece = 3;
-                    }
-                }
-
-}
 
 
 /*

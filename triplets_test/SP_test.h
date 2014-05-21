@@ -1,16 +1,14 @@
 #ifndef SP_H_INCLUDED
 #define SP_H_INCLUDED
 
-#define BOARD_BIG 9
-
-#include "C:\Users\Gabriel Amarista\Desktop\WorkingTest\triplets\project\data_structs.h"
-#include "C:\Users\Gabriel Amarista\Desktop\WorkingTest\triplets\project\data_structs.c"
-#include "C:\Users\Gabriel Amarista\Desktop\WorkingTest\triplets\project\util.c"
-#include "C:\Users\Gabriel Amarista\Desktop\WorkingTest\triplets\project\util.h"
-#include "C:\Users\Gabriel Amarista\Desktop\WorkingTest\triplets\project\board.h"
-#include "C:\Users\Gabriel Amarista\Desktop\WorkingTest\triplets\project\board.c"
-#include "C:\Users\Gabriel Amarista\Desktop\WorkingTest\triplets\project\SP.h"
-#include "C:\Users\Gabriel Amarista\Desktop\WorkingTest\triplets\project\SP_finish_game.c"
+#include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\data_structs.h"
+#include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\data_structs.c"
+#include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\util.c"
+#include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\util.h"
+#include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\board.h"
+#include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\board.c"
+#include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\SP.h"
+#include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\SP_finish_game.c"
 
 TEST(finish_gamePL_test_one){
 

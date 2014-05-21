@@ -30,13 +30,13 @@
  * This variable should only be accessed through the function
  * get_current_game_ptr() that returns a pointer to the variable
  */
-static game_t G_current_game;
+//static game_t G_current_game;
 
 /* Static array variable that holds the data regarding the players
  * This variable should only be accessed through the function
  * get_players_ptr() that returns a pointer to the variable
  */
-static player_t G_players[2];
+//static player_t G_players[2];
 
 /*=====================================
  * Private prototypes
@@ -86,7 +86,7 @@ void reset_data_structs(void)
     game_ptr->player_first = -1;
     game_ptr->board_columns = -1;
     game_ptr->board_rows = -1;
-    game_ptr->game_mode = -1;
+//    game_ptr->game_mode = -1;
 
     /* Set the whole board as empty */
     board_set_empty();

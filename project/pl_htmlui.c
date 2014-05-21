@@ -3,7 +3,6 @@
 
 #include "data_structs.h"
 #include "board.h"
-#include "data_structs.h"
 #include "PL_ui.h"
 #include "main.h"
 

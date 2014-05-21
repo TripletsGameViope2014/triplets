@@ -90,7 +90,10 @@ void refresh_last_piece(int i, int j)
 
                 else
                 {
-                    get_current_game_ptr()->board[i][j].lastPiece = 3;
+                    if (get_current_game_ptr()->board[i][j].lastPiece==1)
+                    {
+                        get_current_game_ptr()->board[i][j].lastPiece = 3;
+                    }
                 }
 
 }

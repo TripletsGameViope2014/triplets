@@ -78,7 +78,7 @@ void WriteHTML(board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
                         fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./move_finish.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
                         break;
                     case 3:
-                        fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./move_finish.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
+                        fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./move_last.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
                         break;
                     }
                 }
@@ -102,8 +102,9 @@ void WriteHTML(board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
                         break;
                     case 2:
                         fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./move_finish.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
+                        break;
                     case 3:
-                        fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./move_finish.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
+                        fprintf(HTML,"<td id=\"%c%d\"> <img src = \"./move_last.png\" width = \"40\" height = \"40\" /> </td>",'a'+j,i+1);
                         break;
                     }
 

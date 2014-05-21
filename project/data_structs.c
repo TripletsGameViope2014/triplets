@@ -16,6 +16,7 @@
  *===================================*/
 #include "data_structs.h"
 #include "board.h"
+#include "PL_ui.h"
 
 
 /*=====================================
@@ -30,13 +31,15 @@
  * This variable should only be accessed through the function
  * get_current_game_ptr() that returns a pointer to the variable
  */
-static game_t G_current_game;
+
+//static game_t G_current_game;
 
 /* Static array variable that holds the data regarding the players
  * This variable should only be accessed through the function
  * get_players_ptr() that returns a pointer to the variable
  */
-static player_t G_players[2];
+
+//static player_t G_players[2];
 
 /*=====================================
  * Private prototypes

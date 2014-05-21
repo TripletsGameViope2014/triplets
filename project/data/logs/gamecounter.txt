@@ -1,1 +1,0 @@
-game counter = 1

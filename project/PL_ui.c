@@ -89,6 +89,7 @@ void choose_board()
         printf("\nChoose board size:\n");
         printf("1. Small board (%dx%d)\n", BOARD_SMALL, BOARD_SMALL);
         printf("2. Medium board (%dx%d)\n", BOARD_MEDIUM, BOARD_MEDIUM);
+        printf("3. Big board (%dx%d)\n", BOARD_BIG, BOARD_BIG);
         printf("3. Large board (%dx%d)\n\n", BOARD_LARGE, BOARD_LARGE);
         printf("(Choose an option and press enter): ");
 
@@ -111,6 +112,11 @@ void choose_board()
         G_current_game.board_rows=BOARD_MEDIUM;
         break;
     case 3:
+        board_set_size(BOARD_BIG);
+        G_current_game.board_columns=BOARD_BIG;
+        G_current_game.board_rows=BOARD_BIG;
+        break;
+    case 4:
         board_set_size(BOARD_LARGE);
         G_current_game.board_columns=BOARD_LARGE;
         G_current_game.board_rows=BOARD_LARGE;

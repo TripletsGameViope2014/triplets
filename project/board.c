@@ -117,6 +117,7 @@ int board_is_valid_size(const int board_size)
 {
     if( board_size == BOARD_SMALL
             || board_size == BOARD_MEDIUM
+            || board_size == BOARD_BIG
             || board_size == BOARD_LARGE )
     {
         return 1;
@@ -149,6 +150,10 @@ void board_print_raw(void)
     if(board_size==BOARD_MEDIUM)
     {
         printf("           GAME BOARD\n");
+    }
+    if(board_size==BOARD_BIG)
+    {
+        printf("                GAME BOARD\n");
     }
     if(board_size==BOARD_LARGE)
     {

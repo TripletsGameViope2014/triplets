@@ -24,6 +24,7 @@
 /* Some defines */
 #define BOARD_SMALL 3 //small board size
 #define BOARD_MEDIUM 6 //medium board size
+#define BOARD_BIG 9
 #define BOARD_LARGE 12 //large board size
 #define EMPTY ' ' //free position on the board
 #define PIECE '#' //board position occupied

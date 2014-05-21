@@ -90,7 +90,9 @@ int main(void)
     {
         set_game_counter(gameCounter); // creates the file
     }
-    create_folder("logs");
+    create_folder("data");
+    create_folder("data/logs");
+    create_folder("data/highscores");
     reset_data_structs();
     clearscr();
 

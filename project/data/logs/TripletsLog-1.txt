@@ -1,0 +1,5 @@
+--Triplets Log--
+Game #1
+Matrix Dimension: 9x9
+Started on: 2014/5/21-9:39
+Player CPU ; Play 1 ; Move [7][D]

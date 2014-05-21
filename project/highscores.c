@@ -94,7 +94,7 @@ void init_highscores()
     }
     fclose(highscoresFile3x3);
 
-    highscoresFile6x6 = fopen("highscores6x6.dat", "rb");
+    highscoresFile6x6 = fopen("data/highscores/highscores6x6.dat", "rb");
     if (highscoresFile6x6 == NULL)
     {
         highscore_type = 2;

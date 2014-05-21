@@ -98,7 +98,7 @@ void set_game_counter(int gameCounter)
 {
     FILE *counter;
 
-    counter=fopen("logs/gamecounter.txt", "wt");
+    counter=fopen("data/logs/gamecounter.txt", "wt");
     if (counter==NULL)
     {
         printf("Error writing on game counter file.");
@@ -126,7 +126,7 @@ int get_game_counter()
     FILE *counter;
     int gameCounter=0;
 
-    counter=fopen("logs/gamecounter.txt", "rt");
+    counter=fopen("data/logs/gamecounter.txt", "rt");
     if (counter!=NULL)
     {
         fscanf(counter, "game counter = %d", &gameCounter);

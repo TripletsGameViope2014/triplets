@@ -133,7 +133,7 @@ void smart (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
             else
             {
-                savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X+1, pos.Y_int+'A', get_game_counter());
+                savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X+1, pos.Y_int+'A', get_game_counter()+1);
                 board[pos.X][pos.Y_int].player = cmp.current_player_move.number;
                 set_last_piece(pos.X, pos.Y_int);
             }
@@ -158,7 +158,7 @@ int oneMovFinish (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
                 pos.Y_int=j;
                 if (finish_game_wrapper(pos))
                 {
-                    savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X+1, pos.Y_int+'A', get_game_counter());
+                    savePlayLog(cmp.current_player_move.name, cmp.current_player_move.moves+cmp.previous_player_move.moves+1, pos.X+1, pos.Y_int+'A', get_game_counter()+1);
                     board[pos.X][pos.Y_int].player = cmp.current_player_move.number;
                     set_last_piece(pos.X, pos.Y_int);
 

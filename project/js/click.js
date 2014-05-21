@@ -2,7 +2,7 @@ function callWebSocket(a) {
 	var socket = new WebSocket("ws://127.0.0.1:1234/"+a);
 	setTimeout(function() {
 		window.location = location.href;
-	}, 1000);
+	}, 100);
 }
 
 

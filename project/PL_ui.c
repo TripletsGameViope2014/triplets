@@ -298,8 +298,12 @@ void show_who_first()
     {
         clearscr();
         printf("Triplets - %s vs %s\n\n", G_players[0].name, G_players[1].name);
-        printf("Select who goes first:\n1. %s\n2. %s\n\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
+        printf("Select who goes first:\n1. %s\n2. %s\n3. Random\n(Choose an option and press enter): ",G_players[0].name,G_players[1].name);
         control=scanf("%d",&who_first_start_game);
+        if (who_first_start_game==3)
+        {
+            who_first_start_game=rand()%2 + 1;
+        }
         clean_buffer_keyboard();
     }
     while (who_first_start_game<1 || who_first_start_game>2 || control==0);
@@ -336,8 +340,8 @@ void show_pvp_mode()
         clearscr();
         printf("Triplets Game\n\n");
         printf("Choose the PvP Mode:\n");
-        printf("1. Normal Mode: \n");
-        printf("2. Column Mode (it's a challenge!): \n\n");
+        printf("1. Normal Mode. \n");
+        printf("2. Column Mode (it's a challenge!). \n\n");
         printf("(Choose an option and press enter): ");
 
         control=scanf("%d",&menu_choose);

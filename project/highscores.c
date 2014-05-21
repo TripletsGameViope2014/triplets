@@ -210,7 +210,7 @@ void verify_new_highscore(int new_player_moves, char new_player_name[], int game
     int i, o, highscoresChanged=0;
     char game_mode[5];
     FILE *fileHighscores;
-    char filename[20] = "highscores";
+    char filename[50] = "";
     highscores_t highscores[MAX_HIGHSCORES];
 
     if(game_mode_i == 1)
@@ -223,7 +223,7 @@ void verify_new_highscore(int new_player_moves, char new_player_name[], int game
     }
 
     // use the game_size variable to obtain the filename to load
-    sprintf(filename, "data/highscores/%s%d%s%d%s", filename, game_size, "x", game_size, ".dat");
+    sprintf(filename, "data/highscores/highscores%dx%d.dat", game_size, game_size);
 
     fileHighscores = fopen(filename, "rb");
     if (fileHighscores == NULL)

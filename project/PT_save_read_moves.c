@@ -207,7 +207,7 @@ void loadLogs(int gameCounter)
             cmp.previous_player_move=cmp.tmp;
 
         }
-        printf("\nWINNER: %s\n", playerName);
+        printf("\nWINNER: %s\a\n", playerName);
         printf("\nPress any key to go back to menu...");
         readchar();
 

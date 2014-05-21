@@ -155,7 +155,7 @@ do{
 
             WriteHTML(get_current_game_ptr()->board,"game.html");
 
-            printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+            printf("%s wins! (In %d moves!)\a\n",cmp.current_player_move.name,cmp.current_player_move.moves);
             closePlayLog(cmp.current_player_move.moves, gameCounter, cmp.current_player_move.name);
             verify_new_highscore(cmp.current_player_move.moves, cmp.current_player_move.name, G_current_game.board_columns, gameCounter, 1);
 
@@ -221,7 +221,7 @@ do{
             cmp.current_player_move=cmp.previous_player_move;  //
             cmp.previous_player_move=cmp.tmp;
 
-            printf("%s wins! (In %d moves!)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
+            printf("%s wins! (In %d moves!)\a\n",cmp.current_player_move.name,cmp.current_player_move.moves);
             closePlayLog(cmp.current_player_move.moves, gameCounter, cmp.current_player_move.name);
 
             if (strcmp(cmp.current_player_move.name,"CPU"))

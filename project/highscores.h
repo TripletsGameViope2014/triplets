@@ -1,4 +1,8 @@
+#ifndef __HIGHSCORES_H__
+#define __HIGHSCORES_H__
+
 /**
+ * Header file for highscores.c
  * Triplets Game - VIOPE 2014
  * @file: highscores.h
  *
@@ -24,10 +28,10 @@
 /*=====================================
  * typedefs
  *===================================*/
+
 /**
  * Stores highscores
  */
-
   typedef struct
  {
      char player_name[MAX_PLAYERNAME_LENGTH];
@@ -45,5 +49,6 @@ extern void show_highscores();
 extern void createHighscores(highscores_t highscores[], int highscore_type);
 extern void clearscr(void);
 extern int readchar(void);
+extern int highscore_menu();
 
-int highscore_menu();
+#endif

@@ -2,7 +2,7 @@
 #define __MAIN_H__
 
 /**
- * Header file for...
+ * Header file for main.c
  *
  * @creation date: 2014-05-15
  *
@@ -30,7 +30,7 @@
 /*=====================================
  * macros and defines
  *===================================*/
-#define MAX_NAME    (20)
+
 
 /*=====================================
  * typedefs

@@ -42,6 +42,4 @@ extern void print_char_board(int i, int j);
 extern void last_play_reset(void);
 extern void set_last_piece(int x, int y);
 
-extern char **board_get_board(void);
-
 #endif

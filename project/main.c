@@ -28,6 +28,20 @@
 #include "sockets.h"
 #include "game_mode.h"
 
+
+/*=====================================
+* Local functions
+*===================================*/
+
+/**
+ * This function asists in the verification
+ * of the finish_gamePL
+ *
+ * @v info_s
+ * @return	An integer to check is the game is finished
+ * @date	2014-05-2
+ * @author	Triplets Team
+ **/
 int finish_game_wrapper(position_t current_pos)
 {
     char S[1024];
@@ -37,6 +51,15 @@ int finish_game_wrapper(position_t current_pos)
     return finish_gamePL(get_current_game_ptr()->board);
 }
 
+/**
+ * This function verifies the CPU mode
+ * and runs the specific function for that mode
+ *
+ * @v info_s    To save repeated code
+ * @return	void
+ * @date	2014-05-15
+ * @author	Gabriel Rodrigues
+ **/
 void select_move()
 {
     if(G_current_game.cpu_mode == easy)
@@ -50,6 +73,15 @@ void select_move()
     }
 }
 
+/**
+ * This function verifies the PvP mode
+ * and runs the specific function for that mode
+ *
+ * @v info_s    To save repeated code
+ * @return	The position being modified
+ * @date	2014-05-21
+ * @author	Gabriel Rodrigues
+ **/
 position_t select_pvp_mode(position_t pos)
 {
     if(G_current_game.pvp_mode == normal)
@@ -64,6 +96,15 @@ position_t select_pvp_mode(position_t pos)
     return pos;
 }
 
+/**
+ * This function verifies the interface
+ * and runs the specific function for that interface
+ *
+ * @v info_s    To save repeated code
+ * @return	The position being modified
+ * @date	2014-05-20
+ * @author	Gabriel Rodrigues
+ **/
 position_t select_interface_gameplay(position_t pos)
 {
     if(G_current_game.interface_mode == html)

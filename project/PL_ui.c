@@ -1,20 +1,58 @@
+
+
+
+
+
+/**
+ * Triplets Game - VIOPE 2014
+ * @file: PL_ui.c
+ * @creation date	2014-05-01
+ *
+ **/
+
+/*=====================================
+ * System includes
+ *===================================*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "board.h"
 #ifdef WIN32
 #include "conio.h"
 #else
 #include <unistd.h>
 #endif // WIN32
 #include <string.h> //strcpy();
+
+/*=====================================
+ * Local includes
+ *===================================*/
 #include "data_structs.h"
 #include "PL_ui.h"
 #include "unistd.h"
 #include "PT_save_read_moves.h"
 #include "highscores.h"
 #include "util.h"
+#include "board.h"
 
+/*=====================================
+ * Prototypes of **private** functions
+ *===================================*/
+
+
+/*=====================================
+ * Public functions
+ *===================================*/
+
+
+
+ /**
+ * This function clears the screen
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-05-11
+ * @author	Triplets Team
+ **/
 void clearscr(void)
 {
 #ifdef WIN32
@@ -24,6 +62,14 @@ void clearscr(void)
 #endif
 }
 
+ /**
+ * This function reads a char to pause the program
+ *
+ * @v info_s
+ * @return	An int
+ * @date	2014-05-11
+ * @author	Triplets Team
+ **/
 int readchar(void)
 {
 #ifdef WIN32
@@ -38,6 +84,14 @@ int readchar(void)
 #endif
 }
 
+ /**
+ * This function shows the game rules
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-04-18
+ * @author	PL Team
+ **/
 void show_game_rules()
 {
     clearscr();
@@ -50,6 +104,15 @@ void show_game_rules()
     printf("\nPress any key to go back to main menu...");
     readchar();
 }
+
+ /**
+ * This function shows the credits
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-04-21
+ * @author	PL Team
+ **/
 void show_credits()
 {
     clearscr();
@@ -61,7 +124,14 @@ void show_credits()
     readchar();
 }
 
-
+ /**
+ * This function shows the welcome screen
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-04-15
+ * @author	PL Team
+ **/
 void welcome_screen()
 {
     printf("              ####################################################\n");
@@ -79,6 +149,14 @@ void welcome_screen()
     readchar();
 }
 
+ /**
+ * This function shows the menu to pick the size of the board
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-04-18
+ * @author	PL Team
+ **/
 void choose_board()
 {
     int control; // to verify if it is not a char!
@@ -127,6 +205,16 @@ void choose_board()
         break;
     }
 }
+
+
+ /**
+ * This function shows the main menu
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-04-14
+ * @author	PL Team
+ **/
 void show_menu()
 {
     int menu_choose;
@@ -264,6 +352,15 @@ void show_menu()
     }
 }
 
+ /**
+ * This function shows the possible difficulties of
+ * the CPU and allows the user to pick one
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-05-13
+ * @author	Gabriel Rodrigues
+ **/
 void show_difficulty()
 {
 
@@ -296,6 +393,15 @@ void show_difficulty()
     }
 }
 
+ /**
+ * This function shows and allows to pick the
+ * player who is going to play first
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-04-22
+ * @author	PL Team
+ **/
 void show_who_first()
 
 {
@@ -331,12 +437,30 @@ void show_who_first()
     clearscr();
 }
 
+
+ /**
+ * This function initializes the selected players
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-05-21
+ * @author	Joao Ramos
+ **/
 void init_players()
 {
         cmp.current_player_move.number=1;
         cmp.previous_player_move.number=2;
 }
 
+ /**
+ * This function shows the possible game modes of
+ * the PvP mode and allows the user to pick one
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-05-20
+ * @author	Gabriel Rodrigues
+ **/
 void show_pvp_mode()
 {
 
@@ -369,7 +493,15 @@ void show_pvp_mode()
     }
 }
 
-
+ /**
+ * This function shows the possible interfaces of
+ * the gameplay and allows the user to pick one
+ *
+ * @v info_s
+ * @return	none
+ * @date	2014-05-21
+ * @author	Gabriel Rodrigues
+ **/
 void choose_interface(){
     int menu_choose;
     int control; // to verify if it is not a char!
@@ -399,4 +531,8 @@ void choose_interface(){
     }
 }
 
+
+/*=====================================
+ * Private functions
+ *===================================*/
 

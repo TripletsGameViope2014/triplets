@@ -126,6 +126,14 @@ void init_highscores()
     }
 }
 
+/**
+ * This function creates the highscores's files
+ *
+ * @v info_s	create them in a folder
+ * @return	void
+ * @date	2014-05-14
+ * @author	PT Team
+ **/
 void createHighscores(highscores_t highscores[], int highscore_type)
 {
     int i;

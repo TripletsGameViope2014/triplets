@@ -27,20 +27,12 @@
 /*=====================================
  * Prototypes of **private** functions
  *===================================*/
-//static void example_of_private_function(int num_states);
+
 
 /*=====================================
  * Public functions
  *===================================*/
 
-/**
- * Brief description of the function
- *
- * @v info_s	string hold with some info
- * @return	what does this function returns
- * @date	2014-03-27
- * @author	name of the author of the function
- **/
 
 /**
  * This function initializes the log file
@@ -333,7 +325,7 @@ void print_game_information(int gameCounter)
  * @v info_s	Also validates the size of the string and limits
  * 			Of the row and column.
  * @return doesn't return anything, the struct position_t pass
- * 		by reference.
+ * 		   by reference.
  * @date	2014-04-20
  * @author	Gabriel Rodrigues (PT Team)
  **/
@@ -472,13 +464,14 @@ char* terminate_string_at_first_slash_n(char *str)
     return str;
 }
 
-
 /**
+ * This function obteins a string and searchs
+ * for the possible letters in the string
  *
- * @param
- * @return
- * 2014-04-18
- * Gabriel (PT)
+ * @v info_s	recieve a string, an input fromn the user
+ * @return  A char with the valid input or '\0'
+ * @date	2014-04-18
+ * @author	Gabriel Rodrigues (PT Team)
  **/
 char input_is_char(char position[3])
 {
@@ -506,6 +499,16 @@ char input_is_char(char position[3])
     return first_character;
 }
 
+
+/**
+ * This function obteins a string and searchs
+ * for the possible numbers in the string
+ *
+ * @v info_s	recieve a string, an input fromn the user
+ * @return  A int with the valid input or -1
+ * @date	2014-04-18
+ * @author	Gabriel Rodrigues (PT Team)
+ **/
 int input_is_digit(char position[3])
 {
 
@@ -633,6 +636,16 @@ void test_reading_converting_validating()
     }
 }
 
+
+/**
+ * This function read a position by clicking in
+ * the HTML interface's board
+ *
+ * @v info_s	when the HTML interface is chosen
+ * @return  void
+ * @date	2014-05-13
+ * @author	PL Team
+ **/
 void PL_HTMLread_move(position_t *pos)
 {
     /* Maximum size for the buffer to read a move: 3 characters + 1 \n + 1 \0 => 5 */
@@ -660,6 +673,16 @@ void PL_HTMLread_move(position_t *pos)
     pos->Y_int = board_col_to_matrix_idx(pos->Y);
 }
 
+
+/**
+ * This function reads a number from the user
+ * that represents the row in the board
+ *
+ * @v info_s	Just to play the column mode
+ * @return  void
+ * @date	2014-05-20
+ * @author	Gabriel Rodrigues (PT Team)
+ **/
 void read_row(position_t *pos){
 
     int control;

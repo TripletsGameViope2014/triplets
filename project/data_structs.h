@@ -24,7 +24,7 @@
 /* Some defines */
 #define BOARD_SMALL 3 //small board size
 #define BOARD_MEDIUM 6 //medium board size
-#define BOARD_BIG 9
+#define BOARD_BIG 9  //big board size
 #define BOARD_LARGE 12 //large board size
 #define EMPTY ' ' //free position on the board
 #define PIECE '#' //board position occupied
@@ -33,7 +33,7 @@
 #define BLACK 0
 #define GREEN 10
 #define WHITE 7
-#define RED 12
+#define RED 12             ///Colors for the pieces.
 #define BLUE 9
 #define YELLOW 14
 #define LIGHT_GRAY 7
@@ -57,7 +57,7 @@ typedef struct player
 	char name[MAX_PLAYERNAME_LENGTH];
 }player_t;
 
-/** The possible game modes
+/** The possible modes
  * PvP - Player vs Player
  * PvC - player vs Computer
  * CvC - computer vs computer
@@ -71,11 +71,11 @@ typedef enum {pvp, pvc, cvc} game_mode_t;
  */                                         //
 typedef enum {easy, hard, none} cpu_difficulty_t; //
 
-/** The possible difficulty modes           //
- * NORMAL - Player vs Player (Normal Mode)         //
- * COLUMN - Player vs Player (Column Mode)         // NEW enum type for the mode of the PvP
- * NONE   - Player vs Player                  //
- */                                         //
+/** The possible game modes           //
+ * NORMAL - Player vs Player (Normal Mode)     //
+ * COLUMN - Player vs Player (Column Mode)     // NEW enum type for the mode of the PvP
+ * NONE   - Player vs Computer                 //
+ */                                            //
 typedef enum {normal, column, notpvp} pvp_mode_t;
 
 /** The possible interface                       //
@@ -86,7 +86,9 @@ typedef enum {html, console} game_interface_t;
 
 
 /**
- * Stores the configuration of the current game
+ * Stores the current information of the board (pieces's information)
+ * @date	2014-05-20
+ * @author	PT team
  */
  typedef struct board
  {
@@ -95,6 +97,10 @@ typedef enum {html, console} game_interface_t;
      char piece;
  } board_t;
 
+
+/**
+ * Stores the configuration of the current game
+ */
 typedef struct game
 {
 	int player_first;  	// represents the player first option
@@ -122,6 +128,8 @@ typedef struct
 
 /**
  * Stores the move played by the user
+ * @date	2014-04-14
+ * @author	PL team
  */
 typedef struct
 {
@@ -138,10 +146,9 @@ typedef struct
 /*=====================================
  * function prototypes
  *===================================*/
+
 extern game_t* get_current_game_ptr(void);
 extern player_t* get_players_ptr(void);
-
-
 extern int is_valid_board_size(const int board_size);
 extern int set_board_size(const int board_size);
 extern void reset_data_structs(void);

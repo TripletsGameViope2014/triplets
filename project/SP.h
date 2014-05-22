@@ -1,11 +1,42 @@
 #ifndef SP_H_INCLUDED
 #define SP_H_INCLUDED
 
+
+/**
+ * Header file for all the functions of
+ * the CPU's moves and the
+ * finishing game
+ *
+ * @date: 2014-05-02
+ *
+ * Triplets Game - VIOPE 2014
+ */
+
+/*=====================================
+ * includes
+ *===================================*/
+/* System includes */
+//#include <...>
+
+/* local includes */
 #include "data_structs.h"
 
+/*=====================================
+ * macros and defines
+ *===================================*/
+
+ /* Number of aligned pieces that are needed to finish the game */
+#define NUM_ALIGNED_PIECES_FINISH (3)
+
+/*=====================================
+ * typedefs
+ *===================================*/
+
+/*=====================================
+ * function prototypes
+ *===================================*/
 int validate (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE], int column, int row);
 void random_cpu (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE]);
-int finish_game (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnName,int rowNumber);
 int diagonally1 (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
 int diagonally2 (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);
 int horizontal (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE],int columnNumber,int rowNumber);

@@ -17,7 +17,7 @@
 /*=====================================
  * macros and defines
  *===================================*/
-#define MAX_NAME	(20)  /* to be erase, already exists on data_structs.h */
+
 
 /*=====================================
  * typedefs
@@ -43,13 +43,16 @@ extern void closePlayLog(int playNumber, int gameCounter, char playerName[]);
 extern void loadLogs(int gameCounter);
 extern void replay_menu();
 extern void print_game_information(int gameCounter);
-int input_is_digit(char position[3]);
-char input_is_char(char position[3]);
+extern int input_is_digit(char position[3]);
+extern char input_is_char(char position[3]);
+extern void read_row(position_t *pos); //to read just the row
+extern void PL_HTMLread_move(position_t *pos);
+
 /* Testing functions */
 extern void test_reading_converting_validating();
 extern void test_representation_matrix(board_t matrix[MAX_BOARDSIZE][MAX_BOARDSIZE], int dimension);
-extern void PL_HTMLread_move(position_t *pos);
-extern void read_row(position_t *pos); //to read just the row
+
+
 
 
 #endif /* __PT_SAVE_READ_MOVES_H__ */

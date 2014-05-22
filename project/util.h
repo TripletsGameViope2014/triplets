@@ -2,7 +2,8 @@
 #define __UTIL_H__
 
 /**
- * Header file for...
+ * Header file for some aditional
+ * functions
  *
  * @creation date: 2014-05-15
  *

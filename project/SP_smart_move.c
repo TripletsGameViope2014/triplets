@@ -1,4 +1,18 @@
+/**
+ * Triplets Game - VIOPE 2014
+ * @file: SP_smart_move.c
+ * @creation date	2014-05-02
+ *
+ **/
+
+/*=====================================
+ * System includes
+ *===================================*/
 #include <stdio.h>
+
+/*=====================================
+ * Local includes
+ *===================================*/
 #include "board.h"
 #include "PL_ui.h"
 #include "SP.h"
@@ -6,6 +20,26 @@
 #include "util.h"
 #include "main.h"
 
+/*=====================================
+ * Prototypes of **private** functions
+ *===================================*/
+
+
+/*=====================================
+ * Public functions
+ *===================================*/
+
+
+
+/**
+ * This function represents the smart move
+ * made by the CPU
+ *
+ * @v info_s	Just in PvC, in hard mode
+ * @return	none
+ * @date	2014-05-12
+ * @author	SP Team
+ **/
 void smart (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j, m=3;
@@ -143,6 +177,15 @@ void smart (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
 }
 
+/**
+ * This function verifies is the next move makes the CPU
+ * wins or not
+ *
+ * @v info_s	Just in PvC
+ * @return	An int, if the move makes the CPU wins or not
+ * @date	2014-05-12
+ * @author	SP Team
+ **/
 int oneMovFinish (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j;
@@ -174,6 +217,15 @@ int oneMovFinish (board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
     return 0;
 }
 
+
+/**
+ * This function verifies is the board is empty
+ *
+ * @v info_s	Just in PvC
+ * @return	An int, if the board was empty or not
+ * @date	2014-05-12
+ * @author	SP Team
+ **/
 int emptyboard(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i, j;
@@ -190,6 +242,16 @@ int emptyboard(board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 
 }
 
+
+/**
+ * This function verifies is the move from the CPU is smart
+ * or not and write it on the board
+ *
+ * @v info_s	Just in PvC
+ * @return	An int, if the move was written or not
+ * @date	2014-05-12
+ * @author	SP Team
+ **/
 int check_let_player_win(board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     int i,j;
@@ -220,6 +282,15 @@ int check_let_player_win(board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 
 }
 
+/**
+ * This function assists the verifications for the smart move
+ * of the CPU
+ *
+ * @v info_s	Just in PvC
+ * @return	An int, if the move was written or not
+ * @date	2014-05-12
+ * @author	SP Team
+ **/
 int okMove (position_t pos, board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
     if(function_validate_move_cpu(pos))
@@ -240,5 +311,9 @@ int okMove (position_t pos, board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE])
 
 }
 
+
+/*=====================================
+ * Private functions
+ *===================================*/
 
 

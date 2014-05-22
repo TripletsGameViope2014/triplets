@@ -1,6 +1,6 @@
 /**
  * Triplets Game - VIOPE 2014
- *
+ * @file: util.c
  * @creation date	2014-05-15
  *
  **/
@@ -164,7 +164,7 @@ int increment_game_counter()
  * @v
  * @return	gameCounter
  * @date	2014-05-16
- * @author	João Ramos (PT)
+ * @author	PT Team
  **/
 
 int get_file_lines(char fileName[])
@@ -210,6 +210,14 @@ void create_folder(char folderName[])
    #endif
 }
 
+/**
+ * This function puts a string in lower case
+ *
+ * @v
+ * @return	void
+ * @date	2014-05-15
+ * @author	João Ramos (PT)
+ **/
 void string_to_lower(char string[])
 {
     int i;

@@ -46,7 +46,7 @@ int board_get_size(void)
  *
  * @v board_size value to use for board size
  * @return 0 if the specified board size is invalid, otherwise it returns
- * the board size
+ *         the board size
  * @date 2014-03-31
  * @author Triplet VIOPE 2014
  */
@@ -336,7 +336,7 @@ void board_set_content_row_col(int row, char col)
  *
  * @v info_s	This function is called after the cpu move
  * @return	An int "0" if the spot is occupied or "1" if it's not
- * @date	2014-04-15
+ * @date	2014-05-15
  * @author	Gabriel Rodrigues (PT Team)
  **/
 int function_validate_move_cpu(position_t pos)
@@ -357,6 +357,16 @@ int function_validate_move_cpu(position_t pos)
     return 0;
 }
 
+
+/**
+ * This function prints a char in the board with a
+ * specific color that depends on the configuration
+ *
+ * @v info_s	The colors can be changed
+ * @return	void
+ * @date	2014-05-21
+ * @author	Joao Ramos (PT Team)
+ **/
 void print_char_board(int i, int j)
 {
     switch (get_current_game_ptr()->board[i][j].lastPiece)
@@ -411,6 +421,16 @@ void print_char_board(int i, int j)
 
     printf(" ");
 }
+
+
+/**
+ * This function prints the last piece
+ *
+ * @v info_s	The last piece is red
+ * @return	void
+ * @date	2014-05-21
+ * @author	Joao Ramos (PT Team)
+ **/
 void set_last_piece(int x, int y)
 {
     last_play_reset();

@@ -1,7 +1,10 @@
+#ifndef __GAME_MODE_H__
+#define __GAME_MODE_H__
+
 /**
- * Header file for board.c
+ * Header file for game_mode.c
  *
- * @date: 2014-03-31
+ * @date: 2014-05-18
  *
  * Triplets Game - VIOPE 2014
  */
@@ -34,4 +37,4 @@ extern position_t pvp_normal_mode(position_t pos);
 extern position_t pvp_column_mode(position_t pos);
 
 
-
+#endif

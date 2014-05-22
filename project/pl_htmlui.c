@@ -1,11 +1,44 @@
+/**
+ * Triplets Game - VIOPE 2014
+ * @file: pl_htmlui.c
+ * @creation date	2014-05-12
+ *
+ **/
+
+/*=====================================
+ * System includes
+ *===================================*/
 #include <stdlib.h>
 #include <stdio.h>
 
+/*=====================================
+ * Local includes
+ *===================================*/
 #include "data_structs.h"
 #include "board.h"
 #include "PL_ui.h"
 #include "main.h"
 
+/*=====================================
+ * Prototypes of **private** functions
+ *===================================*/
+
+
+/*=====================================
+ * Public functions
+ *===================================*/
+
+
+
+/**
+ * This function represents the HTML interface
+ * configuration
+ *
+ * @v info_s	HTML interface
+ * @return	void
+ * @date	2014-05-12
+ * @author	PL Team
+ **/
 void WriteHTML(board_t board [MAX_BOARDSIZE][MAX_BOARDSIZE], char* HTMLName)
 {
     int i,j,m;

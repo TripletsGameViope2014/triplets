@@ -1,6 +1,18 @@
 #ifndef SP_H_INCLUDED
 #define SP_H_INCLUDED
 
+
+/*Relative path:    "..\..\..\..\GitHub\triplets\project\data_structs.h"
+                    "..\..\..\..\GitHub\triplets\project\data_structs.c"
+                    "..\..\..\..\GitHub\triplets\project\util.c"
+                    "..\..\..\..\GitHub\triplets\project\util.h"
+                    "..\..\..\..\GitHub\triplets\project\board.h"
+                    "..\..\..\..\GitHub\triplets\project\board.c"
+                    "..\..\..\..\GitHub\triplets\project\SP.h"
+                    "..\..\..\..\GitHub\triplets\project\SP_finish_game.c"
+
+*/
+
 #include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\data_structs.h"
 #include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\data_structs.c"
 #include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\util.c"
@@ -9,6 +21,35 @@
 #include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\board.c"
 #include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\SP.h"
 #include "C:\Users\Gabriel Amarista\Documents\GitHub\triplets\project\SP_finish_game.c"
+
+
+/**
+ * These are the functions to test the finish game
+ * The functions are divided by the size of the board
+ * For every size of the board we checked the four corner
+ * For every corner we had three tests: Horizontally, Vertically and Diagonally
+ * The first test is to make sure that it does not finish when we don't have three pieces together
+ * A total of 49 tests
+ *
+ * @v info_s
+ * @date	2014-05-21
+ * @author	Gabriel Rodrigues (Triplets Team)
+ **/
+
+
+/*
+    +----------+
+    |1        2| These are the numbers of the corners
+    |          | Example:
+    |          |        finish_gamePL_test_large_1v:
+    |          |        First corner (1) and vertically check, large board.
+    |3        4|
+    +----------+
+
+
+
+*/
+
 
 TEST(finish_gamePL_test_one){
 

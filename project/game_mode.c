@@ -1,6 +1,6 @@
 /**
  * Triplets Game - VIOPE 2014
- *
+ * @file: game_mode.c
  * @creation date	2014-05-19
  *
  **/
@@ -22,7 +22,6 @@
 /*=====================================
  * Prototypes of **private** functions
  *===================================*/
-//static void example_of_private_function(int num_states);
 
 
 /*=====================================
@@ -30,20 +29,14 @@
  *===================================*/
 
 /**
- * Brief description of the function
+ * This function represents the normal mode
+ * of the Triplets game in PvP
  *
- * @v info_s	string hold with some info
- * @return	what does this function returns
- * @date	2014-03-27
- * @author	name of the author of the function
+ * @v info_s	Depends on the interface
+ * @return	The position being modified
+ * @date	2014-05-18
+ * @author	Gabriel Rodrigues
  **/
-//int example_of_function(char *info_s){
-//
-//	int value_to_return = ...;
-//
-//	return value_to_return;
-//}
-
 position_t pvp_normal_mode(position_t pos){
     int check=0;
 
@@ -51,7 +44,6 @@ position_t pvp_normal_mode(position_t pos){
     {
         printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
         pos = select_interface_gameplay(pos);
-//        read_move(&pos);
         check = function_validate_move(pos);
     }
     while(check != 0);
@@ -60,6 +52,15 @@ position_t pvp_normal_mode(position_t pos){
 
 }
 
+/**
+ * This function represents the column mode
+ * of the Triplets game in PvP
+ *
+ * @v info_s	Just for the text interface
+ * @return	The position being modified
+ * @date	2014-05-18
+ * @author	Gabriel Rodrigues
+ **/
 position_t pvp_column_mode(position_t pos){
 
     int check=0;
@@ -77,7 +78,6 @@ position_t pvp_column_mode(position_t pos){
 
         printf("It's your move %s! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
         read_row(&pos);
-        //PL_HTMLread_move(&pos);
 
         check = function_validate_move(pos);
     }
@@ -91,15 +91,3 @@ position_t pvp_column_mode(position_t pos){
  * Private functions
  *===================================*/
 
-/**
- * This is a private function which is not exported to the .h file.
- * It can only be called from this file.
- *
- * @v numstates		number of states to process
- * @return		none
- * @date		2014-03-27
- * @author		...
- **/
-//static void example_of_private_function(int num_states){
-//	/* fill in the code */
-//}

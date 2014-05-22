@@ -9,6 +9,6 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    cout << "\n\n\tTests for the finish game!\n\n" << endl;
     return UnitTest::RunAllTests();
 }

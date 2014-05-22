@@ -1,13 +1,48 @@
+/**
+ * Triplets Game - VIOPE 2014
+ * @file: SP_random_move.c
+ * @creation date	2014-05-02
+ *
+ **/
+
+/*=====================================
+ * System includes
+ *===================================*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+
+
+/*=====================================
+ * Local includes
+ *===================================*/
 #include "board.h"
 #include "PL_ui.h"
 #include "PT_save_read_moves.h"
 #include "util.h"
 #include "SP.h"
 
+/*=====================================
+ * Prototypes of **private** functions
+ *===================================*/
 
+
+/*=====================================
+ * Public functions
+ *===================================*/
+
+
+
+
+/**
+ * This function represents the random move
+ * made by the CPU
+ *
+ * @v info_s	Just in PvC, in easy mode
+ * @return	none
+ * @date	2014-04-16
+ * @author	SP Team
+ **/
 void random_cpu (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 {
  position_t position;
@@ -27,35 +62,6 @@ void random_cpu (board_t board[MAX_BOARDSIZE][MAX_BOARDSIZE])
 }
 
 
-/*
-void random_cpu (char board[MAX_BOARDSIZE][MAX_BOARDSIZE])
-//We must use #include<time.h> and #include<stdlib.h>.
-{int randRow,randColumn;
- //char columnName;
- srand(time (NULL));
- int SIZE=MAX_BOARDSIZE;
- int check=1;
-
-   // do
-   // {
-   //   randRow=rand()%SIZE;
-   //   randColumn=rand()%SIZE;
-     // columnName=turn_name(columnNumber);//This function turn the columnNumber in to a letter;
-
-   // }while(!validate(board,randColumn,randRow));
-
-do{
-                randRow=rand()%SIZE;
-                randColumn=rand()%SIZE;
-                pos.X=randRow;
-                pos.Y_int=randColumn;
-               // printf("%s your move! (all your moves: %d)\n",cmp.current_player_move.name,cmp.current_player_move.moves);
-               // read_move(&pos);
-                check = function_validate_move(pos);
-                }while(check != 0);
-
-
-    board[randRow][randColumn]=PIECE;//Piece is a constant define char '#'
-
-}
-*/
+/*=====================================
+ * Private functions
+ *===================================*/
